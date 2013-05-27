@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<project name="PDA"
+		default="compilation"
+		basedir="..">
+	<!-- répertoire où se trouvent les sources Java -->
+	<property name="src" location="java" />
+	<property name="class" location="build/class" />
+	<property name="doc" location="docsrc" />
+	<property name="distrib" location="jar" />
+	<property name="test" location="test/pda" />
+	<property name="lib" location="jar" />
+	<property name="work" location="ww" />
+	
+	<target name="init" description="creation repertoires">
+		<mkdir dir="${work}"/>
+		<mkdir dir="${class}"/>
+		<mkdir dir="${dist}"/>
+		<mkdir dir="${doc}"/>
+	</target>
+	
+	<path id="MyClassPATH">
+		<path element="${class}" />
+		<path element="${lib}/*jar"/>
+	</path>
+	
+	
+	<!-- rép. où sont produites les classes compilées -->
+	<property name="compilation"
+		value="build/class" />
+	<target name="compilation" description="Compile toutes les classes">
+		<javac destdir="${class}" >
+		<classpath refid="MyClassPATH">
+		<src path="${src}" />
+		</javac>
+	</target>
+	
+	<target name="doc" depends="compilation" description="compilation des classes" >
+		<javadoc destdir="${doc}" private="true"/>
+	</target>
+	
+	<target name="jar" depends="compilation" description="creation de l'archive .jar">
+		<jar destfile="${distrib}/pda.jar">
+		<fileset dir="${class}" >
+			<include name="pda/**/*.class" 
+		</fileset>
+	</target>
+	
+
+	</project>
