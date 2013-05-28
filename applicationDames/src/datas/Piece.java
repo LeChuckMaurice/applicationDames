@@ -8,7 +8,7 @@ public abstract class Piece {
  
 	public Piece(){}
 
-	// Méthodes
+	// Methodes
 
 	public boolean isVulnerable(){}
 
