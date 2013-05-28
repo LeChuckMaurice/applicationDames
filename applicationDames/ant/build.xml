@@ -2,7 +2,6 @@
 	<project name="PDA"
 		default="compilation"
 		basedir="..">
-		
 	<!-- répertoire où se trouvent les sources Java -->
 	
 	<property name="src" location="java" />
