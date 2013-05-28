@@ -4,7 +4,7 @@
 		basedir="..">
 	<!-- répertoire où se trouvent les sources Java -->
 	
-	<property name="src" location="java" />
+	<property name="src" location="src" />
 	<property name="class" location="build/class" />
 	<property name="doc" location="docsrc" />
 	<property name="distrib" location="jar" />
