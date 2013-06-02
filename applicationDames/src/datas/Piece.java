@@ -27,7 +27,7 @@ public abstract class Piece {
 
 	public abstract boolean canMove( Coordonnee place )
 
-	public abstract boolean canTake()
+	public abstract boolean canTake ()
 
 	public abstract boolean canTake( Coordonnee place )
 
@@ -43,4 +43,5 @@ public abstract class Piece {
 	
 	public Plateau getPlateau(){}
 	
+
 }
