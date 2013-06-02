@@ -7,7 +7,9 @@ public abstract class Piece {
 	private Coordonnee place;
 
  
-	public Piece(){}
+	public Piece(){
+		
+	}
 
 	// Methodes
 

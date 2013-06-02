@@ -8,7 +8,7 @@ public class Coup {
 
 	public Coup(){}
 	
-	//modifier en void avec à la fin de la methode nbPoints =xx  ?
+	//modifier int en void avec à la fin de la methode nbPoints =xx  ?
 	public int calculerPoints(){}
 
 	

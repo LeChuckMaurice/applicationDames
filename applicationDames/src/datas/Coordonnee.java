@@ -5,7 +5,8 @@ public class Coordonnee {
 	public int x;
 	public int y;
 
-
+	public Coordonnee(){}
+	
 	public void setX(int newX){
 		x=newX;
 	}

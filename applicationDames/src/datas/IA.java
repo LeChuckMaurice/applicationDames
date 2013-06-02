@@ -2,7 +2,9 @@ package datas;
 
 public class IA {
 
-	public IA(){}
+	public IA(){
+		
+	}
 
 	public Coup getAction(){
 		return null;

@@ -27,7 +27,7 @@ public class Dames extends Piece {
 	}
 
 	public boolean canTake() {
-		return false;
+		return false ;
 	}
 
 	public boolean canTake(Coordonnee place) {
