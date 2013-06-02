@@ -7,20 +7,34 @@ public class Coup {
 	private Coordonnee[] parcours;
 
 	public Coup(){}
-
+	
+	//modifier en void avec à la fin de la methode nbPoints =xx  ?
 	public int calculerPoints(){}
 
+	
 	private boolean makeVulnerable(){}
 
-	public boolean isAuthorized(){}
+	public boolean isAuthorized(){
+		boolean authorized=false;
+		
+		return authorized;
+	}
 
-	public int getNbPoints(){}
+	public int getNbPoints(){
+		return nbPoints;
+	}
 
-	public int getNbPrises(){}
+	public int getNbPrises(){
+		return nbPrises;
+	}
 
-	public Coordonnee[] getParcours(){}
+	public Coordonnee[] getParcours(){
+		return parcours;
+	}
 
-	public Piece[] getPiecesPrises(){}
+	public Piece[] getPiecesPrises(){
+		return null;
+	}
 
 	public void setNbPrises( int nbPrises ){}
 

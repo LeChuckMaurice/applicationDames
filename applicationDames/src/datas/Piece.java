@@ -1,4 +1,5 @@
 package datas;
+import datas.*;
 
 public abstract class Piece {
 
@@ -12,22 +13,32 @@ public abstract class Piece {
 
 	public boolean isVulnerable(){}
 
-	public boolean isVulnerable(Coordonnee place){}
+	public boolean isVulnerable (Coordonnee place){}
 
-	public abstract boolean isDame(){}
+	public abstract boolean isDame()
 
-	public abstract Coup[] generateCoups(){}
+	public abstract Coup[] generateCoups()
 
-	public abstract Coordonnee[] getDeplacements(Coordonnee place){}
+	public abstract Coordonnee[] getDeplacements(Coordonnee place)
 
-	public abstract boolean canMove(){}
+	public abstract boolean canMove()
 
-	public abstract boolean canMove( Coordonnee place ){}
+	public abstract boolean canMove( Coordonnee place )
 
-	public abstract boolean canTake(){}
+	public abstract boolean canTake()
 
-	public abstract boolean canTake( Coordonnee place ){}
+	public abstract boolean canTake( Coordonnee place )
 
 	//Accesseur
-
+	
+	public boolean getCamp(){
+		return camp;
+	}
+	
+	public Coordonnee getCoordonnee(){
+		return place;
+	}
+	
+	public Plateau getPlateau(){}
+	
 }
