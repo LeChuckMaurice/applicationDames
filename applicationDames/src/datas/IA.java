@@ -2,6 +2,8 @@ package datas;
 
 public class IA {
 
+	private Plateau plateau;
+
 	public IA(){
 		
 	}

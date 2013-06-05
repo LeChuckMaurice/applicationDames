@@ -5,6 +5,7 @@ public class Coup {
 	private int nbPrises;
 	private int nbPoints;
 	private Coordonnee[] parcours;
+	private Piece piece;
 
 	public Coup(){}
 	
