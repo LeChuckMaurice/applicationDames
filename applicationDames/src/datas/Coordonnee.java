@@ -24,6 +24,8 @@ public class Coordonnee {
 		this.x = x;
 		this.y = y;
 	}
+
+	//Modificateur
 	
 	/**
 	 * Modificateur de l'attribut x
@@ -40,6 +42,8 @@ public class Coordonnee {
 	public void setY(int newY){
 		this.y = newY;
 	}
+
+	//Accesseur
 
 	/**
 	 * Accesseur de l'attribut x
