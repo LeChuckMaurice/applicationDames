@@ -20,17 +20,17 @@
 	</target>
 	
 	<path id="MyClassPATH">
-		<path element="${class}" />
-		<path element="${lib}/*jar"/>
+		<pathelement location="${class}" />
+		<pathelement location="${lib}/*jar"/>
 	</path>
 	
 	
 	<!-- rép. où sont produites les classes compilées -->
 	<property name="compilation"
-		value="build/class" />
+		value="../build/class" />
 	<target name="compilation" description="Compile toutes les classes">
 		<javac destdir="${class}" >
-		<classpath refid="MyClassPATH">
+		<classpath refid="MyClassPATH" />
 		<src path="${src}" />
 		</javac>
 	</target>
@@ -40,9 +40,9 @@
 	</target>
 	
 	<target name="jar" depends="compilation" description="creation de l'archive .jar">
-		<jar destfile="${distrib}/pda.jar">
+		<jar destfile="${distrib}/pda.jar" />
 		<fileset dir="${class}" >
-			<include name="pda/**/*.class" 
+			<include name="pda/**/*.class" />
 		</fileset>
 	</target>
 	

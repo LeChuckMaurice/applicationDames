@@ -5,6 +5,7 @@ public abstract class Piece {
 
 	private boolean camp;
 	private Coordonnee place;
+	private Plateau plateau;
 
  
 	public Piece(){
@@ -13,23 +14,27 @@ public abstract class Piece {
 
 	// Methodes
 
-	public boolean isVulnerable(){}
+	public boolean isVulnerable(){
+		return true;
+	}
 
-	public boolean isVulnerable (Coordonnee place){}
+	public boolean isVulnerable (Coordonnee place){
+		return true;
+	}
 
-	public abstract boolean isDame()
+	public abstract boolean isDame();
 
-	public abstract Coup[] generateCoups()
+	public abstract Coup[] generateCoups();
 
-	public abstract Coordonnee[] getDeplacements(Coordonnee place)
+	public abstract Coordonnee[] getDeplacements(Coordonnee place);
 
-	public abstract boolean canMove()
+	public abstract boolean canMove();
 
-	public abstract boolean canMove( Coordonnee place )
+	public abstract boolean canMove( Coordonnee place );
 
-	public abstract boolean canTake ()
+	public abstract boolean canTake();
 
-	public abstract boolean canTake( Coordonnee place )
+	public abstract boolean canTake( Coordonnee place );
 
 	//Accesseur
 	
@@ -41,7 +46,9 @@ public abstract class Piece {
 		return place;
 	}
 	
-	public Plateau getPlateau(){}
+	public Plateau getPlateau(){
+		return this.plateau;
+	}
 	
 
 }

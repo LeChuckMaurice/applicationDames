@@ -8,11 +8,15 @@ public class Coup {
 
 	public Coup(){}
 	
-	//modifier int en void avec à la fin de la methode nbPoints =xx  ?
-	public int calculerPoints(){}
+	//modifier int en void avec Ã  la fin de la methode nbPoints =xx  ?
+	public int calculerPoints(){
+		return 1;
+	}
 
 	
-	private boolean makeVulnerable(){}
+	private boolean makeVulnerable(){
+		return true;
+	}
 
 	public boolean isAuthorized(){
 		boolean authorized=false;
