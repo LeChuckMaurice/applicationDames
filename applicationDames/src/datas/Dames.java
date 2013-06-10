@@ -6,10 +6,6 @@ public class Dames extends Piece {
 		super(positionX,positionY,pieceIA,true);
 	}
 
-	public boolean isDame() {
-		return false;
-	}
-
 	public Coup[] generateCoups() {
 		return null;
 	}

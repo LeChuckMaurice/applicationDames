@@ -6,10 +6,6 @@ public class Pion extends Piece {
 		super(positionX,positionY,pieceIA,false);
 	}
 
-	public boolean isDame() {
-		return false;
-	}
-
 	public Coup[] generateCoups() {
 		return null;
 	}

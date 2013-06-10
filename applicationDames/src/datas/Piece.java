@@ -20,14 +20,12 @@ public abstract class Piece {
 	// Methodes
 
 	public boolean isVulnerable(){
-		return true;
+		return false;
 	}
 
 	public boolean isVulnerable (Coordonnee place){
-		return true;
+		return false;
 	}
-
-	public abstract boolean isDame();
 
 	public abstract Coup[] generateCoups();
 
@@ -44,11 +42,15 @@ public abstract class Piece {
 	//Accesseur
 	
 	public boolean getCamp(){
-		return pieceIA;
+		return this.pieceIA;
 	}
 	
 	public Coordonnee getCoordonnee(){
-		return place;
+		return this.place;
+	}
+
+	public boolean isDame(){
+		return this.dame;
 	}
 	
 	public Plateau getPlateau(){

@@ -12,7 +12,17 @@ public class Plateau {
 	// Methodes generales
 
 	public boolean isValide(Coordonnee coord){
+		boolean valide=true;
+		int x=coord.getX();
+		int y=coord.getY();
+		if (x<0 || x>=taille) {
+			valide=false;
+		}
+		else if (y<0 || y>=taille) {
+			valide=false;
+		}
 
+		return valide;
 	}
 
 	public void playAction(Coup coup){
