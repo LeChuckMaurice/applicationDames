@@ -56,6 +56,17 @@ public abstract class Piece {
 	public Plateau getPlateau(){
 		return this.plateau;
 	}
+
+	//Modificateur
+
+	/**
+	*Change un pion en dame
+	*/
+	public void setDame(){
+		if (dame=false) {
+			dame=true;
+		}
+	}
 	
 
 }

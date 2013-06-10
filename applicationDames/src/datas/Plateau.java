@@ -4,6 +4,7 @@ public class Plateau {
 
 	public int taille;
 	public IA ordinateur;
+	public Piece[][] tabPiece;
 
 	public Plateau(){
 
@@ -65,7 +66,7 @@ public class Plateau {
 	*@param piece Le pion a changer en dames
 	*/
 	private void changeStatus(Piece piece){
-
+		piece.setDame();
 	}
 
 	/**
@@ -102,7 +103,7 @@ public class Plateau {
 	*Accesseur du tableau à 2 dimensions de pièces
 	*/
 	public Piece[][] getTabPiece(){
-
+		return tabPiece;
 	}
 
 	/**
@@ -110,7 +111,10 @@ public class Plateau {
 	*@param coord Les coordonnee de la piece que on souhaite obtenir
 	*/
 	public Piece getPiece(Coordonnee coord){
+		int x=coord.getX();
+		int y=coor.getY();
 
+		return (tabPiece[x][y]);
 	}
 
 
