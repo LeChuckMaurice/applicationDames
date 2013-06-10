@@ -67,7 +67,10 @@ public class Plateau {
 	*@param newPlace Le nouvel emplacement de la piece
 	*/
 	private void movePiece(Piece piece, Coordonnee newPlace){
-
+		deletePiece(piece);
+		int newX=newPlace.getX();
+		int newY=newPlace.getY();
+		tabPiece[newX][newY]=piece;
 	}
 
 	/**
@@ -77,7 +80,8 @@ public class Plateau {
 	*@param newY La nouvelle position en ordonnee de la piece
 	*/
 	private void movePiece(Piece piece, int newX, int newY){
-
+		deletePiece(piece);
+		tabPiece[newX][newY]=piece;
 	}	
 
 	/**
