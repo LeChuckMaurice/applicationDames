@@ -68,7 +68,14 @@ public class Plateau {
 	*@param piece Le pion a changer en dames
 	*/
 	private void changeStatus(Piece piece){
-		piece.setDame();
+
+		Coordonnee coord=piece.getCoordonnee();
+		int x=coord.getX();
+		int y=coord.getY();
+		int pieceIA=piece.getCamp();
+
+		tabPiece[x][y]=null;
+		Dames dame=new Dames(x,y,pieceIA);
 	}
 
 	/**
