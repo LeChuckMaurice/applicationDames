@@ -14,6 +14,35 @@ public class Plateau {
 
 	// Methodes generales
 
+	public void remplirPlateau(){
+
+		int i = 0;
+		int j = 0;
+		int depart;
+		// nombre de pieces a inserer
+		int nbLignes = (this.taille-2)/2;
+		int nbPiecesParLigne = this.taille/2;
+		int nbPieces = nbLignes*nbPiecesParLigne;
+
+		// remplissage camp joueur
+		for(i=0; i<nbLignes; i++){ // y
+			depart = (int)Math.pow(-1,i);
+			for (j=depart; j<nbPiecesParLigne; i++){ // x
+				tabPiece[j][i] = new Piece(j,i,this,false);
+				j++;
+			}
+		}
+
+		// remplissage camp ordinateur
+		for(i=0; i<nbLignes; i++){ // y
+			depart = (int) Math.pow(-1,i);
+			for (j=depart; j<nbPiecesParLigne; i++){ // x
+				tabPiece[j][i] = new Piece(j,i,this,true);
+				j++;
+			}
+		}
+	}
+	
 	public boolean isValide(Coordonnee coord){
 		boolean valide=true;
 		int x=coord.getX();
