@@ -101,6 +101,7 @@ public class Plateau {
 
 	/**
 	*Accesseur du tableau à 2 dimensions de pièces
+	*@return tabPiece Le tableau contenant l'ensemble des pieces du plateau
 	*/
 	public Piece[][] getTabPiece(){
 		return tabPiece;

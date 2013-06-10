@@ -17,7 +17,6 @@ public class TestCoordonnee {
 
 	@Test
 	public void testSetX() {
-		Coordonnee coordonnee = new Coordonnee(1,1);
 		assertEquals(coordonnee.getX(),1);
 		coordonnee.setX(0);
 		assertEquals(coordonnee.getX(),0);

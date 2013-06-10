@@ -20,7 +20,32 @@ public abstract class Piece {
 	// Methodes
 
 	public boolean isVulnerable(){
-		return false;
+		
+		vulnerable=false;
+		int x=coord.getX();
+		int y=coor.getY();
+
+		if (pieceIA==false) {
+			Coordonnee gche= new Coordonnee(x-1,y-1);
+			Coordonnee drte= new Coordonnee(x+1,y-1);
+			Piece pieceGche=plateau.getPiece(gche);
+			Piece pieceDrte=plateau.getPiece(drte);
+			if (pieceGche==null || pieceDrte==null) {
+				vulnerable=true;
+			}
+			
+		}
+		else{
+			Coordonnee gche= new Coordonnee(x-1,y+1);
+			Coordonnee drte= new Coordonnee(x+1,y+1);
+			Piece pieceGche=plateau.getPiece(gche);
+			Piece pieceDrte=plateau.getPiece(drte);
+			if (pieceGche==null || pieceDrte==null) {
+				vulnerable=true;
+			}
+		}
+
+		return vulnerable;
 	}
 
 	public boolean isVulnerable (Coordonnee place){
