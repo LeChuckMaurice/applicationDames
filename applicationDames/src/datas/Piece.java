@@ -29,22 +29,26 @@ public abstract class Piece {
 		if (pieceIA==false) {
 			Coordonnee gche= new Coordonnee(x-1,y-1);
 			Coordonnee drte= new Coordonnee(x+1,y-1);
-			Piece pieceGche=plateau.getPiece(gche);
-			Piece pieceDrte=plateau.getPiece(drte);
+			if (this.plateau.isValide(gche) && this.plateau.isValide(drte)) {
+				Piece pieceGche=plateau.getPiece(gche);
+				Piece pieceDrte=plateau.getPiece(drte);
 			
-			if (pieceGche==null || pieceDrte==null) {
-				vulnerable=true;
+				if (pieceGche==null || pieceDrte==null) {
+					vulnerable=true;
+				}
 			}
 			
 		}
 		else{
 			Coordonnee gche= new Coordonnee(x-1,y+1);
 			Coordonnee drte= new Coordonnee(x+1,y+1);
-			Piece pieceGche=plateau.getPiece(gche);
-			Piece pieceDrte=plateau.getPiece(drte);
+			if (this.plateau.isValide(gche) && this.plateau.isValide(drte)) {
+				Piece pieceGche=plateau.getPiece(gche);
+				Piece pieceDrte=plateau.getPiece(drte);
 			
-			if (pieceGche==null || pieceDrte==null) {
-				vulnerable=true;
+				if (pieceGche==null || pieceDrte==null) {
+					vulnerable=true;
+				}
 			}
 		}
 
@@ -60,22 +64,26 @@ public abstract class Piece {
 		if (pieceIA==false) {
 			Coordonnee gche= new Coordonnee(x-1,y-1);
 			Coordonnee drte= new Coordonnee(x+1,y-1);
-			Piece pieceGche=plateau.getPiece(gche);
-			Piece pieceDrte=plateau.getPiece(drte);
+			if (this.plateau.isValide(gche) && this.plateau.isValide(drte)) {
+				Piece pieceGche=plateau.getPiece(gche);
+				Piece pieceDrte=plateau.getPiece(drte);
 			
-			if (pieceGche==null || pieceDrte==null) {
-				vulnerable=true;
+				if (pieceGche==null || pieceDrte==null) {
+					vulnerable=true;
+				}
 			}
 			
 		}
 		else{
 			Coordonnee gche= new Coordonnee(x-1,y+1);
 			Coordonnee drte= new Coordonnee(x+1,y+1);
-			Piece pieceGche=plateau.getPiece(gche);
-			Piece pieceDrte=plateau.getPiece(drte);
+			if (this.plateau.isValide(gche) && this.plateau.isValide(drte)) {
+				Piece pieceGche=plateau.getPiece(gche);
+				Piece pieceDrte=plateau.getPiece(drte);
 			
-			if (pieceGche==null || pieceDrte==null) {
-				vulnerable=true;
+				if (pieceGche==null || pieceDrte==null) {
+					vulnerable=true;
+				}
 			}
 		}
 
