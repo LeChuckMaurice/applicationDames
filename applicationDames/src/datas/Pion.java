@@ -2,8 +2,8 @@ package datas;
 
 public class Pion extends Piece {
 
-	public Pion(int positionX, int positionY, boolean pieceIA) {
-		super(positionX,positionY,pieceIA,false);
+	public Pion(int positionX, int positionY, Plateau thePlateau, boolean pieceIA) {
+		super(positionX,positionY,pieceIA,thePlateau,false);
 	}
 
 	public Coup[] generateCoups() {

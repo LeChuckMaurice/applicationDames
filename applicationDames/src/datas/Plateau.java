@@ -85,11 +85,32 @@ public class Plateau {
 	*@param piece La piece a supprimer
 	*/
 	private void deletePiece(Piece piece){
+		Coordonnee coord=piece.getCoordonnee();
+		int x=coord.getX();
+		int y=coord.getY();
 
+		tabPiece[x][y]=null;
 	}
 
 	private void updateStatus(){
+		int y=0;
 
+		for (int i=1;i<taille ;i=i+2) {
+			Piece piece = this.getPiece(new Coordonnee(i,y));
+			boolean pieceIA=piece.getCamp();
+			if (!(pieceIA)) {
+				changeStatus(piece);
+			}
+		}
+
+		y=taille-1;
+		for (int i=0;i<taille ;i=i+2) {
+			Piece piece = this.getPiece(new Coordonnee(i,y));
+			boolean pieceIA=piece.getCamp();
+			if (pieceIA) {
+				changeStatus(piece);
+			}
+		}
 	}
 
 	/**
@@ -97,7 +118,16 @@ public class Plateau {
 	*@param piece Le pion a changer en dames
 	*/
 	private void changeStatus(Piece piece){
-		piece.setDame();
+
+		if (!(piece.isDame())) {
+			Coordonnee coord=piece.getCoordonnee();
+			int x=coord.getX();
+			int y=coord.getY();
+			boolean pieceIA=piece.getCamp();
+
+			deletePiece(piece);
+			Dames dame=new Dames(x,y,this,pieceIA);
+		}	
 	}
 
 	/**
