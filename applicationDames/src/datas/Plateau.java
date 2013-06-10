@@ -8,7 +8,7 @@ public class Plateau {
 
 	public Plateau(int taillePlat){
 		this.taille = taillePlat;
-		this.ordinateur = new IA(this);
+		this.ordinateur = new IA(this); 
 		this.tabPiece = new Piece[taillePlat][taillePlat];
 	}
 
