@@ -2,8 +2,8 @@ package datas;
 
 public class Pion extends Piece {
 
-	public Pion() {
-		
+	public Pion(int positionX, int positionY, boolean pieceIA) {
+		super(positionX,positionY,pieceIA,false);
 	}
 
 	public boolean isDame() {

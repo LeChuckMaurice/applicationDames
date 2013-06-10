@@ -3,13 +3,18 @@ import datas.*;
 
 public abstract class Piece {
 
-	private boolean camp;
-	private Coordonnee place;
-	private Plateau plateau;
+	// PieceIA : true=IA / false=joueur
+	protected boolean pieceIA;
+	// dame : true=Dame / false=Pion
+	protected boolean dame;
+	protected Coordonnee place;
+	protected Plateau plateau;
 
  
-	public Piece(){
-		
+	public Piece(int positionX, int positionY, boolean camp,boolean isDame){
+		place = new Coordonnee(positionX,positionY);
+		pieceIA=camp;
+		dame=isDame;
 	}
 
 	// Methodes
@@ -39,7 +44,7 @@ public abstract class Piece {
 	//Accesseur
 	
 	public boolean getCamp(){
-		return camp;
+		return pieceIA;
 	}
 	
 	public Coordonnee getCoordonnee(){
