@@ -6,8 +6,10 @@ public class Plateau {
 	public IA ordinateur;
 	public Piece[][] tabPiece;
 
-	public Plateau(){
-
+	public Plateau(int taillePlat){
+		this.taille = taillePlat;
+		this.ordinateur = new IA(this);
+		this.tabPiece = new Piece[taillePlat][taillePlat];
 	}
 
 	// Methodes generales
@@ -86,7 +88,7 @@ public class Plateau {
 	}
 
 	public Plateau chargerPlateau(){
-
+		return null;
 	}
 
 	// Accesseurs
@@ -113,7 +115,7 @@ public class Plateau {
 	*/
 	public Piece getPiece(Coordonnee coord){
 		int x=coord.getX();
-		int y=coor.getY();
+		int y=coord.getY();
 
 		return (tabPiece[x][y]);
 	}

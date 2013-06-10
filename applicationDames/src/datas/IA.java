@@ -4,8 +4,8 @@ public class IA {
 
 	private Plateau plateau;
 
-	public IA(){
-		
+	public IA(Plateau plateauIA){
+		this.plateau = plateauIA;
 	}
 
 	public Coup getAction(){
