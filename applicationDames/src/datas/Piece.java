@@ -21,9 +21,9 @@ public abstract class Piece {
 
 	public boolean isVulnerable(){
 
-		vulnerable=false;
-		int x=coord.getX();
-		int y=coor.getY();
+		boolean vulnerable=false;
+		int x=place.getX();
+		int y=place.getY();
 
 		if (pieceIA==false) {
 			Coordonnee gche= new Coordonnee(x-1,y-1);
