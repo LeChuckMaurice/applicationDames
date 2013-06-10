@@ -12,15 +12,15 @@ public abstract class Piece {
 
  
 	public Piece(int positionX, int positionY, boolean camp,boolean isDame){
-		place = new Coordonnee(positionX,positionY);
-		pieceIA=camp;
-		dame=isDame;
+		this.place = new Coordonnee(positionX,positionY);
+		this.pieceIA=camp;
+		this.dame=isDame;
 	}
 
 	// Methodes
 
 	public boolean isVulnerable(){
-		
+
 		vulnerable=false;
 		int x=coord.getX();
 		int y=coor.getY();
@@ -30,6 +30,7 @@ public abstract class Piece {
 			Coordonnee drte= new Coordonnee(x+1,y-1);
 			Piece pieceGche=plateau.getPiece(gche);
 			Piece pieceDrte=plateau.getPiece(drte);
+			
 			if (pieceGche==null || pieceDrte==null) {
 				vulnerable=true;
 			}
@@ -40,6 +41,7 @@ public abstract class Piece {
 			Coordonnee drte= new Coordonnee(x+1,y+1);
 			Piece pieceGche=plateau.getPiece(gche);
 			Piece pieceDrte=plateau.getPiece(drte);
+			
 			if (pieceGche==null || pieceDrte==null) {
 				vulnerable=true;
 			}
@@ -88,8 +90,8 @@ public abstract class Piece {
 	*Change un pion en dame
 	*/
 	public void setDame(){
-		if (dame=false) {
-			dame=true;
+		if (this.dame=false) {
+			this.dame=true;
 		}
 	}
 	
