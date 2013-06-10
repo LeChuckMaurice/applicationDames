@@ -28,7 +28,7 @@ public class Plateau {
 		for(i=0; i<nbLignes; i++){ // y
 			depart = (int)Math.pow(-1,i);
 			for (j=depart; j<nbPiecesParLigne; i++){ // x
-				tabPiece[j][i] = new Piece(j,i,this,false);
+				tabPiece[j][i] = new Pion(j,i,this,false);
 				j++;
 			}
 		}
@@ -37,7 +37,7 @@ public class Plateau {
 		for(i=0; i<nbLignes; i++){ // y
 			depart = (int) Math.pow(-1,i);
 			for (j=depart; j<nbPiecesParLigne; i++){ // x
-				tabPiece[j][i] = new Piece(j,i,this,true);
+				tabPiece[j][i] = new Pion(j,i,this,true);
 				j++;
 			}
 		}
