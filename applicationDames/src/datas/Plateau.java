@@ -97,7 +97,7 @@ public class Plateau {
 			boolean pieceIA=piece.getCamp();
 
 			deletePiece(piece);
-			Dames dame=new Dames(x,y,pieceIA);
+			Dames dame=new Dames(x,y,this,pieceIA);
 		}	
 	}
 

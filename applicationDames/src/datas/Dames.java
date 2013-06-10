@@ -2,8 +2,8 @@ package datas;
 
 public class Dames extends Piece {
 
-	public Dames(int positionX, int positionY, boolean pieceIA) {
-		super(positionX,positionY,pieceIA,true);
+	public Dames(int positionX, int positionY, Plateau thePlateau, boolean pieceIA) {
+		super(positionX,positionY,pieceIA,thePlateau,true);
 	}
 
 	public Coup[] generateCoups() {
