@@ -16,29 +16,22 @@ public class Plateau {
 
 	public void remplirPlateau(){
 
-		int i = 0;
-		int j = 0;
-		int depart;
-		// nombre de pieces a inserer
-		int nbLignes = (this.taille-2)/2;
+		int x = 0;
+		int y = 0;
 		int nbPiecesParLigne = this.taille/2;
-		int nbPieces = nbLignes*nbPiecesParLigne;
 
 		// remplissage camp joueur
-		for(i=0; i<nbLignes; i++){ // y
-			depart = (int)Math.pow(-1,i);
-			for (j=depart; j<nbPiecesParLigne; i++){ // x
-				tabPiece[j][i] = new Pion(j,i,this,false);
-				j++;
+		for(y=0; y<(this.taille)/2-1; y++){ // y
+			for (x=(y+1)%2; x<this.taille; x++){ // x
+				this.tabPiece[x][y] = new Pion(x,y,this,false);
+				x++;
 			}
 		}
-
-		// remplissage camp ordinateur
-		for(i=0; i<nbLignes; i++){ // y
-			depart = (int) Math.pow(-1,i);
-			for (j=depart; j<nbPiecesParLigne; i++){ // x
-				tabPiece[j][i] = new Pion(j,i,this,true);
-				j++;
+		// remplissage camp joueur
+		for(y=y+2; y<this.taille; y++){ // y
+			for (x=(y+1)%2; x<this.taille; x++){ // x
+				this.tabPiece[x][y] = new Pion(x,y,this,true);
+				x++;
 			}
 		}
 	}
@@ -134,9 +127,37 @@ public class Plateau {
 	*Affiche le plateau sous forme d'une chaine de caractere
 	*/
 	public String toString(){
-		String chainePlateau=null;
+		String chainePlateau="";
+		Piece piece;
+		for(int i=0; i<this.taille; i++){ // x
 
-
+			chainePlateau = chainePlateau+"|";
+			for (int j=0; j<this.taille; j++){ // y
+				System.out.println("x : "+i+" | y : "+j);
+				piece = this.tabPiece[j][i];
+				if(piece==null){
+					chainePlateau = chainePlateau + " |";
+				}
+				else if(piece.getCamp()){ // Sinon,si c'est une piece de l'IA
+					if(piece.isDame()){ // Si c'est une dame
+						chainePlateau = chainePlateau + "d|";
+					}
+					else if(!piece.isDame()){ // Si c'est un pion
+						chainePlateau = chainePlateau + "o|";
+					}
+				}
+				else if(!piece.getCamp()){ // Sinon, si c'est une piece du joueur
+					if(piece.isDame()){ // Si c'est une dame
+						chainePlateau = chainePlateau + "D|";
+					}
+					else if(!piece.isDame()){ // Si c'est un pion
+						chainePlateau = chainePlateau + "O|";
+					}
+				}
+			}
+			chainePlateau = chainePlateau + "\n";
+		}
+		
 		return chainePlateau;
 	}
 
