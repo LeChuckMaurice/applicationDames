@@ -18,7 +18,6 @@ public class Plateau {
 
 		int x = 0;
 		int y = 0;
-		int nbPiecesParLigne = this.taille/2;
 
 		// remplissage camp joueur
 		for(y=0; y<(this.taille)/2-1; y++){ // y
@@ -146,7 +145,8 @@ public class Plateau {
 			boolean pieceIA=piece.isIA();
 
 			deletePiece(piece);
-			Dames dame=new Dames(x,y,this,pieceIA);
+			Dame dame=new Dame(x,y,this,pieceIA);
+			this.tabPiece[x][y] = dame;
 		}	
 	}
 
