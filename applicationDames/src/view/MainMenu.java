@@ -1,10 +1,7 @@
 package view;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.*;
 
 public class MainMenu extends JFrame{
 
@@ -33,8 +30,7 @@ public class MainMenu extends JFrame{
 	public void creerInterface(){
 		this.setLayout(new BorderLayout());
 
-		JBackgroundPanel pPrincipal = new JBackgroundPanel();
-		pPrincipal.setBackground(new Color(246,199,139));
+		JBackgroundPanel pPrincipal = new JBackgroundPanel("datas/Fond_net.jpg");
 		this.add(pPrincipal,BorderLayout.CENTER);
 
 		pPrincipal.setLayout(new GridLayout(4,1));
@@ -51,53 +47,30 @@ public class MainMenu extends JFrame{
 		pNew.setOpaque (false);
 		pPrincipal.add(pNew);
 		bNew = new JButton("Nouvelle partie");
-		bNew.setPreferredSize( new Dimension(240,58));
-		bNew.setBackground(Color.black);
-		bNew.setForeground(Color.white);
-		bNew.setFont(newFont);
+		setStyleButton(bNew);
 		pNew.add(bNew);
 
 		pCharger = new JPanel();
 		pCharger.setOpaque (false);
 		pPrincipal.add(pCharger);
 		bCharger = new JButton("Charger une partie");
-		bCharger.setPreferredSize( new Dimension(240,58));
-		bCharger.setBackground(Color.black);
-		bCharger.setForeground(Color.white);
-		bCharger.setFont(newFont);
+		setStyleButton(bCharger);
 		pCharger.add(bCharger);
 
 		pQuitter = new JPanel();
 		pQuitter.setOpaque (false);
 		pPrincipal.add(pQuitter);
 		bQuitter = new JButton("Quitter");
-		bQuitter.setPreferredSize( new Dimension(240,58));
-		bQuitter.setBackground(Color.black);
-		bQuitter.setForeground(Color.white);
-		bQuitter.setFont(newFont);
+		setStyleButton(bQuitter);
 		pQuitter.add(bQuitter);
 	}
 
-
-public class JBackgroundPanel extends JPanel {
-  private BufferedImage img;
- 
-  public JBackgroundPanel() {
-    // load the background image
-    try {
-      img = ImageIO.read(new File("datas/Fond_net.jpg"));
-    } catch(IOException e) {
-      e.printStackTrace();
-    }
-  }
- 
-  @Override
-  protected void paintComponent(Graphics g) {
-    super.paintComponent(g);
-    // paint the background image and scale it to fill the entire space
-    g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
-  }
-}
+	public void setStyleButton(JButton button){
+		button.setPreferredSize( new Dimension(240,58));
+		button.setBackground(Color.black);
+		button.setForeground(Color.white);
+		button.setFont(newFont);
+	}
 
 
 
