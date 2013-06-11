@@ -40,10 +40,13 @@ public class Plateau {
 		boolean valide=true;
 		int x=coord.getX();
 		int y=coord.getY();
-		if (x<0 || x>=taille) {
+		if (x<0 || x>=taille-1) {
 			valide=false;
 		}
-		else if (y<0 || y>=taille) {
+		else if (y<0 || y>=taille-1) {
+			valide=false;
+		}
+		else if ((x+y)%2 == 0){
 			valide=false;
 		}
 
@@ -51,6 +54,14 @@ public class Plateau {
 	}
 
 	public void playAction(Coup coup){
+		Coordonnee arrivee = coup.getArrivee();
+		Piece piece = coup.getPiece();
+		Piece[] piecesPrises = coup.getPiecesPrises();
+
+		for(int i=0; i<piecesPrises.length; i++){
+			this.deletePiece(piecesPrises[i]);
+		}
+		this.movePiece(piece, arrivee);
 
 	}
 
@@ -137,7 +148,6 @@ public class Plateau {
 
 			chainePlateau = chainePlateau+"|";
 			for (int j=0; j<this.taille; j++){ // y
-				System.out.println("x : "+i+" | y : "+j);
 				piece = this.tabPiece[j][i];
 				if(piece==null){
 					chainePlateau = chainePlateau + " |";
@@ -197,9 +207,13 @@ public class Plateau {
 	*Accesseur d'une piece contenue dans le plateau
 	*@param coord Les coordonnee de la piece que on souhaite obtenir
 	*/
-	public Piece getPiece(Coordonnee coord){
+	public Piece getPiece(Coordonnee coord) throws NullPointerException {
 		int x=coord.getX();
 		int y=coord.getY();
+
+		if(tabPiece[x][y] == null){
+			throw new NullPointerException("Aucune piece n'est presente a cette coordonnee.");
+		}
 
 		return (tabPiece[x][y]);
 	}
