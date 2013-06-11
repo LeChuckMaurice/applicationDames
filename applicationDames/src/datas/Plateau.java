@@ -225,7 +225,7 @@ public class Plateau {
 		int y=coord.getY();
 
 		if(!this.isValide(coord)){
-			piece = null
+			piece = null;
 		}
 		else{
 			piece=tabPiece[x][y];
