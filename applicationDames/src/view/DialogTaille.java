@@ -7,12 +7,11 @@ public class DialogTaille extends JDialog{
 	
 	private JPanel pPrincipal;
 	private JLabel lText;
-	private JComboBox cbTaille;
+	private JComboBox<Integer> cbTaille;
 	private JPanel pButton;
 	private JButton bAnnuler;
 	private JButton bConfirmer;
 
-	private int tailleTableau;
 
 	public DialogTaille(){
 		super ();
@@ -37,7 +36,7 @@ public class DialogTaille extends JDialog{
 		lText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		pPrincipal.add(lText);
 
-		cbTaille = new JComboBox();
+		cbTaille = new JComboBox<Integer>();
 		cbTaille.addItem(8);
 		cbTaille.addItem(10);
 		cbTaille.addItem(12);

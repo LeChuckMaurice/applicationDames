@@ -19,22 +19,6 @@ public class Case extends JLabel {
 		this.taillePlateau=theTaillePlateau;
 	}
 
-	/*
-	public void setTaille(int taillePlateau){
-		if (taillePlateau==8) {
-			tailleCase=30;
-		}
-		else if (taillePlateau==10) {
-			tailleCase=24;
-		}
-		else if (taillePlateau==12) {
-			tailleCase=20;
-		}
-		else{
-			System.out.println("Taille plateau Invalide");
-		}
-	}
-	*/
 
 	public void setCaseNoire(){
 		if (taillePlateau==8 || taillePlateau==10 || taillePlateau==12) {
