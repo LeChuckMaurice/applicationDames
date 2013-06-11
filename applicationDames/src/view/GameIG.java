@@ -18,6 +18,10 @@ public class GameIG extends JFrame{
 	private JLabel bHelp;
 	private JLabel bSave;
 
+	private int taillePlateau=10;
+
+	private Case[][] tabCase = new Case[taillePlateau][taillePlateau];
+
 	public GameIG(){
 		super(" GameIG ");
 		this.creerInterface();
@@ -33,6 +37,8 @@ public class GameIG extends JFrame{
 		this.add(bpPrincipal);
 
 		bpPrincipal.setLayout(new BorderLayout());
+
+		// Bouton superieur gauche
 
 		pMenu = new JPanel();
 		pMenu.setOpaque(false);
@@ -68,8 +74,78 @@ public class GameIG extends JFrame{
 		pMenuRight.add(bExit);
 
 
+		// Plateau
+
+		pGame = new JPanel();
+		pGame.setLayout(new FlowLayout(1));
+		pGame.setOpaque(false);
+		bpPrincipal.add(pGame,BorderLayout.SOUTH);
+		
+		pPlateau = new JPanel();
+		pPlateau.setBackground(Color.black);
+		pPlateau.setPreferredSize(new Dimension(240,240));
+		pGame.add(pPlateau);
+
+		pPlateau.setLayout(new GridLayout(taillePlateau,taillePlateau));
+
+		initPlateau();
+
+		remplirTableau();
+
+		
 
 	}
+
+	public void initPlateau(){
+
+		for (int y=0;y<taillePlateau ;y++ ) {
+			
+			for (int x=0;x<taillePlateau ;x++ ) {
+				if ((x+y)%2 ==0) {
+					
+					Case theCase = new Case(x,y,taillePlateau);
+					
+					theCase.setCaseNoire();
+
+					pPlateau.add(theCase);
+
+					tabCase[x][y]=theCase;
+				}
+				else{
+					Case theCase = new Case(x,y,taillePlateau);
+
+					theCase.setCaseBlanche();
+
+					pPlateau.add(theCase);
+
+					tabCase[x][y]=theCase;
+				}
+			}
+
+		}
+	}
+
+	public void remplirTableau() {
+		int x = 0;
+		int y = 0;
+		int nbPiecesParLigne = this.taillePlateau/2;
+
+		// remplissage camp joueur
+		for(y=0; y<(this.taillePlateau)/2-1; y++){ // y
+			for (x=(y+1)%2; x<this.taillePlateau; x=x+2){ // x
+				tabCase[x][y].setPionNoir();
+
+			}
+		}
+		// remplissage camp joueur
+		for(y=y+2; y<this.taillePlateau; y++){ // y
+			for (x=(y+1)%2; x<this.taillePlateau; x=x+2){ // x
+				tabCase[x][y].setPionBlanc();
+
+			}
+		}
+	}
+	
 
 	public static void main(String[] args) {
 		GameIG game = new GameIG();
