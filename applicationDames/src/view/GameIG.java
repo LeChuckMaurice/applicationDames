@@ -72,7 +72,12 @@ public class GameIG extends JFrame{
 		bExit.setIcon(iExit);
 		bExit.setBackground(new Color(0,0,0,0));
 		pMenuRight.add(bExit);
+		
+		initPlateau();
 
+	}
+
+	public void initPlateau(){
 
 		// Plateau
 
@@ -87,17 +92,7 @@ public class GameIG extends JFrame{
 		pGame.add(pPlateau);
 
 		pPlateau.setLayout(new GridLayout(taillePlateau,taillePlateau));
-
-		initPlateau();
-
-		remplirTableau();
-
 		
-
-	}
-
-	public void initPlateau(){
-
 		for (int y=0;y<taillePlateau ;y++ ) {
 			
 			for (int x=0;x<taillePlateau ;x++ ) {
@@ -128,7 +123,7 @@ public class GameIG extends JFrame{
 	public void remplirTableau() {
 		int x = 0;
 		int y = 0;
-		int nbPiecesParLigne = this.taillePlateau/2;
+		
 
 		// remplissage camp joueur
 		for(y=0; y<(this.taillePlateau)/2-1; y++){ // y
@@ -144,6 +139,10 @@ public class GameIG extends JFrame{
 
 			}
 		}
+	}
+
+	public Case getCase(int x, int y){
+		return tabCase[x][y];
 	}
 	
 
