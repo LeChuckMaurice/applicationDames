@@ -87,19 +87,11 @@ public class TestPlateau {
 	public void testGetPiece() {
 		Piece[][] tabPiece = this.plateau10.getTabPiece();
 		Piece piece = tabPiece[0][1];
-		Piece piece2 = null;
-		try{
-			assertEquals(this.plateau10.getPiece(new Coordonnee(0,1)),piece);
-		}
-		catch(NullPointerException e){
-			fail();
-		}
 
-		try{
-			piece2 = this.plateau10.getPiece(new Coordonnee(0,0));
-			fail();
-		}
-		catch(NullPointerException e){}
+		// cas d'une case occupée par une piece
+		assertEquals(this.plateau10.getPiece(new Coordonnee(0,1)),piece);
+		// cas d'une case vide (doit renvoyer null)
+		assertEquals(this.plateau10.getPiece(new Coordonnee(0,0)),null);
 
 	}
 

@@ -53,6 +53,18 @@ public class Plateau {
 		return valide;
 	}
 
+	public boolean isLibre(Coordonnee coord) {
+		boolean libre = false;
+		int x = coord.getX();
+		int y = coord.getY();
+
+		if(this.tabPiece[x][y] == null){
+			libre = true;
+		}
+
+		return libre;
+	}
+
 	public void playAction(Coup coup){
 		Coordonnee arrivee = coup.getArrivee();
 		Piece piece = coup.getPiece();
@@ -105,8 +117,8 @@ public class Plateau {
 
 		for (int i=1;i<taille ;i=i+2) {
 			Piece piece = this.getPiece(new Coordonnee(i,y));
-			boolean pieceIA=piece.getCamp();
-			if (!(pieceIA)) {
+
+			if(!piece.isIA()) {
 				changeStatus(piece);
 			}
 		}
@@ -114,8 +126,8 @@ public class Plateau {
 		y=taille-1;
 		for (int i=0;i<taille ;i=i+2) {
 			Piece piece = this.getPiece(new Coordonnee(i,y));
-			boolean pieceIA=piece.getCamp();
-			if (pieceIA) {
+			
+			if(piece.isIA()) {
 				changeStatus(piece);
 			}
 		}
@@ -131,7 +143,7 @@ public class Plateau {
 			Coordonnee coord=piece.getCoordonnee();
 			int x=coord.getX();
 			int y=coord.getY();
-			boolean pieceIA=piece.getCamp();
+			boolean pieceIA=piece.isIA();
 
 			deletePiece(piece);
 			Dames dame=new Dames(x,y,this,pieceIA);
@@ -152,7 +164,7 @@ public class Plateau {
 				if(piece==null){
 					chainePlateau = chainePlateau + " |";
 				}
-				else if(piece.getCamp()){ // Sinon,si c'est une piece de l'IA
+				else if(piece.isIA()){ // Sinon,si c'est une piece de l'IA
 					if(piece.isDame()){ // Si c'est une dame
 						chainePlateau = chainePlateau + "d|";
 					}
@@ -160,7 +172,7 @@ public class Plateau {
 						chainePlateau = chainePlateau + "o|";
 					}
 				}
-				else if(!piece.getCamp()){ // Sinon, si c'est une piece du joueur
+				else if(!piece.isIA()){ // Sinon, si c'est une piece du joueur
 					if(piece.isDame()){ // Si c'est une dame
 						chainePlateau = chainePlateau + "D|";
 					}
@@ -207,15 +219,18 @@ public class Plateau {
 	*Accesseur d'une piece contenue dans le plateau
 	*@param coord Les coordonnee de la piece que on souhaite obtenir
 	*/
-	public Piece getPiece(Coordonnee coord) throws NullPointerException {
+	public Piece getPiece(Coordonnee coord){
+		Piece piece;
 		int x=coord.getX();
 		int y=coord.getY();
 
-		if(tabPiece[x][y] == null){
-			throw new NullPointerException("Aucune piece n'est presente a cette coordonnee.");
+		if(!this.isValide(coord)){
+			piece = null
 		}
-
-		return (tabPiece[x][y]);
+		else{
+			piece=tabPiece[x][y];
+		}
+		return piece;
 	}
 
 

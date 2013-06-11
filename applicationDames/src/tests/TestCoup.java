@@ -36,14 +36,7 @@ public class TestCoup {
 		listeCoord.add(new Coordonnee(1,6));
 		listeCoord.add(new Coordonnee(2,5));
 
-		Piece piece = null;
-		
-		try{
-			piece = plateau10.getPiece(new Coordonnee(1,6));
-		}
-		catch(NullPointerException e){
-			System.out.println(e.getMessage());
-		}
+		Piece piece = plateau10.getPiece(new Coordonnee(1,6));
 		
 		this.coupGenerique10 = new Coup(0,listeCoord,piece);
 	}

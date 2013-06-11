@@ -75,14 +75,11 @@ public class Coup {
 				xPiece = (int) (place1.getX()+place2.getX())/2;
 				yPiece = (int) (place1.getY()+place2.getY())/2;
 
-				try{
-					piecePrise=this.piece.getPlateau().getPiece(new Coordonnee(xPiece,yPiece));
+				piecePrise=this.piece.getPlateau().getPiece(new Coordonnee(xPiece,yPiece));
+				
+				if(piecePrise!=null){
 					piecesPrises[i] = piecePrise;
 				}
-				catch(NullPointerException e){
-					System.out.println(e.getMessage());
-				}
-
 			}
 		}
 		return piecesPrises;

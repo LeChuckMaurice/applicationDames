@@ -96,19 +96,19 @@ public abstract class Piece {
 
 	public abstract boolean canMove();
 
-	public abstract boolean canMove( Coordonnee place );
+	public abstract boolean canMove( Coordonnee place, boolean pieceIA );
 
 	public abstract boolean canTake();
 
-	public abstract boolean canTake( Coordonnee place );
+	public abstract boolean canTake( Coordonnee place, boolean pieceIA );
 
-	//Accesseur
+	//Accesseurs
 	
 	/**
 	*Renvoie le camp auquel appartient la piece
 	*@return pieceIA true pour un piece appartenant à l'ordinateur, false pour une du joueur
 	*/
-	public boolean getCamp(){
+	public boolean isIA(){
 		return this.pieceIA;
 	}
 	
