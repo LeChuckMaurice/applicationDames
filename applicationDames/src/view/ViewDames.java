@@ -48,7 +48,8 @@ public class ViewDames extends JFrame{
 
 	//Boites de dialogues
 
-	private DialogFin dialogFin;
+	private DialogFin dialogWin;
+	private DialogFin dialogLose;
 	private DialogSaveCharge dialogSave;
 	private DialogSaveCharge dialogCharge;
 	private DialogQuitter dialogQuit;
@@ -57,21 +58,15 @@ public class ViewDames extends JFrame{
 	public ViewDames(){
 
 		super();
-		this.setSize(322,346);
+		this.setSize(330,350);
 		pGlobal = new JPanel();
 		pGlobal.setSize(322,346);
+		//pGlobal.removeAll();
+		pGlobal.updateUI();
 		this.add(pGlobal);
 
-		bpPrincipal = new JBackgroundPanel("datas/Fond_net.jpg");
-		
-
-		/**
-
-		*/
-		dialogFin = new DialogFin(true);
-		/**
-
-		*/
+		dialogWin = new DialogFin(true);
+		dialogLose = new DialogFin(false);
 		dialogSave = new DialogSaveCharge(false);
 		dialogCharge = new DialogSaveCharge(true);
 		dialogQuit = new DialogQuitter();
@@ -89,6 +84,7 @@ public class ViewDames extends JFrame{
 	public void creerInterfaceJeu(int laTaille){
 
 		pGlobal.removeAll();
+		pGlobal.updateUI();
 		this.taillePlateau=laTaille;
 
 		bpPrincipal = new JBackgroundPanel("datas/Fond_net.jpg");
@@ -139,8 +135,11 @@ public class ViewDames extends JFrame{
 	}
 
 	public void creerInterfaceMenu(){
-
+		
 		pGlobal.removeAll();
+		pGlobal.updateUI();
+
+		bpPrincipal = new JBackgroundPanel("datas/Fond_net.jpg");
 		pGlobal.add(bpPrincipal);
 		bpPrincipal.setLayout(new GridLayout(4,1));
 
@@ -175,9 +174,14 @@ public class ViewDames extends JFrame{
 	}
 
 	public void creerInterfaceAide(){
-
+		
+		pGlobal.removeAll();
+		pGlobal.updateUI();
+		
+		bpPrincipal = new JBackgroundPanel("datas/Fond_net.jpg");
 		bpPrincipal.setLayout(new BorderLayout());
 
+		pGlobal.add(bpPrincipal);
 		// Bouton superieur gauche
 
 		pMenu = new JPanel();
@@ -370,8 +374,12 @@ public class ViewDames extends JFrame{
 		return pGlobal.getLocation();
 	}
 
-	public DialogFin getDialogFin(){
-		return dialogFin;
+	public DialogFin getDialogWin(){
+		return dialogWin;
+	}
+	
+	public DialogFin getDialogLose(){
+		return dialogLose;
 	}
 
 	public DialogSaveCharge getDialogSave(){

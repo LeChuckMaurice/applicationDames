@@ -16,7 +16,7 @@ public DialogFin(boolean victoire){
 	creerInterface();
 	styleLabel(victoire);
 	this.setSize(240,130);
-	this.setVisible(false);
+	this.setVisible(true);
 	this.setDefaultCloseOperation ( HIDE_ON_CLOSE );
 }
 

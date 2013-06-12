@@ -85,12 +85,14 @@ public class DialogTaille extends JDialog{
 		button.setFont(new Font(Font.DIALOG, Font.BOLD, 11));
 	}
 
+	/*
 	public void init () {
-   	JFrame parent = (JFrame) this.getOwner();
+   	JFrame parent = ;
     Dimension d = parent.getSize () ;
     Point p = parent.getLocation () ;
     setLocation (p.x+(d.width-getSize().width)/2, p.y+(d.height-getSize().height)/2);
 	}
+	*/
 
 	public JButton getAnnuler(){
 		return bAnnuler;
