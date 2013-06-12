@@ -39,10 +39,10 @@ public class Plateau {
 		boolean valide=true;
 		int x=coord.getX();
 		int y=coord.getY();
-		if (x<0 || x>=taille-1) {
+		if (x<0 || x>taille-1) {
 			valide=false;
 		}
-		else if (y<0 || y>=taille-1) {
+		else if (y<0 || y>taille-1) {
 			valide=false;
 		}
 		else if ((x+y)%2 == 0){
@@ -80,12 +80,14 @@ public class Plateau {
 	*Deplace une piece vers la coordonnee place en parametre
 	*@param piece La piece que l'on deplace
 	*@param newPlace Le nouvel emplacement de la piece
+	*@throws IllegalArgumentException si la nouvelle position n'est pas sur le plateau
+	*@throws IllegalArgumentException si la nouvelle position est occupee par une autre piece
 	*/
-	private void movePiece(Piece piece, Coordonnee newPlace){
-		deletePiece(piece);
+	public void movePiece(Piece piece, Coordonnee newPlace) throws IllegalArgumentException{
 		int newX=newPlace.getX();
 		int newY=newPlace.getY();
-		tabPiece[newX][newY]=piece;
+
+		this.movePiece(piece,newX,newY);
 	}
 
 	/**
@@ -93,31 +95,45 @@ public class Plateau {
 	*@param piece La piece que l'on deplace
 	*@param newX La nouvelle position en abcisse de la piece
 	*@param newY La nouvelle position en ordonnee de la piece
+	*@throws IllegalArgumentException si la nouvelle position n'est pas sur le plateau
+	*@throws IllegalArgumentException si la nouvelle position est occupee par une autre piece
 	*/
-	private void movePiece(Piece piece, int newX, int newY){
-		deletePiece(piece);
-		tabPiece[newX][newY]=piece;
+	public void movePiece(Piece piece, int newX, int newY) throws IllegalArgumentException{
+		Coordonnee coord = new Coordonnee(newX,newY);
+		if(!this.isValide(coord)){
+			throw new IllegalArgumentException("La nouvelle position ("+newX+","+newY+") est invalide.");
+		}
+		else if(!this.isLibre(coord)){
+			throw new IllegalArgumentException("La nouvelle position est occupee par une autre piece.");
+		}
+		else{
+			deletePiece(piece);
+			piece.setCoordonnee(coord);
+			tabPiece[newX][newY]=piece;
+		}
 	}	
 
 	/**
 	*Supprime une piece du plateau
 	*@param piece La piece a supprimer
 	*/
-	private void deletePiece(Piece piece){
+	public void deletePiece(Piece piece){
 		Coordonnee coord=piece.getCoordonnee();
 		int x=coord.getX();
 		int y=coord.getY();
 
-		tabPiece[x][y]=null;
+		if(this.isValide(coord)) {
+			tabPiece[x][y]=null;
+		}
 	}
 
-	private void updateStatus(){
+	public void updateStatus(){
 		int y=0;
 
 		for (int i=1;i<taille ;i=i+2) {
 			Piece piece = this.getPiece(new Coordonnee(i,y));
 
-			if(!piece.isIA()) {
+			if(piece!=null && !piece.isIA()) {
 				changeStatus(piece);
 			}
 		}
@@ -126,7 +142,7 @@ public class Plateau {
 		for (int i=0;i<taille ;i=i+2) {
 			Piece piece = this.getPiece(new Coordonnee(i,y));
 			
-			if(piece.isIA()) {
+			if(piece!=null && piece.isIA()) {
 				changeStatus(piece);
 			}
 		}

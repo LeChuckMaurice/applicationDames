@@ -134,6 +134,11 @@ public abstract class Piece {
 	public Plateau getPlateau(){
 		return this.plateau;
 	}
+
+
+	public void setCoordonnee(Coordonnee newPlace){
+		this.place = newPlace;
+	}
 	
 
 }
