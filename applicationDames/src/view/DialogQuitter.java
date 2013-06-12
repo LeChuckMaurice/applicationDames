@@ -64,7 +64,7 @@ public class DialogQuitter extends JDialog{
 		button.setPreferredSize( new Dimension(200,35));
 		button.setBackground(Color.black);
 		button.setForeground(Color.white);
-		button.setFont(new Font(Font.DIALOG, Font.BOLD, 13));
+		button.setFont(new Font(Font.DIALOG, Font.BOLD, 11));
 	}
 
 	public static void main(String[] args) {

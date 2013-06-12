@@ -16,8 +16,6 @@ public class MainMenu extends JFrame{
 	private JButton bQuitter;
 	private JPanel pQuitter;
 
-	private Font newFont = new Font(Font.DIALOG, Font.PLAIN, 24);
-
 	public MainMenu(){
 		super(" MainMenu ");
 		this.creerInterface();
@@ -69,7 +67,7 @@ public class MainMenu extends JFrame{
 		button.setPreferredSize( new Dimension(240,58));
 		button.setBackground(Color.black);
 		button.setForeground(Color.white);
-		button.setFont(newFont);
+		button.setFont(new Font(Font.DIALOG, Font.PLAIN, 22));
 	}
 
 

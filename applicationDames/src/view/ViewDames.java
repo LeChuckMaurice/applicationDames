@@ -4,9 +4,24 @@ import javax.swing.*;
 import java.awt.*;
 
 
+public class ViewDames {
+	
+	//Attributs globaux
+	private JPanel pGlobal;
 
-public class GameIG extends JFrame{
+	//Attributs pour le menu
+	private JPanel pLogo;
+	private JLabel lLogo;
 
+	private JButton bNew;
+	private JPanel pNew;
+	private JButton bCharger;
+	private JPanel pCharger;
+	private JButton bQuitter;
+	private JPanel pQuitter;
+
+
+	//Attributs pour interface de jeu
 	private JBackgroundPanel bpPrincipal;
 	private JPanel pMenu;
 	private JPanel pGame;
@@ -22,18 +37,17 @@ public class GameIG extends JFrame{
 
 	private Case[][] tabCase = new Case[taillePlateau][taillePlateau];
 
-	public GameIG(){
-		super(" GameIG ");
-		this.creerInterface();
-		this.setSize(322,346);
-		this.setVisible(true);
-		this.setDefaultCloseOperation ( EXIT_ON_CLOSE );
-	}
+	public ViewDames(){
 
-	public void creerInterface(){
+		pGlobal = new JPanel();
+		pGlobal.setSize(322,346);
 
 		bpPrincipal = new JBackgroundPanel("datas/Fond_net.jpg");
-		this.add(bpPrincipal);
+		pGlobal.add(bpPrincipal);
+
+	}
+
+	public void creerInterfaceJeu(){
 
 		bpPrincipal.setLayout(new BorderLayout());
 
@@ -76,6 +90,47 @@ public class GameIG extends JFrame{
 		
 		remplirPlateau();
 
+	}
+
+	public void creerInterfaceMenu(){
+
+		bpPrincipal.setLayout(new GridLayout(4,1));
+
+		pLogo = new JPanel();
+		pLogo.setOpaque (false);
+		bpPrincipal.add(pLogo);
+		lLogo = new JLabel();
+		ImageIcon logoDame=new ImageIcon("datas/logo.png");
+		lLogo.setIcon(logoDame);
+		pLogo.add(lLogo);
+
+		pNew = new JPanel();
+		pNew.setOpaque (false);
+		bpPrincipal.add(pNew);
+		bNew = new JButton("Nouvelle partie");
+		setStyleButton(bNew);
+		pNew.add(bNew);
+
+		pCharger = new JPanel();
+		pCharger.setOpaque (false);
+		bpPrincipal.add(pCharger);
+		bCharger = new JButton("Charger une partie");
+		setStyleButton(bCharger);
+		pCharger.add(bCharger);
+
+		pQuitter = new JPanel();
+		pQuitter.setOpaque (false);
+		bpPrincipal.add(pQuitter);
+		bQuitter = new JButton("Quitter");
+		setStyleButton(bQuitter);
+		pQuitter.add(bQuitter);
+	}
+
+	public void setStyleButton(JButton button){
+		button.setPreferredSize( new Dimension(240,58));
+		button.setBackground(Color.black);
+		button.setForeground(Color.white);
+		button.setFont(new Font(Font.DIALOG, Font.PLAIN, 22));
 	}
 
 	public void initPlateau(){
@@ -146,9 +201,21 @@ public class GameIG extends JFrame{
 		return tabCase[x][y];
 	}
 	
+	public JPanel getPanel(){
+		return pGlobal;
+	}
 
-	public static void main(String[] args) {
-		GameIG game = new GameIG();
+		
+	public JButton getNew(){
+		return bNew;
+	}
+
+	public JButton getCharger(){
+		return bCharger;
+	}
+
+	public JButton getQuitter(){
+		return bQuitter;
 	}
 
 

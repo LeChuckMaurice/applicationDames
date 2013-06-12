@@ -40,7 +40,7 @@ public void creerInterface(){
 	bMenu.setPreferredSize( new Dimension(160,35));
 	bMenu.setBackground(Color.black);
 	bMenu.setForeground(Color.white);
-	bMenu.setFont(new Font(Font.DIALOG, Font.BOLD, 13));
+	bMenu.setFont(new Font(Font.DIALOG, Font.BOLD, 11));
 	pButton.add(bMenu);
 
 }

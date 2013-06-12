@@ -27,7 +27,7 @@ public class DialogTaille extends JDialog{
 
 	public void creerInterface(){
 		
-		//this.setUndecorated(true);
+		this.setUndecorated(true);
 
 		pPrincipal= new JPanel();
 		pPrincipal.setBackground(Color.darkGray);
@@ -86,7 +86,7 @@ public class DialogTaille extends JDialog{
 		button.setSize(100,35);
 		button.setBackground(Color.black);
 		button.setForeground(Color.white);
-		button.setFont(new Font(Font.DIALOG, Font.BOLD, 13));
+		button.setFont(new Font(Font.DIALOG, Font.BOLD, 11));
 	}
 
 }
