@@ -12,8 +12,6 @@ public class DialogSaveCharge extends JDialog{
 	private JButton bAnnuler;
 	private JPanel pConfirmer;
 	private JButton bConfirmer;
-
-	private String textLabel;
 	
 	public DialogSaveCharge(String text){
 		super ();
@@ -25,6 +23,8 @@ public class DialogSaveCharge extends JDialog{
 	}
 
 	public void creerInterface(String text){
+		
+		//this.setUndecorated(true);
 		
 		pPrincipal = new JPanel();
 		pPrincipal.setLayout(new GridLayout(2,1));
@@ -69,6 +69,7 @@ public class DialogSaveCharge extends JDialog{
 
 	public static void main(String[] args) {
 		DialogSaveCharge dialog = new DialogSaveCharge("Sauvegarder la partie? ");
+		
 		DialogSaveCharge dialog2 = new DialogSaveCharge("Charger la partie? ");
 	}
 
