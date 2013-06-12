@@ -86,7 +86,7 @@ public class GameIG extends JFrame{
 		pGame = new JPanel();
 		pGame.setLayout(new FlowLayout(1));
 		pGame.setOpaque(false);
-		bpPrincipal.add(pGame,BorderLayout.SOUTH);
+		bpPrincipal.add(pGame,BorderLayout.CENTER);
 		
 		pPlateau = new JPanel();
 		pPlateau.setBackground(Color.black);
