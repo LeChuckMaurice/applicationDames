@@ -19,18 +19,16 @@ public class Plateau {
 		int x = 0;
 		int y = 0;
 
-		// remplissage camp joueur
+		// remplissage camp IA
 		for(y=0; y<(this.taille)/2-1; y++){ // y
-			for (x=(y+1)%2; x<this.taille; x++){ // x
-				this.tabPiece[x][y] = new Pion(x,y,this,false);
-				x++;
+			for (x=(y+1)%2; x<this.taille; x=x+2){ // x
+				this.tabPiece[x][y] = new Pion(x,y,this,true);
 			}
 		}
 		// remplissage camp joueur
 		for(y=y+2; y<this.taille; y++){ // y
-			for (x=(y+1)%2; x<this.taille; x++){ // x
-				this.tabPiece[x][y] = new Pion(x,y,this,true);
-				x++;
+			for (x=(y+1)%2; x<this.taille; x=x+2){ // x
+				this.tabPiece[x][y] = new Pion(x,y,this,false);
 			}
 		}
 	}
@@ -247,6 +245,11 @@ public class Plateau {
 			piece=tabPiece[x][y];
 		}
 		return piece;
+	}
+
+	public Piece getPiece(int x, int y){
+		Coordonnee coord = new Coordonnee(x,y);
+		return this.getPiece(coord);
 	}
 
 

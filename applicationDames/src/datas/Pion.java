@@ -24,12 +24,10 @@ public class Pion extends Piece {
 		boolean move=false;
 		int x=thePlace.getX();
 		int y=thePlace.getY();
-
 		// Si la piece appartient à l'IA
 		if (pieceIA==true) {
 			Coordonnee gche= new Coordonnee(x-1,y+1);
 			Coordonnee drte= new Coordonnee(x+1,y+1);
-
 			// Si case droite valide et libre
 			if(this.plateau.isValide(drte) && this.plateau.isLibre(drte)){
 				move=true;
