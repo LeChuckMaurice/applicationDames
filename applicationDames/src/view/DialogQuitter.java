@@ -23,6 +23,8 @@ public class DialogQuitter extends JDialog{
 	}
 
 	public void creerInterface(){
+
+		//this.setUndecorated(true);
 		
 		pPrincipal = new JPanel();
 		pPrincipal.setLayout(new GridLayout(3,1));

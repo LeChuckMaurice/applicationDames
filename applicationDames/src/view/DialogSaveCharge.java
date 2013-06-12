@@ -24,6 +24,8 @@ public class DialogSaveCharge extends JDialog{
 
 	public void creerInterface(String text){
 		
+		//this.setUndecorated(true);
+		
 		pPrincipal = new JPanel();
 		pPrincipal.setLayout(new GridLayout(2,1));
 		pPrincipal.setBackground(Color.darkGray);
