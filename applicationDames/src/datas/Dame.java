@@ -1,16 +1,18 @@
 package datas;
 
+import java.util.ArrayList;
+
 public class Dame extends Piece {
 
 	public Dame(int positionX, int positionY, Plateau thePlateau, boolean pieceIA) {
 		super(positionX,positionY,pieceIA,thePlateau,true);
 	}
 
-	public Coup[] generateCoups() {
+	public ArrayList<Coordonnee> generateCoups() {
 		return null;
 	}
 
-	public Coordonnee[] getDeplacements(Coordonnee place) {
+	public ArrayList<Coordonnee> getDeplacements(Coordonnee place) {
 		return null;
 	}
 
@@ -26,10 +28,10 @@ public class Dame extends Piece {
 
 		// tableau des coordonnees des cases de distance 1
 		Coordonnee[] cases1 = new Coordonnee[4];
-		cases1[0] = new Coordonnee(x+1,x+1);
-		cases1[1] = new Coordonnee(x+1,x-1);
-		cases1[2] = new Coordonnee(x-1,x+1);
-		cases1[3] = new Coordonnee(x-1,x-1);
+		cases1[0] = new Coordonnee(x+1,y+1);
+		cases1[1] = new Coordonnee(x+1,y-1);
+		cases1[2] = new Coordonnee(x-1,y+1);
+		cases1[3] = new Coordonnee(x-1,y-1);
 
 		for(int i=0; i<=3; i++){
 			// Si la case est valide et libre

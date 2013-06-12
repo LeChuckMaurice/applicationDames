@@ -1,16 +1,18 @@
 package datas;
 
+import java.util.ArrayList;
+
 public class Pion extends Piece {
 
 	public Pion(int positionX, int positionY, Plateau thePlateau, boolean pieceIA) {
 		super(positionX,positionY,pieceIA,thePlateau,false);
 	}
 
-	public Coup[] generateCoups() {
+	public ArrayList<Coordonnee> generateCoups() {
 		return null;
 	}
 
-	public Coordonnee[] getDeplacements(Coordonnee place) {
+	public ArrayList<Coordonnee> getDeplacements(Coordonnee place){
 		return null;
 	}
 

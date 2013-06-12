@@ -1,5 +1,6 @@
 package datas;
-import datas.*;
+import java.util.ArrayList;
+
 
 public abstract class Piece {
 
@@ -90,9 +91,9 @@ public abstract class Piece {
 		return vulnerable;
 	}
 
-	public abstract Coup[] generateCoups();
-
-	public abstract Coordonnee[] getDeplacements(Coordonnee place);
+	public abstract ArrayList<Coordonnee> generateCoups();
+	
+	public abstract ArrayList<Coordonnee> getDeplacements(Coordonnee place);
 
 	public abstract boolean canMove();
 
