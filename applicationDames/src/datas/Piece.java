@@ -76,7 +76,7 @@ public abstract class Piece {
 			}
 			
 		}
-		else{
+		else{ 
 			Coordonnee gche= new Coordonnee(x-1,y+1);
 			Coordonnee drte= new Coordonnee(x+1,y+1);
 			if (this.plateau.isValide(gche) && this.plateau.isValide(drte)) {
