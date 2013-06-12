@@ -18,7 +18,7 @@ public class DialogQuitter extends JDialog{
 		creerInterface();
 
 		this.setSize(240,180);
-		this.setVisible(true);
+		this.setVisible(false);
 		this.setDefaultCloseOperation ( HIDE_ON_CLOSE );
 	}
 
@@ -67,7 +67,18 @@ public class DialogQuitter extends JDialog{
 		button.setFont(new Font(Font.DIALOG, Font.BOLD, 11));
 	}
 
-	public static void main(String[] args) {
-		DialogQuitter quit = new DialogQuitter();
+	public JButton getSave(){
+		return bSave;
+	}	
+
+	public JButton getNoSave(){
+		return bNoSave;
+	}	
+
+	public JButton getAnnuler(){
+		return bAnnuler;
 	}
+
+
+
 }

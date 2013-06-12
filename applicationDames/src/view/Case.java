@@ -129,5 +129,12 @@ public class Case extends JLabel {
 		
 	}
 
+	@Override
+	public String toString(){
+		String retCase="case";
+
+		return retCase;
+	}
+
 	
 }

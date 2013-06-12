@@ -21,7 +21,7 @@ public class DialogTaille extends JDialog{
 		creerInterface();
 
 		this.setSize(240,160);
-		this.setVisible(true);
+		this.setVisible(false);
 		this.setDefaultCloseOperation ( HIDE_ON_CLOSE );
 	}
 
@@ -78,10 +78,6 @@ public class DialogTaille extends JDialog{
 
 	}
 
-	public static void main(String[] args) {
-		DialogTaille dialog = new DialogTaille();
-	}
-
 	public void setStyleButton(JButton button){
 		button.setSize(100,35);
 		button.setBackground(Color.black);
@@ -89,4 +85,22 @@ public class DialogTaille extends JDialog{
 		button.setFont(new Font(Font.DIALOG, Font.BOLD, 11));
 	}
 
+	public void init () {
+   	JFrame parent = (JFrame) this.getOwner();
+    Dimension d = parent.getSize () ;
+    Point p = parent.getLocation () ;
+    setLocation (p.x+(d.width-getSize().width)/2, p.y+(d.height-getSize().height)/2);
+	}
+
+	public JButton getAnnuler(){
+		return bAnnuler;
+	}
+
+	public JButton getConfirmer(){
+		return bConfirmer;
+	}
+
+	public int getContenu(){
+		return (int) cbTaille.getSelectedItem();
+	}
 }

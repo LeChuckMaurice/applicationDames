@@ -1,6 +1,7 @@
 package view;
 
 import javax.swing.*;
+
 import java.awt.*;
 
 public class DialogFin extends JDialog{
@@ -15,7 +16,7 @@ public DialogFin(boolean victoire){
 	creerInterface();
 	styleLabel(victoire);
 	this.setSize(240,130);
-	this.setVisible(true);
+	this.setVisible(false);
 	this.setDefaultCloseOperation ( HIDE_ON_CLOSE );
 }
 
@@ -57,11 +58,17 @@ public void styleLabel(boolean victoire){
 
 }
 
-public static void main(String[] args) {
-	DialogFin vict = new DialogFin(true);
-	DialogFin def = new DialogFin(false);
+public JButton getMenu(){
+	return bMenu;
+}
 
+public void init () {
+   	JFrame parent = (JFrame) this.getOwner();
+    Dimension d = parent.getSize () ;
+    Point p = parent.getLocation () ;
+    setLocation (p.x+(d.width-getSize().width)/2, p.y+(d.height-getSize().height)/2);
 }
 	
+
 
 }
