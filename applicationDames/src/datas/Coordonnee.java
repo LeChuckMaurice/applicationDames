@@ -1,5 +1,5 @@
 package datas;
-
+ 
 /**
  * La classe Coordonnee décrit une coordonnée en abscisse et en ordonnée.
  */

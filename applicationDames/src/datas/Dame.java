@@ -1,5 +1,5 @@
 package datas;
-
+ 
 import java.util.ArrayList;
 
 public class Dame extends Piece {
@@ -39,6 +39,7 @@ public class Dame extends Piece {
 				move=true;
 			}
 		}
+		// S'il ne peut pas bouger sans prendre
 		if(!move){
 			// Si il peut prendre (il peut donc bouger)
 			if(this.canTake(place,pieceIA)){
