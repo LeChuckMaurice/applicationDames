@@ -42,12 +42,12 @@ public class Dame extends Piece {
 		// S'il ne peut pas bouger sans prendre
 		if(!move){
 			// Si il peut prendre (il peut donc bouger)
-			if(this.canTake(place,pieceIA)){
+			if(this.canTake()){
 				move=true;
 			}
 		}
 
-		return false;
+		return move;
 	}
 
 	public boolean canTake() {
@@ -66,21 +66,21 @@ public class Dame extends Piece {
 
 		Piece piece;
 
-		for(int i=0; i<3; i++){
+		for(int i=0; i<=3; i++){
 			// 1er tour de boucle : diagonale bas droite
 			if(i==0){
 				deplacementX=1; deplacementY=1;
 			}
 			// 2eme tour de boucle : diagonale bas gauche
-			if(i==0){
+			if(i==1){
 				deplacementX=-1; deplacementY=1;
 			}			
 			// 3eme tour de boucle : diagonale haut gauche
-			if(i==0){
+			if(i==2){
 				deplacementX=-1; deplacementY=-1;
 			}			
 			// 4eme tour de boucle : diagonale haut droite
-			if(i==0){
+			if(i==3){
 				deplacementX=1; deplacementY=-1;
 			}
 
