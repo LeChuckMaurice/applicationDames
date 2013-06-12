@@ -224,8 +224,8 @@ public class TestPlateau {
 
 	private void viderPlateau(Plateau plateau){
 		Piece[][] tabPiece = plateau.getTabPiece();
-		for(int i=0; i<plateau.getTaille()-1; i++){
-			for(int j=0; j<plateau.getTaille()-1; j++){
+		for(int i=0; i<plateau.getTaille(); i++){
+			for(int j=0; j<plateau.getTaille(); j++){
 				tabPiece[i][j] = null;
 			}
 		}

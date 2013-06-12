@@ -9,8 +9,8 @@ import org.junit.Test;
 
 import datas.Plateau;
 
-public class TestPion {
 
+public class TestDame {
 	private Plateau plateau8;
 	private Plateau plateau10;
 	private Plateau plateau12;
@@ -23,6 +23,7 @@ public class TestPion {
 
 	private Pion pionJoueur;
 	private Dame dameJoueur;
+
 
 	@Before
 	public void setUp() throws Exception {
@@ -62,7 +63,6 @@ public class TestPion {
 	}
 
 
-
 	@Test
 	public void testGenerateCoups() {
 		fail("Not yet implemented");
@@ -75,57 +75,68 @@ public class TestPion {
 
 	@Test
 	public void testCanMove() {
-		Piece pieceFalse = this.plateau10.getPiece(1,0);
-		Piece pieceTrue = this.plateau10.getPiece(0,3);
-		
-		System.out.println(this.plateau10.toString()+"------");
-		assertFalse(pieceFalse.canMove());
-		assertTrue(pieceTrue.canMove());
+		this.viderPlateau(plateauVide10);
+		// dame principale
+		Dame dame1Joueur = new Dame(0,9,this.plateauVide10,false);
+		this.tabPieceVide10[0][9] = dame1Joueur;
 
-		// test avec pion qui peut prendre (mais ne peut pas bouger sans prendre)
-		Piece piecePrise = this.plateau10.getPiece(1,6);
-		this.plateau10.movePiece(piecePrise,1,4);
-		assertTrue(pieceTrue.canMove());
+		Pion pionIA1 = new Pion(1,8,this.plateauVide10,true);
+		this.tabPieceVide10[1][8] = pionIA1;
+
+		Pion pionGenantJoueur = new Pion(2,7,this.plateauVide10,false);
+		this.tabPieceVide10[2][7] = pionGenantJoueur;
+
+		System.out.println(this.plateauVide10.toString());
+
+		assertFalse(dame1Joueur.canMove());
+
+		this.plateauVide10.movePiece(pionGenantJoueur,3,6);
+
+		System.out.println(this.plateauVide10.toString());
+
+		assertTrue(dame1Joueur.canMove());
+
+		this.plateauVide10.movePiece(pionIA1,1,0);
+		
+		assertTrue(dame1Joueur.canMove());
+		
 
 	}
 
 	@Test
 	public void testCanTake() {
 		this.viderPlateau(plateauVide10);
-		// pion principal
-		Pion pion1 = new Pion(4,5,this.plateauVide10,true);
-		this.tabPieceVide10[4][5] = pion1;
+		// dame principale
+		Dame dame1Joueur = new Dame(4,5,this.plateauVide10,false);
+		this.tabPieceVide10[4][5] = dame1Joueur;
 
-		Pion pionJoueur1 = new Pion(3,4,this.plateauVide10,false);
-		this.tabPieceVide10[3][4] = pionJoueur1;
+		Pion pionIA1 = new Pion(3,4,this.plateauVide10,true);
+		this.tabPieceVide10[3][4] = pionIA1;
 
-		Pion pionJoueur2 = new Pion(5,4,this.plateauVide10,false);
-		this.tabPieceVide10[5][4] = pionJoueur2;
-
-		Pion pionIA1 = new Pion(3,6,this.plateauVide10,true);
-		this.tabPieceVide10[3][6] = pionIA1;
-
-		Pion pionIA2 = new Pion(5,6,this.plateauVide10,true);
-		this.tabPieceVide10[5][6] = pionIA2;
-
-		System.out.println(this.plateauVide10.toString());
-		// test prise en avant
-		assertTrue(pion1.canTake());
-
-		// tests prise avec pion la piece a abattre  (donc pas possible)
-		assertFalse(pionJoueur1.canTake());
-		assertFalse(pionJoueur2.canTake());
-		assertFalse(pionIA1.canTake());
-		assertFalse(pionIA2.canTake());
-
-		this.plateauVide10.deletePiece(pionJoueur2);
-		this.plateauVide10.movePiece(pionIA2,5,4);
-
-		// test prise en arriere
-		assertTrue(pion1.canTake());
+		Pion pionGenantJoueur = new Pion(2,3,this.plateauVide10,false);
+		this.tabPieceVide10[2][3] = pionGenantJoueur;
 
 
-		System.out.println(this.plateauVide10.toString());
+		assertFalse(dame1Joueur.canTake());
+
+		this.plateauVide10.movePiece(pionGenantJoueur,1,0);
+
+		assertTrue(dame1Joueur.canTake());
+
+		// pion a abattre dans la diagonale a 2 cases de distance
+		this.plateauVide10.movePiece(pionIA1,2,3);
+		assertTrue(dame1Joueur.canTake());
+
+		// pion a abattre en bout de diagonale
+		this.plateauVide10.movePiece(pionIA1,0,1);
+		assertFalse(dame1Joueur.canTake());
+
+		// pion a abattre dans la diagonale a 3 cases de distance
+		// avec case d'apres occupee
+		this.plateauVide10.movePiece(pionIA1,1,2);
+		this.plateauVide10.movePiece(pionGenantJoueur,0,1);
+		assertFalse(dame1Joueur.canTake());
+
 	}
 
 	private void viderPlateau(Plateau plateau){
