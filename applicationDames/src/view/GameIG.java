@@ -18,7 +18,7 @@ public class GameIG extends JFrame{
 	private JLabel bHelp;
 	private JLabel bSave;
 
-	private int taillePlateau=10;
+	private int taillePlateau=8;
 
 	private Case[][] tabCase = new Case[taillePlateau][taillePlateau];
 
@@ -74,6 +74,8 @@ public class GameIG extends JFrame{
 		pMenuRight.add(bExit);
 		
 		initPlateau();
+		
+		remplirPlateau();
 
 	}
 
@@ -120,7 +122,7 @@ public class GameIG extends JFrame{
 		}
 	}
 
-	public void remplirTableau() {
+	public void remplirPlateau() {
 		int x = 0;
 		int y = 0;
 		
