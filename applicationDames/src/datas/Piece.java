@@ -27,6 +27,21 @@ public abstract class Piece implements Serializable {
 
 	// Methodes
 
+	public ArrayList<Coup> generateCoups(){
+
+		ArrayList<Coup> coups = new ArrayList<Coup>();
+		ArrayList<Coordonnee> deplacementsPossibles  = this.getDeplacements();
+
+
+
+		for(int i=0; i<deplacementsPossibles.size(); i++){
+
+			coups.add(new Coup(this, deplacementsPossibles.get(i)));
+		}
+
+		return coups;
+	}
+
 	public boolean isVulnerable(){
 		return this.isVulnerable(this.place,this.pieceIA);
 	}
@@ -43,14 +58,14 @@ public abstract class Piece implements Serializable {
 		Piece piece1=null; 
 
 		// recuperation des 4 diagonales
-		ArrayList<Piece> diagonaleHG = this.getDiagonale(-1,-1);
-		ArrayList<Piece> diagonaleHD = this.getDiagonale(1, -1);
-		ArrayList<Piece> diagonaleBD = this.getDiagonale(1,1);
-		ArrayList<Piece> diagonaleBG = this.getDiagonale(-1, 1);
+		ArrayList<Coordonnee> diagonaleHG = this.getDiagonale(-1,-1);
+		ArrayList<Coordonnee> diagonaleHD = this.getDiagonale(1, -1);
+		ArrayList<Coordonnee> diagonaleBD = this.getDiagonale(1,1);
+		ArrayList<Coordonnee> diagonaleBG = this.getDiagonale(-1, 1);
 		
 		int i=0;
 		do{
-			piece1 = diagonaleHG.get(0);
+			// piece1 = diagonaleHG.get(i);
 			i++;
 		}
 		// jusqu'a ce que la case soit occupée
@@ -64,16 +79,17 @@ public abstract class Piece implements Serializable {
 		return vulnerable;
 	}
 
-	public abstract ArrayList<Coordonnee> generateCoups();
-	
+
+	public abstract ArrayList<Coordonnee> getDeplacements();
 	public abstract ArrayList<Coordonnee> getDeplacements(Coordonnee place);
 
-	public abstract boolean canMove();
+	public abstract ArrayList<Piece> prisesPossibles();
+	public abstract ArrayList<Piece> prisesPossibles(Coordonnee thePlace, boolean pieceIA);
 
+	public abstract boolean canMove();
 	public abstract boolean canMove( Coordonnee place, boolean pieceIA );
 
 	public abstract boolean canTake();
-
 	public abstract boolean canTake( Coordonnee place, boolean pieceIA );
 
 	//Accesseurs
@@ -113,13 +129,13 @@ public abstract class Piece implements Serializable {
 	}
 
 
-	protected ArrayList<Piece> getDiagonale(int dirX, int dirY){
+	protected ArrayList<Coordonnee> getDiagonale(int dirX, int dirY){
 		return this.getDiagonale(this.place, dirX, dirY);
 	}
 
 
-	protected ArrayList<Piece> getDiagonale(Coordonnee place, int dirX, int dirY){
-		ArrayList<Piece> tabCoord = new ArrayList<Piece>();
+	protected ArrayList<Coordonnee> getDiagonale(Coordonnee place, int dirX, int dirY){
+		ArrayList<Coordonnee> tabCoord = new ArrayList<Coordonnee>();
 
 		int x = place.getX();
 		int y = place.getY();
@@ -127,14 +143,14 @@ public abstract class Piece implements Serializable {
 		do{
 			x = x + dirX;
 			y = y + dirY;
-			tabCoord.add(this.plateau.getPiece(x,y));
+			tabCoord.add(new Coordonnee(x,y));
 		}
 		// tant qu'on n'est pas sorti du plateau et que la case est libre
 		while(this.plateau.isValide(new Coordonnee(x,y)));
 
-		if(tabCoord.size()>0){
-			tabCoord.remove(tabCoord.size()-1);
-		}
+		//if(tabCoord.size()>0){
+			//tabCoord.remove(tabCoord.size()-1);
+		//}
 		return tabCoord;
 	}
 	

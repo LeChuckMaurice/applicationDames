@@ -13,9 +13,7 @@ public class Pion extends Piece {
 		super(positionX,positionY,pieceIA,thePlateau,false);
 	}
 
-	public ArrayList<Coordonnee> generateCoups() {
-		return null;
-	}
+
 
 
 	public ArrayList<Coordonnee> getDeplacements(){

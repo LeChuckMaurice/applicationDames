@@ -1,5 +1,7 @@
 package tests;
 
+import java.util.ArrayList;
+
 import datas.*;
 import static org.junit.Assert.*;
 
@@ -70,7 +72,38 @@ public class TestPion {
 
 	@Test
 	public void testGetDeplacements() {
-		fail("Not yet implemented");
+		viderPlateau(plateauVide10);
+
+		Pion pion1 = new Pion(4,5,this.plateauVide10,false);
+		this.tabPieceVide10[4][5] = pion1;
+
+		ArrayList<Coordonnee> deplacements = pion1.getDeplacements();
+		
+		assertEquals(deplacements.size(), 2);
+
+		
+		System.out.println("testGetDeplacements() 1 : lorsque le pion est libre (2 deplacements possibles).");
+		System.out.println("Resultat attendu : (3,4) et (5,4)");
+		for(int i=0; i<deplacements.size(); i++){
+			System.out.println(deplacements.get(i).toString());
+		}
+
+		// avec pion derriere (un deplacement possible en plus
+		Pion pion2 = new Pion(5,6,this.plateauVide10,true);
+		this.tabPieceVide10[5][6] = pion2;
+
+		ArrayList<Coordonnee> deplacements2 = pion1.getDeplacements();
+		
+		assertEquals(deplacements2.size(), 3);
+
+		System.out.println("testGetDeplacements() 2 : lorsque le pion est libre (2 deplacements possibles) + 1 pion adverse arriere.");
+		System.out.println("Resultat attendu : (3,4), (5,4) et (6,7)");
+		for(int i=0; i<deplacements2.size(); i++){
+			System.out.println(deplacements2.get(i).toString());
+		}
+
+		
+
 	}
 
 	@Test
@@ -78,7 +111,6 @@ public class TestPion {
 		Piece pieceFalse = this.plateau10.getPiece(1,0);
 		Piece pieceTrue = this.plateau10.getPiece(0,3);
 		
-		System.out.println(this.plateau10.toString()+"------");
 		assertFalse(pieceFalse.canMove());
 		assertTrue(pieceTrue.canMove());
 
@@ -88,6 +120,37 @@ public class TestPion {
 		assertTrue(pieceTrue.canMove());
 
 	}
+
+
+	@Test
+	public void testPrisesPossibles() {
+		this.viderPlateau(plateauVide10);
+		// pion principal
+		Pion pion1 = new Pion(4,5,this.plateauVide10,true);
+		this.tabPieceVide10[4][5] = pion1;
+
+		Pion pionJoueur1 = new Pion(3,4,this.plateauVide10,false);
+		this.tabPieceVide10[3][4] = pionJoueur1;
+
+		Pion pionJoueur2 = new Pion(5,4,this.plateauVide10,false);
+		this.tabPieceVide10[5][4] = pionJoueur2;
+
+		Pion pionIA1 = new Pion(3,6,this.plateauVide10,true);
+		this.tabPieceVide10[3][6] = pionIA1;
+
+		Pion pionIA2 = new Pion(5,6,this.plateauVide10,true);
+		this.tabPieceVide10[5][6] = pionIA2;
+
+		ArrayList<Piece> prises = pion1.prisesPossibles();
+
+		System.out.println("testPrisesPossibles() : resultats attendus (3,4) et (5,4)");
+		for(int i = 0; i<prises.size(); i++){
+			System.out.println(prises.get(i).getCoordonnee().toString());
+		}
+
+	}
+
+
 
 	@Test
 	public void testCanTake() {
@@ -108,7 +171,6 @@ public class TestPion {
 		Pion pionIA2 = new Pion(5,6,this.plateauVide10,true);
 		this.tabPieceVide10[5][6] = pionIA2;
 
-		System.out.println(this.plateauVide10.toString());
 		// test prise en avant
 		assertTrue(pion1.canTake());
 
@@ -125,7 +187,6 @@ public class TestPion {
 		assertTrue(pion1.canTake());
 
 
-		System.out.println(this.plateauVide10.toString());
 	}
 
 	private void viderPlateau(Plateau plateau){
