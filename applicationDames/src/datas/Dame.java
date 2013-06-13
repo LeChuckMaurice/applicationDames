@@ -41,7 +41,7 @@ public class Dame extends Piece implements Serializable {
 			tabCoord.add(diagonaleHG.get(i).getCoordonnee());
 			i++;
 		}
-		i=0;
+		i=0; 
 		while(diagonaleHD.get(i)==null){
 			tabCoord.add(diagonaleHG.get(i).getCoordonnee());
 			i++;

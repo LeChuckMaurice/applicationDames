@@ -58,7 +58,7 @@ public class Coordonnee implements Serializable{
 	 */
 	public int getX(){
 		return this.x;
-	}
+	} 
 
 	/**
 	 * Accesseur de l'attribut y

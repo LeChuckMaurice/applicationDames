@@ -40,7 +40,7 @@ public abstract class Piece implements Serializable {
 		int deplacementY=0; // deplacement en y
 		Coordonnee coord = new Coordonnee(x,y);
 
-		Piece piece1=null;
+		Piece piece1=null; 
 
 		// recuperation des 4 diagonales
 		ArrayList<Piece> diagonaleHG = this.getDiagonale(-1,-1);

@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 public class Pion extends Piece {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public Pion(int positionX, int positionY, Plateau thePlateau, boolean pieceIA) {
 		super(positionX,positionY,pieceIA,thePlateau,false);
 	}
