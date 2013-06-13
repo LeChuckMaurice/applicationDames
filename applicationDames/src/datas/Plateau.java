@@ -1,7 +1,18 @@
 package datas;
- 
-public class Plateau {
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+ 
+public class Plateau implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public int taille;
 	public IA ordinateur;
 	public Piece[][] tabPiece;
@@ -204,11 +215,29 @@ public class Plateau {
 	// Entree / Sorties
 
 	public void savePlateau(){
-
+		String fichierPlateau = "plateau.out";
+		FileOutputStream out = null;
+		ObjectOutputStream flux = null;
+		try {
+			out = new FileOutputStream(fichierPlateau);
+			flux = new ObjectOutputStream(out);
+			flux.writeObject(this);
+		}
+		catch(IOException e) {
+			System.out.println("Erreur I/O");
+		}
 	}
 
-	public Plateau chargerPlateau(){
-		return null;
+	public Plateau chargerPlateau() throws Exception{
+		Plateau plateau1 = new Plateau(10);
+		String fichierPlateau="plateau.out";
+
+		FileInputStream out = new FileInputStream(fichierPlateau);
+		ObjectInputStream flux = new ObjectInputStream(out);
+		plateau1 = (Plateau) flux.readObject();
+		flux.close();
+
+		return plateau1;
 	}
 
 	// Accesseurs

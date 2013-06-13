@@ -1,9 +1,16 @@
 package datas;
+
+import java.io.Serializable;
  
 /**
  * La classe Coordonnee décrit une coordonnée en abscisse et en ordonnée.
  */
-public class Coordonnee {
+public class Coordonnee implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Abscisse
@@ -59,6 +66,11 @@ public class Coordonnee {
 	 */
 	public int getY(){
 		return this.y;
+	}
+	
+	public String toString(){
+		String chaine = "("+this.getX()+","+this.getY()+")";
+		return chaine;
 	}
 
 }
