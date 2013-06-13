@@ -2,13 +2,13 @@ package controller;
 
 import view.*;
 import java.awt.event.*;
-
+import java.io.*;
 import datas.Piece;
 import datas.Plateau;
 
 public class DamesControl implements Globale{
 	
-	Plateau thePlat = null;
+	Plateau thePlat = new Plateau(10);
 	
 	public DamesControl(){
 
@@ -100,6 +100,15 @@ public class DamesControl implements Globale{
 		}
 
 
+	}
+
+	public void charger() throws Exception{
+		thePlat = thePlat.chargerPlateau();
+		
+	}
+	
+	public void sauver(){
+		thePlat.savePlateau();
 	}
 	
 	public void createThePlat(int taille){
