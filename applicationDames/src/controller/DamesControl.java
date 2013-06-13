@@ -3,7 +3,12 @@ package controller;
 import view.*;
 import java.awt.event.*;
 
+import datas.Piece;
+import datas.Plateau;
+
 public class DamesControl implements Globale{
+	
+	Plateau thePlat = null;
 	
 	public DamesControl(){
 
@@ -53,6 +58,56 @@ public class DamesControl implements Globale{
 	
 	public void attacherReactionsAide(){
 		(Globale.theView).getExitAide().addMouseListener(new ReactionClick(this));
+	}
+
+	public void updateView(){
+		int taillePlateau=thePlat.getTaille();;
+
+		if (thePlat!=null) {
+			for (int y=0;y<taillePlateau;y++) {
+				
+				for (int x=(y+1)%2; x<taillePlateau; x=x+2){ // x
+				
+					Piece piece = thePlat.getPiece(x,y);
+					Case laCase = theView.getCase(x,y);
+
+					if (piece==null) {
+						laCase.setCaseNoire();
+					}
+					else if (piece.isIA()) {
+						
+						if (piece.isDame()) {
+							laCase.setDameNoir();
+						}
+						else{
+							laCase.setPionNoir();
+						}
+
+					}
+					else if (!(piece.isDame())) {
+						
+						if (piece.isDame()) {
+							laCase.setDameBlanc();
+						}
+						else{
+							laCase.setPionBlanc();
+						}
+						
+					}
+				}
+
+			}
+		}
+
+
+	}
+	
+	public void createThePlat(int taille){
+		thePlat = new Plateau(taille);
+	}
+
+	public Plateau getThePlat(){
+		return thePlat;
 	}
 
 public static void main(String[] args) {

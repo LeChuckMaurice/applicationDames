@@ -129,8 +129,6 @@ public class ViewDames extends JFrame{
 		tabCase = new Case[taillePlateau][taillePlateau];
 		
 		initPlateau();
-		
-		remplirPlateau();
 
 	}
 
@@ -278,7 +276,7 @@ public class ViewDames extends JFrame{
 					
 					Case theCase = new Case(x,y,taillePlateau);
 					
-					theCase.setCaseNoire();
+					theCase.setCaseBlanche();
 					
 					tabCase[x][y]=theCase;
 
@@ -288,7 +286,7 @@ public class ViewDames extends JFrame{
 				else{
 					Case theCase = new Case(x,y,taillePlateau);
 
-					theCase.setCaseBlanche();
+					theCase.setCaseNoire();
 
 					tabCase[x][y]=theCase;
 
