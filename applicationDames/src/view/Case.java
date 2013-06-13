@@ -22,7 +22,7 @@ public class Case extends JLabel {
 
 	public void setCaseNoire(){
 		if (taillePlateau==8 || taillePlateau==10 || taillePlateau==12) {
-			String chemin = "datas/"+taillePlateau +"/caseBlanc.png";
+			String chemin = "datas/"+taillePlateau +"/caseNoir.png";
 			image = new ImageIcon(chemin);
 			this.setIcon(image);
 		}
@@ -34,7 +34,7 @@ public class Case extends JLabel {
 
 	public void setCaseBlanche(){
 		if (taillePlateau==8 || taillePlateau==10 || taillePlateau==12) {
-			String chemin = "datas/"+ taillePlateau+"/caseNoir.png";
+			String chemin = "datas/"+ taillePlateau+"/caseBlanc.png";
 			image = new ImageIcon(chemin);
 			this.setIcon(image);
 		}
@@ -127,6 +127,13 @@ public class Case extends JLabel {
 			System.out.println("Taille plateau Invalide");
 		}
 		
+	}
+
+	@Override
+	public String toString(){
+		String retCase="case";
+
+		return retCase;
 	}
 
 	

@@ -2,9 +2,11 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.*;
+import java.net.*;
 
 
-public class ViewDames {
+public class ViewDames extends JFrame{
 	
 	//Attributs globaux
 	private JPanel pGlobal;
@@ -20,6 +22,13 @@ public class ViewDames {
 	private JButton bQuitter;
 	private JPanel pQuitter;
 
+	//Attributs pour l'interface d'aide
+
+	private JEditorPane epAide;
+	private JScrollPane spAide;
+	private JPanel pAide;
+	private JLabel bExitAide;
+
 
 	//Attributs pour interface de jeu
 	private JBackgroundPanel bpPrincipal;
@@ -33,25 +42,56 @@ public class ViewDames {
 	private JLabel bHelp;
 	private JLabel bSave;
 
-	private int taillePlateau=8;
+	private int taillePlateau;
 
-	private Case[][] tabCase = new Case[taillePlateau][taillePlateau];
+	private Case[][] tabCase;
+
+	//Boites de dialogues
+
+	private DialogFin dialogWin;
+	private DialogFin dialogLose;
+	private DialogSaveCharge dialogSave;
+	private DialogSaveCharge dialogCharge;
+	private DialogQuitter dialogQuit;
+	private DialogTaille dialogTaille;
 
 	public ViewDames(){
 
+		super();
+		this.setSize(330,350);
 		pGlobal = new JPanel();
 		pGlobal.setSize(322,346);
+		//pGlobal.removeAll();
+		pGlobal.updateUI();
+		this.add(pGlobal);
 
-		bpPrincipal = new JBackgroundPanel("datas/Fond_net.jpg");
-		pGlobal.add(bpPrincipal);
+		dialogWin = new DialogFin(true);
+		dialogLose = new DialogFin(false);
+		dialogSave = new DialogSaveCharge(false);
+		dialogCharge = new DialogSaveCharge(true);
+		dialogQuit = new DialogQuitter();
+		dialogTaille = new DialogTaille();
+		
+		this.setVisible(true);
+		this.setDefaultCloseOperation ( EXIT_ON_CLOSE );
+
+		this.creerInterfaceMenu();
+		
+		
 
 	}
 
-	public void creerInterfaceJeu(){
+	public void creerInterfaceJeu(int laTaille){
 
+		pGlobal.removeAll();
+		pGlobal.updateUI();
+		this.taillePlateau=laTaille;
+
+		bpPrincipal = new JBackgroundPanel("datas/Fond_net.jpg");
+		pGlobal.add(bpPrincipal);
 		bpPrincipal.setLayout(new BorderLayout());
 
-		// Bouton superieur gauche
+		// Boutons superieur gauche
 
 		pMenu = new JPanel();
 		pMenu.setOpaque(false);
@@ -85,15 +125,20 @@ public class ViewDames {
 		bExit.setIcon(iExit);
 		bExit.setBackground(new Color(0,0,0,0));
 		pMenuRight.add(bExit);
+
+		tabCase = new Case[taillePlateau][taillePlateau];
 		
 		initPlateau();
-		
-		remplirPlateau();
 
 	}
 
 	public void creerInterfaceMenu(){
+		
+		pGlobal.removeAll();
+		pGlobal.updateUI();
 
+		bpPrincipal = new JBackgroundPanel("datas/Fond_net.jpg");
+		pGlobal.add(bpPrincipal);
 		bpPrincipal.setLayout(new GridLayout(4,1));
 
 		pLogo = new JPanel();
@@ -126,6 +171,81 @@ public class ViewDames {
 		pQuitter.add(bQuitter);
 	}
 
+	public void creerInterfaceAide(){
+		
+		pGlobal.removeAll();
+		pGlobal.updateUI();
+		
+		bpPrincipal = new JBackgroundPanel("datas/Fond_net.jpg");
+		bpPrincipal.setLayout(new BorderLayout());
+
+		pGlobal.add(bpPrincipal);
+		// Bouton superieur gauche
+
+		pMenu = new JPanel();
+		pMenu.setOpaque(false);
+		bpPrincipal.add(pMenu,BorderLayout.NORTH);
+		pMenu.setLayout(new GridLayout(1,2));
+
+		pMenuLeft = new JPanel();
+		pMenuLeft.setOpaque(false);
+		pMenuLeft.setBackground(new Color(0,0,0,0));
+		pMenu.add(pMenuLeft);
+		pMenuRight = new JPanel();
+		pMenuRight.setOpaque(false);
+		pMenu.add(pMenuRight);
+
+		pMenuRight.setLayout(new GridLayout(1,3));
+
+		bSave = new JLabel();
+		bSave.setBackground(new Color(0,0,0,0));
+		pMenuRight.add(bSave);
+		
+		bHelp = new JLabel();
+		bHelp.setBackground(new Color(0,0,0,0));
+		pMenuRight.add(bHelp);
+
+		ImageIcon iExit=new ImageIcon("datas/exit.png");
+		bExitAide = new JLabel();
+		bExitAide.setIcon(iExit);
+		bExitAide.setBackground(new Color(0,0,0,0));
+		pMenuRight.add(bExitAide);
+		pAide = new JPanel();
+		pAide.setLayout(new BorderLayout());
+		pAide.setOpaque(false);
+		bpPrincipal.add(pAide);
+		
+		
+		JEditorPane epAide = new JEditorPane("text/html",null);
+		epAide.setOpaque(false);
+			
+		URL u=null;
+		try {
+			u = new File("datas/aide.html").toURI().toURL();
+			
+			try {
+				epAide.setPage(u);
+			} catch (IOException e) {
+				e.printStackTrace();
+				epAide.setText("Fichier d'aide introuvable");
+			}
+			
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+			epAide.setText("Fichier d'aide introuvable");
+		}
+		        	
+		spAide = new JScrollPane(epAide);
+		spAide.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		spAide.setPreferredSize(new Dimension(300, 800));
+		spAide.setOpaque(false);
+		spAide.getViewport().setOpaque(false);
+		pAide.add(spAide,BorderLayout.CENTER);
+			
+			
+
+	}
+
 	public void setStyleButton(JButton button){
 		button.setPreferredSize( new Dimension(240,58));
 		button.setBackground(Color.black);
@@ -156,20 +276,22 @@ public class ViewDames {
 					
 					Case theCase = new Case(x,y,taillePlateau);
 					
-					theCase.setCaseNoire();
-
-					pPlateau.add(theCase);
-
+					theCase.setCaseBlanche();
+					
 					tabCase[x][y]=theCase;
+
+					pPlateau.add(tabCase[x][y]);
+
 				}
 				else{
 					Case theCase = new Case(x,y,taillePlateau);
 
-					theCase.setCaseBlanche();
-
-					pPlateau.add(theCase);
+					theCase.setCaseNoire();
 
 					tabCase[x][y]=theCase;
+
+					pPlateau.add(tabCase[x][y]);
+
 				}
 			}
 
@@ -216,6 +338,62 @@ public class ViewDames {
 
 	public JButton getQuitter(){
 		return bQuitter;
+	}
+
+	public JLabel getExit(){
+		return bExit;
+	}
+
+	public JLabel getHelp(){
+		return bHelp;
+	}
+
+	public JLabel getSave(){
+		return bSave;
+	}
+
+	public JLabel getExitAide(){
+		return bExitAide;
+	}
+
+	public Case[][] getTabCase(){
+		return tabCase;
+	}
+
+	public int getTaillePlateau(){
+		return taillePlateau;
+	}
+	
+	public Dimension getSize(){
+		return pGlobal.getSize();
+	}
+
+	public Point getLocation(){
+		return pGlobal.getLocation();
+	}
+
+	public DialogFin getDialogWin(){
+		return dialogWin;
+	}
+	
+	public DialogFin getDialogLose(){
+		return dialogLose;
+	}
+
+	public DialogSaveCharge getDialogSave(){
+		return dialogSave;
+	}
+
+	public DialogSaveCharge getDialogCharge(){
+		return dialogCharge;
+	}
+
+	public DialogQuitter getDialogQuit(){
+		return dialogQuit;
+	}
+	
+	public DialogTaille getDialogTaille(){
+		return dialogTaille;
 	}
 
 
