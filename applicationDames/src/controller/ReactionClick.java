@@ -52,16 +52,11 @@ public class ReactionClick implements Globale, MouseListener{
 	}
 
 	private void retourPlateau(){
-		int taille;
-		if (myCtrl.getThePlat()!=null) {
-			taille=myCtrl.getThePlat().getTaille();
-		}
-		else{
-			taille=10;
-		}
-
-		(Globale.theView).creerInterfaceJeu(taille);
+		(Globale.theView).creerInterfaceJeu(myCtrl.getThePlat().getTaille());
 		myCtrl.attacherReactionsPlateau();
+
+		myCtrl.getThePlat().remplirPlateau();
+		myCtrl.updateView();
 	}
 
 	private void lancementAide(){

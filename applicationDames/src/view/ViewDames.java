@@ -237,7 +237,7 @@ public class ViewDames extends JFrame{
 		        	
 		spAide = new JScrollPane(epAide);
 		spAide.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		spAide.setPreferredSize(new Dimension(300, 800));
+		spAide.setPreferredSize(new Dimension(322,346));
 		spAide.setOpaque(false);
 		spAide.getViewport().setOpaque(false);
 		pAide.add(spAide,BorderLayout.CENTER);

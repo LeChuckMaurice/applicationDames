@@ -30,6 +30,9 @@ public class ReactionAction implements Globale, ActionListener{
 		else if (src==(Globale.theView).getDialogTaille().getConfirmer()) {
 			creationNewGame();
 		}
+		else if (src==(Globale.theView).getDialogTaille().getAnnuler()) {
+			(Globale.theView).getDialogTaille().setVisible(false);
+		}
 		else if (src==(Globale.theView).getDialogWin().getMenu() || src==(Globale.theView).getDialogWin().getMenu()) {
 			(Globale.theView).getDialogWin().setVisible(false);
 			retourMenu();
@@ -79,7 +82,7 @@ public class ReactionAction implements Globale, ActionListener{
 
 		myCtrl.createThePlat(taillePlat);
 		myCtrl.getThePlat().remplirPlateau();
-		//myCtrl.updateView();
+		myCtrl.updateView();
 		
 	}
 
@@ -90,12 +93,25 @@ public class ReactionAction implements Globale, ActionListener{
 	}
 	
 	private void save(){
-	
+		myCtrl.sauver();
 
 	}
 
 
 	private void charger(){
+			try{
+			myCtrl.charger();
+			(Globale.theView).creerInterfaceJeu(myCtrl.getThePlat().getTaille());
+			myCtrl.attacherReactionsPlateau();
+
+			myCtrl.getThePlat().remplirPlateau();
+			myCtrl.updateView();
+			}
+			catch(Exception e){
+				System.out.println("Aucun plateau n'est sauvegarder");
+				System.out.println(e);
+			}
+		
 
 	}
 	
