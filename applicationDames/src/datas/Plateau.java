@@ -73,6 +73,7 @@ public class Plateau implements Serializable{
 		return libre;
 	}
 
+	/*
 	public void playAction(Coup coup){
 		Coordonnee arrivee = coup.getArrivee();
 		Piece piece = coup.getPiece();
@@ -84,6 +85,7 @@ public class Plateau implements Serializable{
 		this.movePiece(piece, arrivee);
 
 	}
+	*/
 
 	/**
 	*Deplace une piece vers la coordonnee place en parametre

@@ -6,7 +6,7 @@ import datas.Coordonnee;
 
 import java.awt.*;
 
-public class Case extends JLabel {
+public class Case extends JButton {
 
 	private int x;
 	private int y;

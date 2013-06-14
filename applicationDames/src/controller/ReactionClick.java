@@ -101,6 +101,7 @@ public class ReactionClick implements Globale, MouseListener{
 
 						for (int i=0;i<listCases.size() ;i++ ) {
 							Coordonnee coordJouable=listCases.get(i);
+							System.out.println(coordJouable.toString());
 							int x = coordJouable.getX();
 							int y = coordJouable.getY();
 							Case caseJouable=(Globale.theView).getCase(x,y);
