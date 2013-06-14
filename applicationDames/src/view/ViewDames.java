@@ -61,7 +61,6 @@ public class ViewDames extends JFrame{
 		this.setSize(330,350);
 		pGlobal = new JPanel();
 		pGlobal.setSize(322,346);
-		//pGlobal.removeAll();
 		pGlobal.updateUI();
 		this.add(pGlobal);
 

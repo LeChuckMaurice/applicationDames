@@ -1,6 +1,9 @@
 package view;
 
 import javax.swing.*;
+
+import datas.Coordonnee;
+
 import java.awt.*;
 
 public class Case extends JLabel {
@@ -8,7 +11,6 @@ public class Case extends JLabel {
 	private int x;
 	private int y;
 	private ImageIcon image;
-	//private int tailleCase;
 	private int taillePlateau;
 
 	public Case(int theX, int theY,int theTaillePlateau){
@@ -17,6 +19,21 @@ public class Case extends JLabel {
 		this.y  = theY;
 		//this.setTaille(theTaillePlateau);
 		this.taillePlateau=theTaillePlateau;
+	}
+	
+	/*
+	public int getX(){
+		return this.x;
+	}
+	public int getY(){
+		return this.y;
+	}
+	*/
+
+	public Coordonnee getCoordonnee(){
+		Coordonnee coord = new Coordonnee(x,y);
+
+		return coord;
 	}
 
 
@@ -119,7 +136,7 @@ public class Case extends JLabel {
 
 	public void setDameBlancSurl(){
 		if (taillePlateau==8 || taillePlateau==10 || taillePlateau==12) {
-			String chemin = "datas/"+ taillePlateau+"/dameBlancheSurl.png";
+			String chemin = "datas/"+ taillePlateau+"/dameBlancSurl.png";
 			image = new ImageIcon(chemin);
 			this.setIcon(image);
 		}
@@ -129,12 +146,39 @@ public class Case extends JLabel {
 		
 	}
 
-	@Override
+	public void setPionBlancOver(){
+		if (taillePlateau==8 || taillePlateau==10 || taillePlateau==12) {
+			String chemin = "datas/"+taillePlateau +"/pionBlancOver.png";
+			image = new ImageIcon(chemin);
+			this.setIcon(image);
+		}
+		else{
+			System.out.println("Taille plateau Invalide");
+		}
+		
+	}
+
+	public void setDameBlancOver(){
+		if (taillePlateau==8 || taillePlateau==10 || taillePlateau==12) {
+			String chemin = "datas/"+ taillePlateau+"/dameBlancOver.png";
+			image = new ImageIcon(chemin);
+			this.setIcon(image);
+		}
+		else{
+			System.out.println("Taille plateau Invalide");
+		}
+		
+	}
+
+	
 	public String toString(){
 		String retCase="case";
 
 		return retCase;
 	}
-
+	
+	
+	
+	
 	
 }

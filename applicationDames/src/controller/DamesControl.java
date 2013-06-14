@@ -9,6 +9,7 @@ import datas.Plateau;
 public class DamesControl implements Globale{
 	
 	Plateau thePlat = new Plateau(10);
+	Piece pieceSelect = null;
 	
 	public DamesControl(){
 
@@ -84,13 +85,23 @@ public class DamesControl implements Globale{
 						}
 
 					}
-					else if (!(piece.isDame())) {
+					else if (!(piece.isIA())) {
 						
 						if (piece.isDame()) {
-							laCase.setDameBlanc();
+							if (piece.canMove()) {
+								laCase.setDameBlancSurl();
+							}
+							else{
+								laCase.setDameBlanc();
+							}
 						}
 						else{
-							laCase.setPionBlanc();
+							if (piece.canMove()) {
+								laCase.setPionBlancSurl();
+							}
+							else{
+								laCase.setPionBlanc();
+							}
 						}
 						
 					}
@@ -103,16 +114,24 @@ public class DamesControl implements Globale{
 	}
 
 	public void charger() throws Exception{
-		thePlat = thePlat.chargerPlateau();
+		this.thePlat = thePlat.chargerPlateau();
 		
 	}
 	
 	public void sauver(){
-		thePlat.savePlateau();
+		this.thePlat.savePlateau();
 	}
 	
 	public void createThePlat(int taille){
-		thePlat = new Plateau(taille);
+		this.thePlat = new Plateau(taille);
+	}
+
+	public void setPieceSelect(Piece laPiece){
+		this.pieceSelect=laPiece;
+	}
+
+	public Piece getPieceSelect(){
+		return this.pieceSelect;
 	}
 
 	public Plateau getThePlat(){
