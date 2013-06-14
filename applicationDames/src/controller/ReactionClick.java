@@ -98,7 +98,7 @@ public class ReactionClick implements Globale, MouseListener{
 						}
 
 						ArrayList<Coordonnee> listCases = laPiece.getDeplacements();
-
+						System.out.println("---------");						
 						for (int i=0;i<listCases.size() ;i++ ) {
 							Coordonnee coordJouable=listCases.get(i);
 							System.out.println(coordJouable.toString());
