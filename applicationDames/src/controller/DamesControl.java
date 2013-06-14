@@ -37,6 +37,8 @@ public class DamesControl implements Globale{
 		 
 		(Globale.theView).getDialogTaille().getAnnuler().addActionListener(new ReactionAction(this));
 		(Globale.theView).getDialogTaille().getConfirmer().addActionListener(new ReactionAction(this));
+
+		(Globale.theView).getDialogErreur().getOk().addActionListener(new ReactionAction(this));
 		
 	}
 

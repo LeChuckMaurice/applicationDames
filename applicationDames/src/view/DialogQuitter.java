@@ -20,11 +20,10 @@ public class DialogQuitter extends JDialog{
 		this.setSize(240,180);
 		this.setVisible(false);
 		this.setDefaultCloseOperation ( HIDE_ON_CLOSE );
+		this.setUndecorated(true);
 	}
 
 	public void creerInterface(){
-
-		//this.setUndecorated(true);
 		
 		pPrincipal = new JPanel();
 		pPrincipal.setLayout(new GridLayout(3,1));
@@ -65,6 +64,7 @@ public class DialogQuitter extends JDialog{
 		button.setBackground(Color.black);
 		button.setForeground(Color.white);
 		button.setFont(new Font(Font.DIALOG, Font.BOLD, 11));
+		button.setBorderPainted(false);
 	}
 
 	public JButton getSave(){

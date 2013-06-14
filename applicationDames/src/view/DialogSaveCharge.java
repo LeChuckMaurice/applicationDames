@@ -22,11 +22,10 @@ public class DialogSaveCharge extends JDialog{
 		this.setSize(240,130);
 		this.setVisible(false);
 		this.setDefaultCloseOperation ( HIDE_ON_CLOSE );
+		this.setUndecorated(true);
 	}
 
 	public void creerInterface(boolean isCharge){
-		
-		//this.setUndecorated(true);
 		
 		pPrincipal = new JPanel();
 		pPrincipal.setLayout(new GridLayout(2,1));
@@ -76,6 +75,7 @@ public class DialogSaveCharge extends JDialog{
 		button.setBackground(Color.black);
 		button.setForeground(Color.white);
 		button.setFont(new Font(Font.DIALOG, Font.BOLD, 10));
+		button.setBorderPainted(false);
 	}
 
 	public JButton getCharge(){

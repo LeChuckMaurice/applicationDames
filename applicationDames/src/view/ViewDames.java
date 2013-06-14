@@ -54,6 +54,7 @@ public class ViewDames extends JFrame{
 	private DialogSaveCharge dialogCharge;
 	private DialogQuitter dialogQuit;
 	private DialogTaille dialogTaille;
+	private DialogErreur dialogErreur;
 
 	public ViewDames(){
 
@@ -70,6 +71,7 @@ public class ViewDames extends JFrame{
 		dialogCharge = new DialogSaveCharge(true);
 		dialogQuit = new DialogQuitter();
 		dialogTaille = new DialogTaille();
+		dialogErreur = new DialogErreur("");
 		
 		this.setVisible(true);
 		this.setDefaultCloseOperation ( EXIT_ON_CLOSE );
@@ -250,6 +252,7 @@ public class ViewDames extends JFrame{
 		button.setBackground(Color.black);
 		button.setForeground(Color.white);
 		button.setFont(new Font(Font.DIALOG, Font.PLAIN, 22));
+		button.setBorderPainted(false);
 	}
 
 	public void initPlateau(){
@@ -393,6 +396,10 @@ public class ViewDames extends JFrame{
 	
 	public DialogTaille getDialogTaille(){
 		return dialogTaille;
+	}
+	
+	public DialogErreur getDialogErreur(){
+		return dialogErreur;
 	}
 
 

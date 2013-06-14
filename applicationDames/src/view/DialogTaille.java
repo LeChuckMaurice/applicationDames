@@ -23,11 +23,10 @@ public class DialogTaille extends JDialog{
 		this.setSize(240,160);
 		this.setVisible(false);
 		this.setDefaultCloseOperation ( HIDE_ON_CLOSE );
+		this.setUndecorated(true);
 	}
 
 	public void creerInterface(){
-		
-		this.setUndecorated(true);
 
 		pPrincipal= new JPanel();
 		pPrincipal.setBackground(Color.darkGray);
@@ -83,6 +82,7 @@ public class DialogTaille extends JDialog{
 		button.setBackground(Color.black);
 		button.setForeground(Color.white);
 		button.setFont(new Font(Font.DIALOG, Font.BOLD, 11));
+		button.setBorderPainted(false);
 	}
 
 	/*

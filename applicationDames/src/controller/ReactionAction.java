@@ -63,6 +63,9 @@ public class ReactionAction implements Globale, ActionListener{
 		else if (src==(Globale.theView).getDialogCharge().getAnnuler()) {
 			(Globale.theView).getDialogCharge().setVisible(false);
 		}
+		else if (src==(Globale.theView).getDialogErreur().getOk()) {
+			(Globale.theView).getDialogErreur().setVisible(false);
+		}
 
 	
 		
@@ -108,8 +111,8 @@ public class ReactionAction implements Globale, ActionListener{
 			myCtrl.updateView();
 			}
 			catch(Exception e){
-				System.out.println("Aucun plateau n'est sauvegarder");
-				System.out.println(e);
+				(Globale.theView).getDialogErreur().changeText("Aucun plateau n'est sauvegarder");
+				(Globale.theView).getDialogErreur().setVisible(true);
 			}
 		
 

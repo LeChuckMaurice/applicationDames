@@ -21,22 +21,6 @@ public class Case extends JButton {
 		this.taillePlateau=theTaillePlateau;
 	}
 	
-	/*
-	public int getX(){
-		return this.x;
-	}
-	public int getY(){
-		return this.y;
-	}
-	*/
-
-	public Coordonnee getCoordonnee(){
-		Coordonnee coord = new Coordonnee(x,y);
-
-		return coord;
-	}
-
-
 	public void setCaseNoire(){
 		if (taillePlateau==8 || taillePlateau==10 || taillePlateau==12) {
 			String chemin = "datas/"+taillePlateau +"/caseNoir.png";
@@ -170,6 +154,11 @@ public class Case extends JButton {
 		
 	}
 
+	public Coordonnee getCoordonnee(){
+		Coordonnee coord = new Coordonnee(x,y);
+
+		return coord;
+	}
 	
 	public String toString(){
 		String retCase="case";
