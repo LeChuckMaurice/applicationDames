@@ -73,19 +73,12 @@ public class Plateau implements Serializable{
 		return libre;
 	}
 
-	/*
+	
 	public void playAction(Coup coup){
-		Coordonnee arrivee = coup.getArrivee();
-		Piece piece = coup.getPiece();
-		Piece[] piecesPrises = coup.getPiecesPrises();
-
-		for(int i=0; i<piecesPrises.length; i++){
-			this.deletePiece(piecesPrises[i]);
-		}
-		this.movePiece(piece, arrivee);
-
+		this.deletePiece(coup.getPiecePrise());
+		this.movePiece(coup.getPiece(), coup.getArrivee());
 	}
-	*/
+	
 
 	/**
 	*Deplace une piece vers la coordonnee place en parametre
