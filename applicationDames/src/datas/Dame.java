@@ -16,10 +16,6 @@ public class Dame extends Piece implements Serializable {
 		super(positionX,positionY,pieceIA,thePlateau,true);
 	}
 
-	public ArrayList<Coordonnee> generateCoups() {
-		return null;
-	}
-
 	public ArrayList<Coordonnee> getDeplacements(){
 		return this.getDeplacements(this.place);
 	}
@@ -27,46 +23,72 @@ public class Dame extends Piece implements Serializable {
 	public ArrayList<Coordonnee> getDeplacements(Coordonnee place) {
 
 		ArrayList<Coordonnee> tabCoord = new ArrayList<Coordonnee>();
-
+		Coordonnee coord;
+		
 		int x = place.getX();
 		int y = place.getY();
 
-		ArrayList<Piece> diagonaleHG = this.getDiagonale(-1,-1);
-		ArrayList<Piece> diagonaleHD = this.getDiagonale(+1,-1);
-		ArrayList<Piece> diagonaleBG = this.getDiagonale(+1,+1);
-		ArrayList<Piece> diagonaleBD = this.getDiagonale(-1,+1);
-
-		int i=0;
-		while(diagonaleHG.get(i)==null){
-			tabCoord.add(diagonaleHG.get(i).getCoordonnee());
-			i++;
-		}
-		i=0; 
-		while(diagonaleHD.get(i)==null){
-			tabCoord.add(diagonaleHG.get(i).getCoordonnee());
-			i++;
-		}
-		i=0;
-		while(diagonaleBG.get(i)==null){
-			tabCoord.add(diagonaleHG.get(i).getCoordonnee());
-			i++;
-		}
-		i=0;
-		while(diagonaleBD.get(i)==null){
-			tabCoord.add(diagonaleHG.get(i).getCoordonnee());
-			i++;
-		}
-
+		int dirX=1;
+		int dirY=1;
+		int i;
+		int j;
 		// déplacements dans le cas d'une prise
 		ArrayList<Piece> prisesPossibles = this.prisesPossibles();
+
 		int xPrise;
 		int yPrise;
+		// Si des prises sont possibles, on ajoute les deplacements correspondants a la liste des deplacements
 		if(prisesPossibles().size()>0){
 			for(i=0; i<prisesPossibles.size(); i++){
-				xPrise = prisesPossibles.get(i).getCoordonnee().getX();
+				xPrise = prisesPossibles.get(i).getCoordonnee().getX(); 
 				yPrise = prisesPossibles.get(i).getCoordonnee().getY();
-				tabCoord.add(new Coordonnee(2*xPrise-x,2*yPrise-y));
+
+				j=1;
+
+				if((xPrise-x)>=0) dirX = 1;
+				if((yPrise-y)<0) dirY = -1;
+
+				coord = new Coordonnee(xPrise+j*dirX, yPrise+j*dirY);
+
+				while(this.plateau.isValide(coord) && this.plateau.isLibre(coord)){
+
+					if((xPrise-x)>=0) dirX = 1;
+					if((yPrise-y)<0) dirY = -1;
+	
+					tabCoord.add(coord);
+					j++;
+					coord = new Coordonnee(xPrise+j*dirX, yPrise+j*dirY);
+				}
 			}
+		}
+		// Sinon, on ajoute tous les deplacements possibles sans prises
+		else {
+			ArrayList<Coordonnee> diagonaleHG = this.getDiagonale(-1,-1);
+			ArrayList<Coordonnee> diagonaleHD = this.getDiagonale(+1,-1);
+			ArrayList<Coordonnee> diagonaleBG = this.getDiagonale(+1,+1);
+			ArrayList<Coordonnee> diagonaleBD = this.getDiagonale(-1,+1);			
+			
+			i=0;
+			while(this.plateau.isValide(diagonaleHG.get(i)) && this.plateau.isLibre(diagonaleHG.get(i)) && i<diagonaleHG.size()){
+				tabCoord.add(diagonaleHG.get(i));
+				i++;
+			}
+			i=0; 
+			while(this.plateau.isValide(diagonaleHD.get(i)) && this.plateau.isLibre(diagonaleHD.get(i)) && i<diagonaleHD.size()){
+				tabCoord.add(diagonaleHD.get(i));
+				i++;
+			}
+			i=0;
+			while(this.plateau.isValide(diagonaleBG.get(i)) && this.plateau.isLibre(diagonaleBG.get(i)) && i<diagonaleBG.size()){
+				tabCoord.add(diagonaleBG.get(i));
+				i++;
+			}
+			i=0;
+			while(this.plateau.isValide(diagonaleBD.get(i)) && this.plateau.isLibre(diagonaleBD.get(i)) && i<diagonaleBD.size()){
+				tabCoord.add(diagonaleBD.get(i));
+				i++;
+			}
+
 		}
 
 		return tabCoord;
@@ -104,11 +126,6 @@ public class Dame extends Piece implements Serializable {
 		}
 
 		return move;
-	}
-
-	public boolean canTake() {
-
-		return this.canTake(this.place, this.pieceIA);
 	}
 
 	public ArrayList<Piece> prisesPossibles() {
@@ -165,6 +182,7 @@ public class Dame extends Piece implements Serializable {
 				y = y + deplacementY;
 				coord.setX(x);
 				coord.setY(y);
+
 				// La piece n'est pas null, qu'elle est adverse et que la case d'apres est libre et valide
 				if(piece!=null && piece.isIA()!=pieceIA 
 					&& this.plateau.isValide(coord) && this.plateau.isLibre(coord)){
@@ -172,8 +190,11 @@ public class Dame extends Piece implements Serializable {
 				}
 			}
 		}
-
 		return prisesPossibles;
+	}
+
+	public boolean canTake() {
+		return this.canTake(this.place, this.pieceIA);
 	}
 
 	public boolean canTake(Coordonnee place, boolean pieceIA ) {
