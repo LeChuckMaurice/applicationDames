@@ -16,7 +16,8 @@ public class Dame extends Piece implements Serializable {
 		super(positionX,positionY,pieceIA,thePlateau,true);
 	}
 
-	public ArrayList<Coordonnee> getDeplacements(){
+
+	public ArrayList<Coordonnee> getDeplacements() {
 		return this.getDeplacements(this.place);
 	}
 
@@ -46,6 +47,8 @@ public class Dame extends Piece implements Serializable {
 				j=1;
 
 				if((xPrise-x)>=0) dirX = 1;
+				if((xPrise-x)<0) dirX = -1;
+				if((yPrise-y)>=0) dirY = 1;
 				if((yPrise-y)<0) dirY = -1;
 
 				coord = new Coordonnee(xPrise+j*dirX, yPrise+j*dirY);
@@ -61,37 +64,36 @@ public class Dame extends Piece implements Serializable {
 				}
 			}
 		}
-		// Sinon, on ajoute tous les deplacements possibles sans prises
-		else {
-			ArrayList<Coordonnee> diagonaleHG = this.getDiagonale(-1,-1);
-			ArrayList<Coordonnee> diagonaleHD = this.getDiagonale(+1,-1);
-			ArrayList<Coordonnee> diagonaleBG = this.getDiagonale(+1,+1);
-			ArrayList<Coordonnee> diagonaleBD = this.getDiagonale(-1,+1);			
-			
-			i=0;
-			while(this.plateau.isValide(diagonaleHG.get(i)) && this.plateau.isLibre(diagonaleHG.get(i)) && i<diagonaleHG.size()){
-				tabCoord.add(diagonaleHG.get(i));
-				i++;
-			}
-			i=0; 
-			while(this.plateau.isValide(diagonaleHD.get(i)) && this.plateau.isLibre(diagonaleHD.get(i)) && i<diagonaleHD.size()){
-				tabCoord.add(diagonaleHD.get(i));
-				i++;
-			}
-			i=0;
-			while(this.plateau.isValide(diagonaleBG.get(i)) && this.plateau.isLibre(diagonaleBG.get(i)) && i<diagonaleBG.size()){
-				tabCoord.add(diagonaleBG.get(i));
-				i++;
-			}
-			i=0;
-			while(this.plateau.isValide(diagonaleBD.get(i)) && this.plateau.isLibre(diagonaleBD.get(i)) && i<diagonaleBD.size()){
-				tabCoord.add(diagonaleBD.get(i));
-				i++;
-			}
+		// Ajout de tous les deplacements possibles sans prises
 
+		ArrayList<Coordonnee> diagonaleHG = this.getDiagonale(-1,-1);
+		ArrayList<Coordonnee> diagonaleHD = this.getDiagonale(+1,-1);
+		ArrayList<Coordonnee> diagonaleBG = this.getDiagonale(+1,+1);
+		ArrayList<Coordonnee> diagonaleBD = this.getDiagonale(-1,+1);			
+			
+		i=0;
+		while(this.plateau.isValide(diagonaleHG.get(i)) && this.plateau.isLibre(diagonaleHG.get(i)) && i<diagonaleHG.size()){
+			tabCoord.add(diagonaleHG.get(i));
+			i++;
+		}
+		i=0; 
+		while(this.plateau.isValide(diagonaleHD.get(i)) && this.plateau.isLibre(diagonaleHD.get(i)) && i<diagonaleHD.size()){
+			tabCoord.add(diagonaleHD.get(i));
+			i++;
+		}
+		i=0;
+		while(this.plateau.isValide(diagonaleBG.get(i)) && this.plateau.isLibre(diagonaleBG.get(i)) && i<diagonaleBG.size()){
+			tabCoord.add(diagonaleBG.get(i));
+			i++;
+		}
+		i=0;
+		while(this.plateau.isValide(diagonaleBD.get(i)) && this.plateau.isLibre(diagonaleBD.get(i)) && i<diagonaleBD.size()){
+			tabCoord.add(diagonaleBD.get(i));
+			i++;
 		}
 
 		return tabCoord;
+
 	}
 
 	public boolean canMove() {

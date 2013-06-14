@@ -12,10 +12,7 @@ public class Pion extends Piece {
 	public Pion(int positionX, int positionY, Plateau thePlateau, boolean pieceIA) {
 		super(positionX,positionY,pieceIA,thePlateau,false);
 	}
-
-
-
-
+	
 	public ArrayList<Coordonnee> getDeplacements(){
 		return this.getDeplacements(this.place);
 	}

@@ -6,13 +6,13 @@ public class Coup {
 
 	private Coordonnee arrivee;
 	private Piece piece;
-	private Piece findPiecePrise;
+	private Piece piecePrise;
 	private int nbPoints;
 
 	public Coup(Piece piece, Coordonnee arrivee){
 		this.arrivee = arrivee;
 		this.piece = piece;
-		this.piecePrise = getPiecePrise();
+		this.piecePrise = findPiecePrise();
 		this.nbPoints = calculerPoints();
 	}
 	
@@ -20,13 +20,13 @@ public class Coup {
 	public int calculerPoints(){
 		int points =0;
 
-		points = points+10*nbPrises;
+		if(piecePrise!=null){
+			points = points + 10;
+		}
+		
 		return 1;
 	}
 
-	public voi
-
-	
 	private boolean makeVulnerable(){
 		return true;
 	}
@@ -54,32 +54,52 @@ public class Coup {
 	}
 
 	public Piece findPiecePrise(){
-		Piece[] piecesPrises = new Piece[this.nbPrises];
-		Piece piecePrise = null;;
 
-		Coordonnee place1;
-		Coordonnee place2;
+		Piece piecePrise = null;
+		Plateau plateau = this.piece.getPlateau();
 
-		int xPiece;
-		int yPiece;
+		int departX = this.piece.getCoordonnee().getX();
+		int departY = this.piece.getCoordonnee().getY();
+		int arriveeX = this.arrivee.getX();
+		int arriveeY = this.arrivee.getY();
 
 
-		if(this.nbPrises!=0){
-			for(int i=0; i<nbPrises; i++){
-				place1 = this.parcours.get(i);
-				place2 = this.parcours.get(i+1);
+		int dirX;
+		int dirY;
 
-				xPiece = (int) (place1.getX()+place2.getX())/2;
-				yPiece = (int) (place1.getY()+place2.getY())/2;
+		if((arriveeX-departX)>=0) 
+			dirX = 1;
+		else 
+			dirX = -1;
 
-				piecePrise=this.piece.getPlateau().getPiece(new Coordonnee(xPiece,yPiece));
-				
-				if(piecePrise!=null){
-					piecesPrises[i] = piecePrise;
-				}
+		if((arriveeY-departY)>=0) 
+			dirY = 1;
+		else 
+			dirY = -1;
+
+
+		Coordonnee coordTmp = new Coordonnee(departX,departY);
+		Piece pieceTmp = null;
+		do{
+			coordTmp.setX(coordTmp.getX()+dirX);
+			coordTmp.setY(coordTmp.getY()+dirY);
+			pieceTmp = plateau.getPiece(coordTmp);
+
+			// Si c'est une piece adverse
+			if(pieceTmp.isIA()!=this.piece.isIA()){
+				piecePrise = pieceTmp;
 			}
-		}
-		return piecesPrises;
+
+		}while(plateau.isValide(coordTmp) && plateau.isValide(coordTmp));
+
+
+
+		return piecePrise;
+	}
+
+
+	public Piece getPiecePrise(){
+		return this.piecePrise;
 	}
 
 }
