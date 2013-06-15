@@ -79,61 +79,75 @@ public class ReactionClick implements Globale, MouseListener{
 	}
 
 	private void reactionCase(Case theCase){
+		
+		myCtrl.updateView();
+		
 		Case laCase=theCase;
 		Plateau plateau=myCtrl.getThePlat();
 		Piece laPiece=plateau.getPiece(laCase.getCoordonnee());
 
 		if (laPiece!=null) {
 			if (!(laPiece.isIA())) {
-				if ((myCtrl.getPieceSelect())==null) {
-					if (laPiece.canMove()) {
-						
-						myCtrl.setPieceSelect(laPiece);
+				if (laPiece.canMove()) {
 
-						if (laPiece.isDame()) {
-							laCase.setDameBlancOver();
-						}
-						else{
-							laCase.setPionBlancOver();
-						}
-
-						ArrayList<Coordonnee> listCases = laPiece.getDeplacements();
-						System.out.println("---------");						
-						for (int i=0;i<listCases.size() ;i++ ) {
-							Coordonnee coordJouable=listCases.get(i);
-							System.out.println(coordJouable.toString());
-							int x = coordJouable.getX();
-							int y = coordJouable.getY();
-							Case caseJouable=(Globale.theView).getCase(x,y);
-							caseJouable.setCaseJouable();
-						}
-
-					}
+					//Si on a aucune piece selectionne et que on clic sur une piece joueur pouvant bouger on selectionne cette dernière
 					
-				}
-			}
-			else{
-				if ((myCtrl.getPieceSelect())==null) {
 					myCtrl.setPieceSelect(laPiece);
+
+					ArrayList<Coordonnee> listCases = laPiece.getDeplacements();
+
+					//puis on applique le surlignage rouge a toute les case sur lesquels la piece peu ce deplacer
+					for (int i=0;i<listCases.size() ;i++ ) {
+						Coordonnee coordJouable=listCases.get(i);
+						int x = coordJouable.getX();
+						int y = coordJouable.getY();
+						Case caseJouable=(Globale.theView).getCase(x,y);
+						caseJouable.setCaseJouable();
+					}
 				}
 			}
 		}
 		else{
 			if (myCtrl.getPieceSelect()!=null) {
+
 				Coordonnee coord=laCase.getCoordonnee();
 				int x=coord.getX();
 				int y=coord.getY();
 
+				//Si on a une piece de selectionne et que on clic sur une case jouable (noire)
 				if (((x+y)%2)==1) {
-					plateau.movePiece(myCtrl.getPieceSelect(),coord);
-					myCtrl.setPieceSelect(null);
-					plateau.updateStatus();
-					myCtrl.updateView();
+					boolean caseValide = false;
+					ArrayList<Coordonnee> listCases = myCtrl.getPieceSelect().getDeplacements();
+					int i=0;
+
+					//si la case appartient aux case sur lesquels le pions selectionne peux jouer on passe le booleen a vrai 
+					
+					while(!(caseValide) && i<listCases.size()) {
+						Coordonnee coordJouable=listCases.get(i);
+						int coordJouableX = coordJouable.getX();
+						int coordJouableY = coordJouable.getY();
+
+						if (coordJouableX==x) {
+							if (coordJouableY==y) {
+								caseValide=true;
+							}
+						}
+						
+						i++;
+					}
+					
+					if (caseValide) {
+						plateau.movePiece(myCtrl.getPieceSelect(),coord);
+						myCtrl.setPieceSelect(null);
+						plateau.updateStatus();
+						myCtrl.updateView();
+					}
 				}
+
 			}
 		}
-
-
 	}
 
 }
+
+

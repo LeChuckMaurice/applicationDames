@@ -6,4 +6,5 @@ import view.*;
 
 public interface Globale {
 	public static final ViewDames theView = new ViewDames();
+	public static final Partie thePart = new Partie(8);
 }

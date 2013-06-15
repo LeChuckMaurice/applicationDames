@@ -8,8 +8,8 @@ import datas.Plateau;
 
 public class DamesControl implements Globale{
 	
-	Plateau thePlat = new Plateau(10);
-	Piece pieceSelect = null;
+	private Plateau thePlat = null;
+	private Piece pieceSelect = null;
 	
 	public DamesControl(){
 
