@@ -14,7 +14,9 @@ public class Partie {
 	 */
 	private boolean tourIA;
 	
-	
+	public Partie(){
+		this.tourIA = false;
+	}
 	public Partie(int taillePlateau){
 		this.plateau = new Plateau(taillePlateau);
 		this.tourIA = false;
@@ -47,9 +49,50 @@ public class Partie {
 
 		return plateau1;
 	}
+	
+	/**
+	 * @return gagnant 1 si l'IA a gagne, -1 si le joueur a gagne, 0 sinon.
+	 */
+	public int getGagnant(){
+		int gagnant;
+		int nbIA=0;
+		int nbJoueur=0;
+		Piece pieceTmp = null;
+		for(int i=0; i<this.plateau.getTaille(); i++){
+			for(int j=0; j<this.plateau.getTaille(); j++){
+
+				pieceTmp = this.plateau.getPiece(i,j);
+				if(pieceTmp!=null){
+					if(pieceTmp.isIA()){
+						nbIA++;
+					}
+					else{
+						nbJoueur++;
+					}
+				}
+			}
+		}
+
+		if(nbIA==0){
+			gagnant=-1;
+		}
+		else if(nbJoueur==0){
+			gagnant=1;
+		}
+		else{
+			gagnant=0;
+		}
+
+		return gagnant;
+
+	}
 
 	public Plateau getPlateau(){
 		return this.plateau;
+	}
+
+	public void setPlateau(Plateau plateau){
+		this.plateau = plateau;
 	}
 
 	public boolean getTourIA(){

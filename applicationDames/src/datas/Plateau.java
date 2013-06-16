@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable; 
+import java.util.ArrayList;
  
 public class Plateau implements Serializable{
 
@@ -86,6 +87,7 @@ public class Plateau implements Serializable{
 	*@param newPlace Le nouvel emplacement de la piece
 	*@throws IllegalArgumentException si la nouvelle position n'est pas sur le plateau
 	*@throws IllegalArgumentException si la nouvelle position est occupee par une autre piece
+	*@throws IllegalArgumentException si le deplacement n'est pas permis
 	*/
 	public void movePiece(Piece piece, Coordonnee newPlace) throws IllegalArgumentException{
 		int newX=newPlace.getX();
@@ -104,11 +106,26 @@ public class Plateau implements Serializable{
 	*/
 	public void movePiece(Piece piece, int newX, int newY) throws IllegalArgumentException{
 		Coordonnee coord = new Coordonnee(newX,newY);
+
+		boolean isPossible = false;
+		ArrayList<Coordonnee> deplacementsPossibles = piece.getDeplacements();
+
+		// Verification si le deplacement est permis
+		for(int i=0; i<deplacementsPossibles.size(); i++){
+			if(deplacementsPossibles.get(i).equals(coord)){
+				isPossible=true;
+			}
+		}
+
+
 		if(!this.isValide(coord)){
 			throw new IllegalArgumentException("La nouvelle position ("+newX+","+newY+") est invalide.");
 		}
 		else if(!this.isLibre(coord)){
 			throw new IllegalArgumentException("La nouvelle position est occupee par une autre piece.");
+		}
+		else if(!isPossible){
+			throw (new IllegalArgumentException("Ce deplacement n'est pas permis."));
 		}
 		else{
 			deletePiece(piece);
@@ -174,12 +191,17 @@ public class Plateau implements Serializable{
 	*Affiche le plateau sous forme d'une chaine de caractere
 	*/
 	public String toString(){
-		String chainePlateau="";
+		String chainePlateau = "";
 		Piece piece;
-		for(int i=0; i<this.taille; i++){ // x
 
-			chainePlateau = chainePlateau+"|";
-			for (int j=0; j<this.taille; j++){ // y
+		for(int k=0; k<this.taille; k++){
+			chainePlateau = chainePlateau + k + "|";
+		}
+		chainePlateau = chainePlateau + "\n\n";
+
+		for(int i=0; i<this.taille; i++){ // y
+
+			for (int j=0; j<this.taille; j++){ // x
 				piece = this.tabPiece[j][i];
 				if(piece==null){
 					chainePlateau = chainePlateau + " |";
@@ -201,39 +223,14 @@ public class Plateau implements Serializable{
 					}
 				}
 			}
+			chainePlateau = chainePlateau+"  |"+i+"|";
 			chainePlateau = chainePlateau + "\n";
 		}
 		
 		return chainePlateau;
 	}
 
-	// Entree / Sorties
 
-	public void savePlateau(){
-		String fichierPlateau = "plateau.out";
-		FileOutputStream out = null;
-		ObjectOutputStream flux = null;
-		try {
-			out = new FileOutputStream(fichierPlateau);
-			flux = new ObjectOutputStream(out);
-			flux.writeObject(this);
-		}
-		catch(IOException e) {
-			System.out.println("Erreur I/O");
-		}
-	}
-
-	public Plateau chargerPlateau() throws Exception{
-		Plateau plateau1 = new Plateau(10);
-		String fichierPlateau="plateau.out";
-
-		FileInputStream out = new FileInputStream(fichierPlateau);
-		ObjectInputStream flux = new ObjectInputStream(out);
-		plateau1 = (Plateau) flux.readObject();
-		flux.close();
-
-		return plateau1;
-	}
 
 	// Accesseurs
 
