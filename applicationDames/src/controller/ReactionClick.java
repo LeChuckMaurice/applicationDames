@@ -87,7 +87,8 @@ public class ReactionClick implements Globale, MouseListener{
 		Piece laPiece=plateau.getPiece(laCase.getCoordonnee());
 
 		if (laPiece!=null) {
-			if (!(laPiece.isIA())) {
+			//normalement !(laPiece.isIA()), true pour permettre le deplacement manuel des pions noir
+			if (true) {
 				if (laPiece.canMove()) {
 
 					//Si on a aucune piece selectionne et que on clic sur une piece joueur pouvant bouger on selectionne cette dernière
@@ -131,25 +132,44 @@ public class ReactionClick implements Globale, MouseListener{
 
 					while(!(caseValide) && i<listCases.size()) {
 						Coordonnee coordJouable=listCases.get(i);
-						int coordJouableX = coordJouable.getX();
-						int coordJouableY = coordJouable.getY();
 
-						if (coordJouableX==x) {
-							if (coordJouableY==y) {
-								caseValide=true;
-							}
+						if (coordJouable.equals(coord)) {
+								caseValide=true;	
 						}
 						
 						i++;
 					}
 					
 					if (caseValide) {
-						try{
-							plateau.movePiece(myCtrl.getPieceSelect(),coord);
+						boolean caseCoup=false;
+
+						if (myCtrl.getPieceSelect().canTake()) {
+							ArrayList<Coup> listeCoups = myCtrl.getPieceSelect().generateCoups();
+
+							int j=0;
+							Coup theCoup=null;
+							while (!(caseCoup) && i<listeCoups.size()) {
+								Coup coupActuel = listeCoups.get(j);
+								Coordonnee coordArrive = coupActuel.getArrivee();
+								if (coordArrive.equals(coord)) {
+									caseCoup=true;
+									theCoup = coupActuel;
+								}
+							}
+
+							if (caseCoup) {
+								plateau.playAction(theCoup);
+							}
 						}
-						catch(IllegalArgumentException e){
-							System.out.println(e.getMessage());
+						else{
+								try{
+								plateau.movePiece(myCtrl.getPieceSelect(),coord);
+								}
+								catch(IllegalArgumentException e){
+									System.out.println(e.getMessage());
+								}
 						}
+								
 						myCtrl.setPieceSelect(null);
 						plateau.updateStatus();
 						myCtrl.updateView();
