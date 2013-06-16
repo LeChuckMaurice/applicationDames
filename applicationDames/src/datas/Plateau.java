@@ -79,9 +79,11 @@ public class Plateau implements Serializable{
 		System.out.println(coup.toString());
 		try{
 			this.movePiece(coup.getPiece(), coup.getArrivee());
-			this.deletePiece(coup.getPiecePrise());
+			if(coup.getPiecePrise()!=null){
+				this.deletePiece(coup.getPiecePrise());
+			}
 		}
-		catch(IllegalArgumentException e){
+			catch(IllegalArgumentException e){
 			System.out.println(e.getMessage());
 		}
 	}
