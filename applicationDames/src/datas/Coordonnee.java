@@ -75,10 +75,10 @@ public class Coordonnee implements Serializable{
 
 	public boolean equals(Coordonnee coord){
 		boolean equals;
-		if(coord!=null){
+		if(coord==null){
 			equals = false;
 		}
-		else if(coord.getX() == this.getX() &&  coord.getY() == this.getY()){
+		else if(coord.getX() == this.x &&  coord.getY() == this.y){
 			equals = true;
 		}
 		else{
