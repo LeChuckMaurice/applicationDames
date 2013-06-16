@@ -97,7 +97,7 @@ public class Coup {
 				piecePrise = pieceTmp;
 			}
 
-		}while(pieceTmp==null && plateau.isValide(coordTmp) && plateau.isValide(coordTmp));
+		}while(pieceTmp==null && plateau.isValide(coordTmp) && plateau.isValide(coordTmp) && !coordTmp.equals(this.arrivee));
 
 
 
