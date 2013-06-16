@@ -96,7 +96,7 @@ public class ReactionClick implements Globale, MouseListener{
 					myCtrl.setPieceSelect(laPiece);
 
 					ArrayList<Coordonnee> listCases = laPiece.getDeplacements();
-
+					
 					if (laPiece.isDame()) {
 						laCase.setDameBlancOver();
 					}
@@ -143,36 +143,33 @@ public class ReactionClick implements Globale, MouseListener{
 					if (caseValide) {
 						boolean caseCoup=false;
 
-						if (myCtrl.getPieceSelect().canTake()) {
-							ArrayList<Coup> listeCoups = myCtrl.getPieceSelect().generateCoups();
+						ArrayList<Coup> listeCoups = myCtrl.getPieceSelect().generateCoups();
 
-							int j=0;
-							Coup theCoup=null;
-							while (!(caseCoup) && i<listeCoups.size()) {
-								Coup coupActuel = listeCoups.get(j);
-								Coordonnee coordArrive = coupActuel.getArrivee();
-								if (coordArrive.equals(coord)) {
-									caseCoup=true;
-									theCoup = coupActuel;
-								}
-							}
+						int j=0;
+						Coup theCoup=null;
 
-							if (caseCoup) {
-								plateau.playAction(theCoup);
+						
+
+
+						while (!(caseCoup) && j<listeCoups.size()) {
+							Coup coupActuel = listeCoups.get(j);
+							Coordonnee coordArrive = coupActuel.getArrivee();
+							
+							if (coordArrive.equals(coord)) {
+								caseCoup=true;
+								theCoup = coupActuel;
 							}
+							
+							j++;
 						}
-						else{
-								try{
-								plateau.movePiece(myCtrl.getPieceSelect(),coord);
-								}
-								catch(IllegalArgumentException e){
-									System.out.println(e.getMessage());
-								}
+
+						if (caseCoup) {
+							plateau.playAction(theCoup);
+							myCtrl.setPieceSelect(null);
+							plateau.updateStatus();
+							myCtrl.updateView();
 						}
 								
-						myCtrl.setPieceSelect(null);
-						plateau.updateStatus();
-						myCtrl.updateView();
 					}
 				}
 
