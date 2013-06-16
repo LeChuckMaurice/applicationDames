@@ -6,7 +6,7 @@ public class Coup {
 
 	private Coordonnee arrivee;
 	private Piece piece;
-	private Piece piecePrise;
+	private Piece piecePrise; 
 	private int nbPoints;
 
 
