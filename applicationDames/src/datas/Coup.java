@@ -9,11 +9,17 @@ public class Coup {
 	private Piece piecePrise;
 	private int nbPoints;
 
+
 	public Coup(Piece piece, Coordonnee arrivee){
 		this.arrivee = arrivee;
 		this.piece = piece;
 		this.piecePrise = findPiecePrise();
 		this.nbPoints = calculerPoints();
+		if(piece==null)
+			System.out.println("piece nulle");
+		if(arrivee==null)
+			System.out.println("arrivee nulle");
+
 	}
 	
 	//modifier int en void avec à la fin de la methode nbPoints =xx  ?
@@ -24,7 +30,7 @@ public class Coup {
 			points = points + 10;
 		}
 		
-		return 1;
+		return points;
 	}
 
 	private boolean makeVulnerable(){
@@ -34,6 +40,7 @@ public class Coup {
 	public boolean isAuthorized(){
 		boolean authorized=false;
 		
+
 		return authorized;
 	}
 
@@ -86,11 +93,11 @@ public class Coup {
 			pieceTmp = plateau.getPiece(coordTmp);
 
 			// Si c'est une piece adverse
-			if(pieceTmp.isIA()!=this.piece.isIA()){
+			if(pieceTmp!= null && pieceTmp.isIA()!=this.piece.isIA()){
 				piecePrise = pieceTmp;
 			}
 
-		}while(plateau.isValide(coordTmp) && plateau.isValide(coordTmp));
+		}while(pieceTmp==null && plateau.isValide(coordTmp) && plateau.isValide(coordTmp));
 
 
 
@@ -100,6 +107,18 @@ public class Coup {
 
 	public Piece getPiecePrise(){
 		return this.piecePrise;
+	}
+
+	public String toString(){
+		String chaine = "";
+		if(this.piece==null){
+			chaine = chaine + "Probleme!!!";
+		}
+		else{
+			chaine = chaine + "Depart"+this.piece.getCoordonnee().toString();
+		}
+		chaine = chaine +"Arrivee : "+this.arrivee.toString()+"\n";
+		return chaine;
 	}
 
 }

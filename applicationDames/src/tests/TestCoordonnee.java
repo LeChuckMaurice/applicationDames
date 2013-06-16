@@ -39,4 +39,15 @@ public class TestCoordonnee {
 		assertEquals(coordonnee.getY(),1);
 	}
 
+	@Test
+	public void testEquals(){
+		Coordonnee coordTrue = new Coordonnee(1,1);
+		Coordonnee coordFalse = new Coordonnee(2,1);
+		Coordonnee coordNull = null;
+
+		assertTrue(this.coordonnee.equals(coordTrue));
+		assertFalse(this.coordonnee.equals(coordFalse));
+		assertFalse(this.coordonnee.equals(coordNull));
+	}
+
 }

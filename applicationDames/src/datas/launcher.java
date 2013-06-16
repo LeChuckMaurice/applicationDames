@@ -70,24 +70,21 @@ public class launcher {
 
 		int gagnant = 0;
 
-		Coordonnee coordTmp;
 		Piece pieceTmp;
-		boolean hasAlreadyTaken;
 
 		while(gagnant==0){
-			pieceTmp = choixPiece(plateau);
+			pieceTmp = choixPiece(plateau, scanner);
 			System.out.println("choixpiece ok");
-			jouerCoup(pieceTmp, plateau);
-
-
+			jouerCoup(pieceTmp, plateau, scanner);
+			partie.getPlateau().getOrdinateur().play();
+			
 		}
 
 
 		
 	}
 
-	public static Piece choixPiece(Plateau plateau){
-		Scanner scanner = new Scanner(System.in);
+	public static Piece choixPiece(Plateau plateau, Scanner scanner){
 		Piece piece = null;
 		int x;
 		int y;
@@ -109,9 +106,7 @@ public class launcher {
 			}
 			catch(InputMismatchException e){
 				System.out.println("Veuillez saisir un entier.");
-				scanner.next();
 				saisieOk = false;
-				scanner.next();
 			}
 
 			if(!plateau.isValide(coordonnee)){
@@ -133,18 +128,14 @@ public class launcher {
 			else{
 				saisieOk = true;
 			}
-			scanner.next();
 
-		}
+		} 
 		while(saisieOk!=true);
-
-		scanner.close();
 
 		return piece;
 	}
 
-	public static void jouerCoup(Piece piece, Plateau plateau){
-		Scanner scanner = new Scanner(System.in);
+	public static void jouerCoup(Piece piece, Plateau plateau, Scanner scanner){
 		ArrayList<Coordonnee> deplacementsPossibles;
 		Coordonnee coordonnee = new Coordonnee(20,20);
 		boolean canContinue = true;

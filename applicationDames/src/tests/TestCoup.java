@@ -8,16 +8,16 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import datas.Coordonnee;
-import datas.Coup;
-import datas.Piece;
-import datas.Plateau;
+import datas.*;
 
 public class TestCoup {
 
 	private Plateau plateau8;
 	private Plateau plateau10;
+	private Plateau plateau10Vide;
 	private Plateau plateau12;
+
+	private Piece[][] tabPieceVide10;
 
 	private Coup coupGenerique10;
 
@@ -27,10 +27,13 @@ public class TestCoup {
 		this.plateau8 = new Plateau(8);
 		this.plateau10 = new Plateau(10);
 		this.plateau12 = new Plateau(12);
+		this.plateau10Vide = new Plateau(10);
 
 		this.plateau8.remplirPlateau();
 		this.plateau10.remplirPlateau();
 		this.plateau12.remplirPlateau();
+
+		this.tabPieceVide10 = this.plateau10Vide.getTabPiece();
 
 		ArrayList listeCoord = new ArrayList<Coordonnee>();
 		listeCoord.add(new Coordonnee(1,6));
@@ -38,7 +41,28 @@ public class TestCoup {
 
 		Piece piece = plateau10.getPiece(new Coordonnee(1,6));
 		
-		this.coupGenerique10 = new Coup(0,listeCoord,piece);
+	}
+
+	@Test
+	public void testFindPiecePrise(){
+		Dame dame1IA = new Dame(4,5,this.plateau10Vide,true);
+		this.tabPieceVide10[4][5] = dame1IA;
+
+		Pion pion1Joueur = new Pion(6,7,this.plateau10Vide,false);
+		this.tabPieceVide10[6][7] = pion1Joueur;
+
+		Coup coup1 = new Coup(dame1IA,new Coordonnee(8,9));
+		assertEquals(pion1Joueur, coup1.findPiecePrise());
+
+		Dame dame1Joueur = new Dame(6,3,this.plateau10Vide,false);
+		this.tabPieceVide10[6][3] = dame1Joueur;
+
+		Coup coup2 = new Coup(dame1IA,new Coordonnee(8,1));
+		assertEquals(dame1Joueur, coup2.findPiecePrise());
+
+		Coup coup3 = new Coup(dame1IA,new Coordonnee(2,3));
+		assertEquals(null, coup3.findPiecePrise());
+
 	}
 
 	@Test

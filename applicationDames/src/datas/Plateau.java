@@ -76,10 +76,16 @@ public class Plateau implements Serializable{
 
 	
 	public void playAction(Coup coup){
-		this.deletePiece(coup.getPiecePrise());
-		this.movePiece(coup.getPiece(), coup.getArrivee());
+		System.out.println(coup.toString());
+		try{
+			this.movePiece(coup.getPiece(), coup.getArrivee());
+			this.deletePiece(coup.getPiecePrise());
+		}
+		catch(IllegalArgumentException e){
+			System.out.println(e.getMessage());
+		}
 	}
-	
+
 
 	/**
 	*Deplace une piece vers la coordonnee place en parametre
@@ -128,7 +134,12 @@ public class Plateau implements Serializable{
 			throw (new IllegalArgumentException("Ce deplacement n'est pas permis."));
 		}
 		else{
-			deletePiece(piece);
+			try{
+				deletePiece(piece);
+			}
+			catch(IllegalArgumentException e){
+				System.out.println(e.getMessage());
+			}
 			piece.setCoordonnee(coord);
 			tabPiece[newX][newY]=piece;
 		}
@@ -137,13 +148,17 @@ public class Plateau implements Serializable{
 	/**
 	*Supprime une piece du plateau
 	*@param piece La piece a supprimer
+	*@throw IllegalArgumentException si la piece passee en parametre n'existe pas
 	*/
-	public void deletePiece(Piece piece){
-		Coordonnee coord=piece.getCoordonnee();
-		int x=coord.getX();
-		int y=coord.getY();
+	private void deletePiece(Piece piece) throws IllegalArgumentException{
 
-		if(this.isValide(coord)) {
+		if(piece==null){
+			throw new IllegalArgumentException("La piece a supprimer n'existe pas.");
+		}
+		else{
+			Coordonnee coord = piece.getCoordonnee();
+			int x=coord.getX();
+			int y=coord.getY();
 			tabPiece[x][y]=null;
 		}
 	}
@@ -240,6 +255,10 @@ public class Plateau implements Serializable{
 	*/
 	public int getTaille(){
 		return this.taille;
+	}
+
+	public IA getOrdinateur(){
+		return this.ordinateur;
 	}
 
 	/**
