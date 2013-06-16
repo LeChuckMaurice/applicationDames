@@ -48,8 +48,7 @@ public class ViewDames extends JFrame{
 
 	//Boites de dialogues
 
-	private DialogFin dialogWin;
-	private DialogFin dialogLose;
+	private DialogFin dialogFin;
 	private DialogSaveCharge dialogSave;
 	private DialogSaveCharge dialogCharge;
 	private DialogQuitter dialogQuit;
@@ -65,8 +64,7 @@ public class ViewDames extends JFrame{
 		pGlobal.updateUI();
 		this.add(pGlobal);
 
-		dialogWin = new DialogFin(true);
-		dialogLose = new DialogFin(false);
+		dialogFin = new DialogFin();
 		dialogSave = new DialogSaveCharge(false);
 		dialogCharge = new DialogSaveCharge(true);
 		dialogQuit = new DialogQuitter();
@@ -374,12 +372,8 @@ public class ViewDames extends JFrame{
 		return pGlobal.getLocation();
 	}
 
-	public DialogFin getDialogWin(){
-		return dialogWin;
-	}
-	
-	public DialogFin getDialogLose(){
-		return dialogLose;
+	public DialogFin getDialogFin(){
+		return dialogFin;
 	}
 
 	public DialogSaveCharge getDialogSave(){

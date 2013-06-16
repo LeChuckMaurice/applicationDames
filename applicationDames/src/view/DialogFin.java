@@ -11,13 +11,13 @@ private JLabel lText;
 private JPanel pButton;
 private JButton bMenu;
 
-public DialogFin(boolean victoire){
+public DialogFin(){
 	super();
 	creerInterface();
-	styleLabel(victoire);
 	this.setSize(240,130);
 	this.setVisible(false);
 	this.setDefaultCloseOperation ( HIDE_ON_CLOSE );
+	this.setUndecorated(true);
 }
 
 public void creerInterface(){

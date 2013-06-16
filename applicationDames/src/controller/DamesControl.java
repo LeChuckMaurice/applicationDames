@@ -8,7 +8,6 @@ import datas.Plateau;
 
 public class DamesControl implements Globale{
 	
-	private Plateau thePlat = null;
 	private Piece pieceSelect = null;
 	
 	public DamesControl(){
@@ -23,8 +22,7 @@ public class DamesControl implements Globale{
 		(Globale.theView).getCharger().addActionListener(new ReactionAction(this));
 		(Globale.theView).getQuitter().addActionListener(new ReactionAction(this));
 
-		(Globale.theView).getDialogWin().getMenu().addActionListener(new ReactionAction(this));
-		(Globale.theView).getDialogLose().getMenu().addActionListener(new ReactionAction(this));
+		(Globale.theView).getDialogFin().getMenu().addActionListener(new ReactionAction(this));
 
 		(Globale.theView).getDialogCharge().getCharge().addActionListener(new ReactionAction(this));
 		(Globale.theView).getDialogCharge().getAnnuler().addActionListener(new ReactionAction(this));
@@ -64,7 +62,8 @@ public class DamesControl implements Globale{
 	}
 
 	public void updateView(){
-		int taillePlateau=thePlat.getTaille();;
+		Plateau thePlat=(Globale.thePart).getPlateau();
+		int taillePlateau=thePlat.getTaille();
 
 		if (thePlat!=null) {
 			for (int y=0;y<taillePlateau;y++) {
@@ -112,11 +111,27 @@ public class DamesControl implements Globale{
 			}
 		}
 
+	}
+
+	public void coupIA(){
 
 	}
 
+	public void isFin(){
+		int isGagnant = (Globale.thePart).getGagnant();
+
+		if (isGagnant==1) {
+			(Globale.theView).getDialogFin().styleLabel(false);
+			(Globale.theView).getDialogFin().setVisible(true);
+		}
+		if (isGagnant==(-1)) {
+			(Globale.theView).getDialogFin().styleLabel(true);
+			(Globale.theView).getDialogFin().setVisible(true);
+		}
+	}
+
 	public void charger() throws Exception{
-		this.thePlat = thePart.chargerPlateau();
+		(Globale.thePart).setPlateau(thePart.chargerPlateau());
 		
 	}
 	
@@ -125,7 +140,7 @@ public class DamesControl implements Globale{
 	}
 	
 	public void createThePlat(int taille){
-		this.thePlat = new Plateau(taille);
+		(Globale.thePart).setPlateau(new Plateau(taille));
 	}
 
 	public void setPieceSelect(Piece laPiece){
@@ -134,10 +149,6 @@ public class DamesControl implements Globale{
 
 	public Piece getPieceSelect(){
 		return this.pieceSelect;
-	}
-
-	public Plateau getThePlat(){
-		return thePlat;
 	}
 
 public static void main(String[] args) {

@@ -61,10 +61,10 @@ public class ReactionClick implements Globale, MouseListener{
 	}
 
 	private void retourPlateau(){
-		(Globale.theView).creerInterfaceJeu(myCtrl.getThePlat().getTaille());
+		(Globale.theView).creerInterfaceJeu((Globale.thePart).getPlateau().getTaille());
 		myCtrl.attacherReactionsPlateau();
 
-		myCtrl.getThePlat().remplirPlateau();
+		(Globale.thePart).getPlateau().remplirPlateau();
 		myCtrl.updateView();
 	}
 
@@ -79,102 +79,110 @@ public class ReactionClick implements Globale, MouseListener{
 	}
 
 	private void reactionCase(Case theCase){
+		if (!(Globale.thePart).getTourIA()) {
+			
 		
-		myCtrl.updateView();
-		
-		Case laCase=theCase;
-		Plateau plateau=myCtrl.getThePlat();
-		Piece laPiece=plateau.getPiece(laCase.getCoordonnee());
+			myCtrl.updateView();
+			
+			Case laCase=theCase;
+			Plateau plateau=(Globale.thePart).getPlateau();
+			Piece laPiece=plateau.getPiece(laCase.getCoordonnee());
 
-		if (laPiece!=null) {
-			//normalement !(laPiece.isIA()), true pour permettre le deplacement manuel des pions noir
-			if (true) {
-				if (laPiece.canMove()) {
+			if (laPiece!=null) {
+				//normalement !(laPiece.isIA()), true pour permettre le deplacement manuel des pions noir
+				if (true) {
+					if (laPiece.canMove()) {
 
-					//Si on a aucune piece selectionne et que on clic sur une piece joueur pouvant bouger on selectionne cette dernière
-					
-					myCtrl.setPieceSelect(laPiece);
+						//Si on a aucune piece selectionne et que on clic sur une piece joueur pouvant bouger on selectionne cette dernière
+						
+						myCtrl.setPieceSelect(laPiece);
 
-					ArrayList<Coordonnee> listCases = laPiece.getDeplacements();
-					
-					if (laPiece.isDame()) {
-						laCase.setDameBlancOver();
-					}
-					else{
-						laCase.setPionBlancOver();
-					}
+						ArrayList<Coordonnee> listCases = laPiece.getDeplacements();
+						
+						if (laPiece.isDame()) {
+							laCase.setDameBlancOver();
+						}
+						else{
+							laCase.setPionBlancOver();
+						}
 
-					//puis on applique le surlignage rouge a toute les cases sur lesquelles la piece peut ce deplacer
-					for (int i=0;i<listCases.size() ;i++ ) {
-						Coordonnee coordJouable=listCases.get(i);
-						int x = coordJouable.getX();
-						int y = coordJouable.getY();
-						Case caseJouable=(Globale.theView).getCase(x,y);
-						caseJouable.setCaseJouable();
+						//puis on applique le surlignage rouge a toute les cases sur lesquelles la piece peut ce deplacer
+						for (int i=0;i<listCases.size() ;i++ ) {
+							Coordonnee coordJouable=listCases.get(i);
+							int x = coordJouable.getX();
+							int y = coordJouable.getY();
+							Case caseJouable=(Globale.theView).getCase(x,y);
+							caseJouable.setCaseJouable();
+						}
 					}
 				}
 			}
-		}
-		else{
-			if (myCtrl.getPieceSelect()!=null) {
+			else{
+				if (myCtrl.getPieceSelect()!=null) {
 
-				Coordonnee coord=laCase.getCoordonnee();
-				int x=coord.getX();
-				int y=coord.getY();
+					Coordonnee coord=laCase.getCoordonnee();
+					int x=coord.getX();
+					int y=coord.getY();
 
-				//Si on a une piece de selectionne et que on clic sur une case jouable (noire)
-				if (((x+y)%2)==1) {
-					boolean caseValide = false;
-					ArrayList<Coordonnee> listCases = myCtrl.getPieceSelect().getDeplacements();
-					int i=0;
+					//Si on a une piece de selectionne et que on clic sur une case jouable (noire)
+					if (((x+y)%2)==1) {
+						boolean caseValide = false;
+						ArrayList<Coordonnee> listCases = myCtrl.getPieceSelect().getDeplacements();
+						int i=0;
 
-					//si la case appartient aux case sur lesquels le pions selectionne peux jouer on passe le booleen a vrai 
+						//si la case appartient aux case sur lesquels le pions selectionne peux jouer on passe le booleen a vrai 
 
-					while(!(caseValide) && i<listCases.size()) {
-						Coordonnee coordJouable=listCases.get(i);
+						while(!(caseValide) && i<listCases.size()) {
+							Coordonnee coordJouable=listCases.get(i);
 
-						if (coordJouable.equals(coord)) {
-								caseValide=true;	
-						}
-						
-						i++;
-					}
-					
-					if (caseValide) {
-						boolean caseCoup=false;
-
-						ArrayList<Coup> listeCoups = myCtrl.getPieceSelect().generateCoups();
-
-						int j=0;
-						Coup theCoup=null;
-
-						
-
-
-						while (!(caseCoup) && j<listeCoups.size()) {
-							Coup coupActuel = listeCoups.get(j);
-							Coordonnee coordArrive = coupActuel.getArrivee();
-							
-							if (coordArrive.equals(coord)) {
-								caseCoup=true;
-								theCoup = coupActuel;
+							if (coordJouable.equals(coord)) {
+									caseValide=true;	
 							}
 							
-							j++;
+							i++;
 						}
+						
+						if (caseValide) {
+							boolean caseCoup=false;
 
-						if (caseCoup) {
-							plateau.playAction(theCoup);
-							myCtrl.setPieceSelect(null);
-							plateau.updateStatus();
-							myCtrl.updateView();
-						}
+							ArrayList<Coup> listeCoups = myCtrl.getPieceSelect().generateCoups();
+
+							int j=0;
+							Coup theCoup=null;
+
+							
+
+
+							while (!(caseCoup) && j<listeCoups.size()) {
+								Coup coupActuel = listeCoups.get(j);
+								Coordonnee coordArrive = coupActuel.getArrivee();
 								
-					}
-				}
+								if (coordArrive.equals(coord)) {
+									caseCoup=true;
+									theCoup = coupActuel;
+								}
+								
+								j++;
+							}
 
+							if (caseCoup) {
+								plateau.playAction(theCoup);
+								myCtrl.setPieceSelect(null);
+								plateau.updateStatus();
+								myCtrl.updateView();
+							}
+									
+						}
+					}
+
+				}
 			}
 		}
+
+		myCtrl.isFin();
+
+		myCtrl.coupIA();
+
 	}
 
 }

@@ -33,8 +33,8 @@ public class ReactionAction implements Globale, ActionListener{
 		else if (src==(Globale.theView).getDialogTaille().getAnnuler()) {
 			(Globale.theView).getDialogTaille().setVisible(false);
 		}
-		else if (src==(Globale.theView).getDialogWin().getMenu() || src==(Globale.theView).getDialogWin().getMenu()) {
-			(Globale.theView).getDialogWin().setVisible(false);
+		else if (src==(Globale.theView).getDialogFin().getMenu()) {
+			(Globale.theView).getDialogFin().setVisible(false);
 			retourMenu();
 		}
 		else if (src==(Globale.theView).getDialogQuit().getNoSave()) {
@@ -84,7 +84,7 @@ public class ReactionAction implements Globale, ActionListener{
 		myCtrl.attacherReactionsPlateau();
 
 		myCtrl.createThePlat(taillePlat);
-		myCtrl.getThePlat().remplirPlateau();
+		(Globale.thePart).getPlateau().remplirPlateau();
 		myCtrl.updateView();
 		
 	}
@@ -104,10 +104,10 @@ public class ReactionAction implements Globale, ActionListener{
 	private void charger(){
 			try{
 			myCtrl.charger();
-			(Globale.theView).creerInterfaceJeu(myCtrl.getThePlat().getTaille());
+			(Globale.theView).creerInterfaceJeu((Globale.thePart).getPlateau().getTaille());
 			myCtrl.attacherReactionsPlateau();
 
-			myCtrl.getThePlat().remplirPlateau();
+			(Globale.thePart).getPlateau().remplirPlateau();
 			myCtrl.updateView();
 			}
 			catch(Exception e){
