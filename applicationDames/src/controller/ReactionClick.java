@@ -96,7 +96,14 @@ public class ReactionClick implements Globale, MouseListener{
 
 					ArrayList<Coordonnee> listCases = laPiece.getDeplacements();
 
-					//puis on applique le surlignage rouge a toute les case sur lesquels la piece peu ce deplacer
+					if (laPiece.isDame()) {
+						laCase.setDameBlancOver();
+					}
+					else{
+						laCase.setPionBlancOver();
+					}
+
+					//puis on applique le surlignage rouge a toute les cases sur lesquelles la piece peut ce deplacer
 					for (int i=0;i<listCases.size() ;i++ ) {
 						Coordonnee coordJouable=listCases.get(i);
 						int x = coordJouable.getX();
@@ -121,7 +128,7 @@ public class ReactionClick implements Globale, MouseListener{
 					int i=0;
 
 					//si la case appartient aux case sur lesquels le pions selectionne peux jouer on passe le booleen a vrai 
-					
+
 					while(!(caseValide) && i<listCases.size()) {
 						Coordonnee coordJouable=listCases.get(i);
 						int coordJouableX = coordJouable.getX();
@@ -137,7 +144,12 @@ public class ReactionClick implements Globale, MouseListener{
 					}
 					
 					if (caseValide) {
-						plateau.movePiece(myCtrl.getPieceSelect(),coord);
+						try{
+							plateau.movePiece(myCtrl.getPieceSelect(),coord);
+						}
+						catch(IllegalArgumentException e){
+							System.out.println(e.getMessage());
+						}
 						myCtrl.setPieceSelect(null);
 						plateau.updateStatus();
 						myCtrl.updateView();

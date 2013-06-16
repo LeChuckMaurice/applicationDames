@@ -116,12 +116,12 @@ public class DamesControl implements Globale{
 	}
 
 	public void charger() throws Exception{
-		this.thePlat = thePlat.chargerPlateau();
+		this.thePlat = thePart.chargerPlateau();
 		
 	}
 	
 	public void sauver(){
-		this.thePlat.savePlateau();
+		thePart.savePlateau();
 	}
 	
 	public void createThePlat(int taille){
