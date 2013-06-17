@@ -15,11 +15,6 @@ public class Coup {
 		this.piece = piece;
 		this.piecePrise = findPiecePrise();
 		this.nbPoints = calculerPoints();
-		if(piece==null)
-			System.out.println("piece nulle");
-		if(arrivee==null)
-			System.out.println("arrivee nulle");
-
 	}
 	
 	//modifier int en void avec à la fin de la methode nbPoints =xx  ?
@@ -29,7 +24,6 @@ public class Coup {
 		if(piecePrise!=null){
 			points = points + 10;
 		}
-		// 
 		if(transformDame()){
 			points = points + 20;
 		}

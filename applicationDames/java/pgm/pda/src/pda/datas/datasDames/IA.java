@@ -122,7 +122,6 @@ public class IA implements Serializable {
 		Piece piece = null;
 
 		while(canContinue){
-			System.out.println("coup\n");
 
 			if(nbDeplacements==0){
 				coup = getAction();
@@ -142,7 +141,6 @@ public class IA implements Serializable {
 					nbPrises++;
 				}
 				plateau.playAction(coup);
-				System.out.println(coup);
 				nbDeplacements++;
 
 

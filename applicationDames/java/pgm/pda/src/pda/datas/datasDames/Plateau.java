@@ -245,6 +245,7 @@ public class Plateau implements Serializable{
 		
 		return chainePlateau;
 	}
+	
 
 	public String toString(){
 		String chainePlateau = "  ";
@@ -255,34 +256,34 @@ public class Plateau implements Serializable{
 		for(k=0; k<this.taille; k++){
 			chainePlateau = chainePlateau + k + "   ";
 		}
-		chainePlateau = chainePlateau + "\n╔";
+		chainePlateau = chainePlateau + "\n\u2554";
 
 		for(k=0; k<this.taille-1; k++){
-			chainePlateau = chainePlateau+ "───┬";
+			chainePlateau = chainePlateau+ "\u2500\u2500\u2500\u252c";
 		}
-		chainePlateau = chainePlateau+ "───╗\n";
+		chainePlateau = chainePlateau+ "\u2500\u2500\u2500\u2557\n";
 
 		for(int i=0; i<this.taille; i++){ // y
-			chainePlateau = chainePlateau + "│";
+			chainePlateau = chainePlateau + "\u2502";
 			for (int j=0; j<this.taille; j++){ // x
 				piece = this.tabPiece[j][i];
 				if(piece==null){
-					chainePlateau = chainePlateau + "   │";
+					chainePlateau = chainePlateau + "   \u2502";
 				}
 				else if(piece.isIA()){ // Sinon,si c'est une piece de l'IA
 					if(piece.isDame()){ // Si c'est une dame
-						chainePlateau = chainePlateau + " d │";
+						chainePlateau = chainePlateau + " d \u2502";
 					}
 					else if(!piece.isDame()){ // Si c'est un pion
-						chainePlateau = chainePlateau + " o │";
+						chainePlateau = chainePlateau + " o \u2502";
 					}
 				}
 				else if(!piece.isIA()){ // Sinon, si c'est une piece du joueur
 					if(piece.isDame()){ // Si c'est une dame
-						chainePlateau = chainePlateau + " D │";
+						chainePlateau = chainePlateau + " D \u2502";
 					}
 					else if(!piece.isDame()){ // Si c'est un pion
-						chainePlateau = chainePlateau + " O │";
+						chainePlateau = chainePlateau + " O \u2502";
 					}
 				}
 			}
@@ -292,22 +293,22 @@ public class Plateau implements Serializable{
 			// Si ce n'est pas la derniere ligne
 			if(i!=this.taille-1){
 				// separation entre les lignes
-				chainePlateau = chainePlateau + "├";
+				chainePlateau = chainePlateau + "\u251c";
 
 				for(k=0; k<this.taille-1; k++){
-					chainePlateau = chainePlateau+ "───┼";
+					chainePlateau = chainePlateau+ "\u2500\u2500\u2500\u253c";
 				}
-				chainePlateau = chainePlateau+ "───┤\n";	
+				chainePlateau = chainePlateau+ "\u2500\u2500\u2500\u2524\n";	
 			}
 
 		}
 		// derniere ligne
-		chainePlateau = chainePlateau + "╚";
+		chainePlateau = chainePlateau + "\u255a";
 
 		for(k=0; k<this.taille-1; k++){
-			chainePlateau = chainePlateau+ "───┴";
+			chainePlateau = chainePlateau+ "\u2500\u2500\u2500\u2534";
 		}
-		chainePlateau = chainePlateau+ "───╝\n";	
+		chainePlateau = chainePlateau+ "\u2500\u2500\u2500\u255d\n";	
 
 		return chainePlateau;
 	}

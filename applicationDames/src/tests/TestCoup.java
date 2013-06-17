@@ -35,11 +35,9 @@ public class TestCoup {
 
 		this.tabPieceVide10 = this.plateau10Vide.getTabPiece();
 
-		ArrayList listeCoord = new ArrayList<Coordonnee>();
-		listeCoord.add(new Coordonnee(1,6));
-		listeCoord.add(new Coordonnee(2,5));
-
 		Piece piece = plateau10.getPiece(new Coordonnee(1,6));
+
+		this.coupGenerique10 = new Coup(piece, new Coordonnee(2,5));
 		
 	}
 
@@ -66,31 +64,6 @@ public class TestCoup {
 	}
 
 	@Test
-	public void testCalculerPoints() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testIsAuthorized() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetNbPoints() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetNbPrises() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetParcours() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testGetDepart() {
 		Coordonnee depart = this.coupGenerique10.getDepart();
 		assertEquals(depart.getX(),1);
@@ -102,26 +75,6 @@ public class TestCoup {
 		Coordonnee arrivee = this.coupGenerique10.getArrivee();
 		assertEquals(arrivee.getX(),2);
 		assertEquals(arrivee.getY(),5);
-	}
-
-	@Test
-	public void testGetPiece() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetPiecesPrises() {
-				fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetNbPrises() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetParcours() {
-		fail("Not yet implemented");
 	}
 
 }

@@ -70,7 +70,6 @@ public abstract class Piece implements Serializable {
 				do{
 					j++;
 					piece1 = this.plateau.getPiece(diagonale.get(j));
-					System.out.println(j+" : "+diagonale.get(j));
 				}
 				// jusqu'a ce que la case soit occupée
 				while(piece1==null && j<diagonale.size()-1);

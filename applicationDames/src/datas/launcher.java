@@ -66,7 +66,6 @@ public class launcher {
 		Plateau plateau = partie.getPlateau();
 
 		plateau.remplirPlateau();
-		System.out.println(plateau.toString());
 
 		int gagnant = 0;
 
@@ -74,6 +73,7 @@ public class launcher {
 
 		// Tant qu'il n'y a pas de gagnant
 		while(gagnant==0){
+			System.out.println(plateau.toString());
 			pieceTmp = choixPiece(plateau, scanner);
 			jouerCoup(pieceTmp, plateau, scanner);
 			plateau.updateStatus();
@@ -108,19 +108,10 @@ public class launcher {
 
 		do{
 			saisieOk = false;
-			System.out.println(plateau.toString());
-			try{
-				System.out.print("x = ");
-				x = scanner.nextInt();
-				System.out.println("y = ");
-				y = scanner.nextInt();
-				coordonnee = new Coordonnee(x,y);
-				piece = plateau.getPiece(coordonnee);
-			}
-			catch(InputMismatchException e){
-				System.out.println("Veuillez saisir un entier.");
-				saisieOk = false;
-			}
+
+			coordonnee = saisieCoordonnee(scanner);
+
+			piece = plateau.getPiece(coordonnee);
 
 			if(!plateau.isValide(coordonnee)){
 				System.out.println("La coordonnee saisie est invalide. (hors du plateau ou case non jouable)");
@@ -154,39 +145,33 @@ public class launcher {
 		boolean canContinue = true;
 		boolean saisieOk = false;
 		boolean fini;
-		int x;
+		int x=1;
 		int y;
 		Coup coup;
 		int nbDeplacements = 0;
 		int nbPrises = 0;
 		System.out.println("Sur quelle case souhaitez-vous deplacer cette piece ?");
+		int i;
 
 		while(canContinue){
-			System.out.println(plateau.toString());
 
 			do {
-				try{
-					System.out.print("x = ");
-					x = scanner.nextInt();
-					System.out.println("y = ");
-					y = scanner.nextInt();
-					coordonnee = new Coordonnee(x,y);
+				deplacementsPossibles = piece.getDeplacements();
+				//affichage des deplacements possibles
+				System.out.println("deplacements possibles : ");
+				for(i=0; i<deplacementsPossibles.size(); i++){
+					System.out.print(deplacementsPossibles.get(i));
 				}
-				catch(InputMismatchException e){
-					System.out.println("Veuillez saisir un entier.");
-					scanner.next();
-					saisieOk = false;
-					scanner.next();
-				}
+				System.out.println("\n");
+
+				coordonnee = saisieCoordonnee(scanner);
 
 				if(!plateau.isValide(coordonnee)){
 					System.out.println("La coordonnee saisie est invalide. (hors du plateau ou case non jouable)");
 					saisieOk = false;
-					scanner.next();
 				}
 				else{
-					deplacementsPossibles = piece.getDeplacements();
-					for(int i=0; i<deplacementsPossibles.size(); i++){
+					for(i=0; i<deplacementsPossibles.size(); i++){
 						if(deplacementsPossibles.get(i).equals(coordonnee)){
 							coup = new Coup(piece, coordonnee);
 							// Si c'est le premier deplacement, alors saisie OK
@@ -223,12 +208,38 @@ public class launcher {
 			else {
 				canContinue = false;
 			}
+			System.out.println(plateau.toString());
 
 		}
 
 	}
 
+	public static Coordonnee saisieCoordonnee(Scanner scanner){
+		
+		boolean saisieOk;
+		Coordonnee coordonnee=null;
+		int x;
+		int y;
+		do{
+			scanner = new Scanner(System.in);
+			try{
+				System.out.print("x = ");
+				x = scanner.nextInt();
+				System.out.print("y = ");
+				y = scanner.nextInt();
+				coordonnee = new Coordonnee(x,y);
+				saisieOk = true;
+			}
+			catch(InputMismatchException e){
+				System.out.println("Veuillez saisir un entier.");
+				saisieOk = false;
+			}
 
+		}while(!saisieOk);
+
+		return coordonnee;
+
+	}
 
 
 
