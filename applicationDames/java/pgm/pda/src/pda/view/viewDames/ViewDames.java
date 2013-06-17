@@ -58,7 +58,7 @@ public class ViewDames{
 	public ViewDames(){
 
 		pGlobal = new JPanel();
-		pGlobal.setPreferredSize(new Dimension(350,370));
+		pGlobal.setPreferredSize(new Dimension(320,325));
 		pGlobal.setSize(322,346);
 		//pGlobal.updateUI();
 
@@ -231,7 +231,7 @@ public class ViewDames{
 		        	
 		spAide = new JScrollPane(epAide);
 		spAide.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		spAide.setPreferredSize(new Dimension(322,346));
+		spAide.setPreferredSize(new Dimension(320,325));
 		spAide.setOpaque(false);
 		spAide.getViewport().setOpaque(false);
 		pAide.add(spAide,BorderLayout.CENTER);
