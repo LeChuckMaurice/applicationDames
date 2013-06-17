@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class Partie {
+public class Partie { 
 	private Plateau plateau;
 	/**
 	 * True si c'est le tour de l'IA.
