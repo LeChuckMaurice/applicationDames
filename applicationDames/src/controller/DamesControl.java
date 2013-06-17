@@ -114,6 +114,7 @@ public class DamesControl implements Globale{
 	}
 
 	public void coupIA(){
+		
 		(Globale.thePart).getPlateau().getOrdinateur().play();
 
 		/*
@@ -124,8 +125,11 @@ public class DamesControl implements Globale{
 
     	}
     	*/
+    	
 		(Globale.thePart).getPlateau().updateStatus();
 		this.updateView();
+		(Globale.thePart).setTourIA(false);
+		isFin();
 	}
 
 	public void isFin(){
