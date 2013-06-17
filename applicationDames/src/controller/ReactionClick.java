@@ -138,74 +138,72 @@ public class ReactionClick implements Globale, MouseListener{
 		int x=coord.getX();
 		int y=coord.getY();
 
-					//Si on a une piece de selectionne et que on clic sur une case jouable (noire)
-					if (((x+y)%2)==1) {
-						boolean caseValide = false;
-						ArrayList<Coordonnee> listCases = myCtrl.getPieceSelect().getDeplacements();
-						int i=0;
+		//Si on a une piece de selectionne et que on clic sur une case jouable (noire)
+		if (((x+y)%2)==1) {
+			boolean caseValide = false;
+			ArrayList<Coordonnee> listCases = myCtrl.getPieceSelect().getDeplacements();
+			int i=0;
 
-						//si la case appartient aux case sur lesquels le pions selectionne peux jouer on passe le booleen a vrai 
+			//si la case appartient aux case sur lesquels le pions selectionne peux jouer on passe le booleen a vrai 
+			while(!(caseValide) && i<listCases.size()) {
+				Coordonnee coordJouable=listCases.get(i);
 
-						while(!(caseValide) && i<listCases.size()) {
-							Coordonnee coordJouable=listCases.get(i);
-
-							if (coordJouable.equals(coord)) {
-									caseValide=true;	
-							}
+				if (coordJouable.equals(coord)) {
+					caseValide=true;	
+				}
 							
-							i++;
-						}
+				i++;
+			}
 						
-						if (caseValide) {
-							boolean caseCoup=false;
+			if (caseValide) {
+				boolean caseCoup=false;
 
-							ArrayList<Coup> listeCoups = myCtrl.getPieceSelect().generateCoups();
+				ArrayList<Coup> listeCoups = myCtrl.getPieceSelect().generateCoups();
 
-							int j=0;
-							Coup theCoup=null;
+				int j=0;
+				Coup theCoup=null;
 
-							while (!(caseCoup) && j<listeCoups.size()) {
-								Coup coupActuel = listeCoups.get(j);
-								Coordonnee coordArrive = coupActuel.getArrivee();
+				while (!(caseCoup) && j<listeCoups.size()) {
+					Coup coupActuel = listeCoups.get(j);
+					Coordonnee coordArrive = coupActuel.getArrivee();
 								
-								if (coordArrive.equals(coord)) {
-									caseCoup=true;
-									theCoup = coupActuel;
-								}
+					if (coordArrive.equals(coord)) {
+						caseCoup=true;
+						theCoup = coupActuel;
+					}
 								
-								j++;
-							}
+					j++;
+				}
 
-							if (caseCoup) {
-								plateau.playAction(theCoup);
-								myCtrl.updateView();
-								Coordonnee coordArrive = theCoup.getArrivee();
-								Piece laPieceFin = plateau.getPiece(coordArrive);
+				if (caseCoup) {
+					plateau.playAction(theCoup);
+					myCtrl.updateView();
+					Coordonnee coordArrive = theCoup.getArrivee();
+					Piece laPieceFin = plateau.getPiece(coordArrive);
 
-								if (theCoup.getPiecePrise()!=null && laPieceFin.canTake()) {
-										int newX = coordArrive.getX();
-										int newY = coordArrive.getY();
-										Case newCase = (Globale.theView).getCase(newX,newY);
-										myCtrl.setDoubleCoup(true);
-										this.selectionPiece(laPieceFin,newCase);
-										this.jouerCoup(laPieceFin,newCase,plateau);
-								}
-								else {
-									myCtrl.setPieceSelect(null);
-									(Globale.thePart).setTourIA(true);
-									myCtrl.setDoubleCoup(false);
-								}
+					if (theCoup.getPiecePrise()!=null && laPieceFin.canTake()) {
+						int newX = coordArrive.getX();
+						int newY = coordArrive.getY();
+						Case newCase = (Globale.theView).getCase(newX,newY);
+						myCtrl.setDoubleCoup(true);
+						this.selectionPiece(laPieceFin,newCase);
+						this.jouerCoup(laPieceFin,newCase,plateau);
+					}
+					else {
+						myCtrl.setPieceSelect(null);
+						(Globale.thePart).setTourIA(true);
+						myCtrl.setDoubleCoup(false);
+					}
 
-								}
-								plateau.updateStatus();
-								myCtrl.isFin();
+				}
+				plateau.updateStatus();
+				myCtrl.isFin();
 
-								if ((Globale.thePart).getTourIA()==true) {
-									myCtrl.coupIA();
-								}
-							}
-									
-						}
+				if ((Globale.thePart).getTourIA()==true) {
+					myCtrl.coupIA();
+				}
+			}
+		}
 	}
 }
 

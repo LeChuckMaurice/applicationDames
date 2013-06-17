@@ -54,7 +54,7 @@ public void styleLabel(boolean victoire){
 	}
 	else {
 		lText.setForeground(new Color(255,23,23));
-		lText.setText("DÉFAITE");
+		lText.setText("DEFAITE");
 	}
 
 }
