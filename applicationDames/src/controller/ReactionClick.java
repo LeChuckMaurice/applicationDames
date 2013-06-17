@@ -80,7 +80,7 @@ public class ReactionClick implements Globale, MouseListener{
 
 	private void reactionCase(Case theCase){
 		
-		if (!(Globale.thePart).getTourIA()) {
+		while (!(Globale.thePart).getTourIA()) {
 			
 		
 			myCtrl.updateView();
@@ -164,11 +164,20 @@ public class ReactionClick implements Globale, MouseListener{
 
 							if (caseCoup) {
 								plateau.playAction(theCoup);
-								myCtrl.setPieceSelect(null);
+								Coordonnee coordArrive = theCoup.getArrivee();
+								Piece laPieceFin = plateau.getPiece(coordArrive);
+
+								if (!(laPieceFin.canTake())) {
+									myCtrl.setPieceSelect(null);
+									(Globale.thePart).setTourIA(true);
+								}	
 								plateau.updateStatus();
 								myCtrl.updateView();
 								myCtrl.isFin();
-								myCtrl.coupIA();
+
+								if ((Globale.thePart).getTourIA()==true) {
+									myCtrl.coupIA();
+								}
 							}
 									
 						}
