@@ -81,7 +81,7 @@ public class ViewDames{
 		pGlobal.updateUI();
 		this.taillePlateau=laTaille;
 
-		bpPrincipal = new JBackgroundPanel("datas/img/Fond_net.jpg");
+		bpPrincipal = new JBackgroundPanel("data/img/Fond_net.jpg");
 		pGlobal.add(bpPrincipal);
 		bpPrincipal.setLayout(new BorderLayout());
 
