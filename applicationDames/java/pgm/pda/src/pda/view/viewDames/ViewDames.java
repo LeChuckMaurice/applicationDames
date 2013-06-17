@@ -1,4 +1,4 @@
-package view;
+package pda.view.viewDames;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,7 +6,7 @@ import java.io.*;
 import java.net.*;
 
 
-public class ViewDames extends JFrame{
+public class ViewDames{
 	
 	//Attributs globaux
 	private JPanel pGlobal;
@@ -57,9 +57,8 @@ public class ViewDames extends JFrame{
 
 	public ViewDames(){
 
-		super();
-		this.setSize(330,350);
 		pGlobal = new JPanel();
+		pGlobal.setPreferredSize(new Dimension(322,346))
 		pGlobal.setSize(322,346);
 		pGlobal.updateUI();
 		this.add(pGlobal);
