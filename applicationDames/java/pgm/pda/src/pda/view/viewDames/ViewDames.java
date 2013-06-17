@@ -199,7 +199,7 @@ public class ViewDames{
 		bHelp.setBackground(new Color(0,0,0,0));
 		pMenuRight.add(bHelp);
 
-		ImageIcon iExit=new ImageIcon("datas/exit.png");
+		ImageIcon iExit=new ImageIcon("data/img/exit.png");
 		bExitAide = new JLabel();
 		bExitAide.setIcon(iExit);
 		bExitAide.setBackground(new Color(0,0,0,0));
@@ -215,7 +215,7 @@ public class ViewDames{
 			
 		URL u=null;
 		try {
-			u = new File("datas/aide.html").toURI().toURL();
+			u = new File("data/aide.html").toURI().toURL();
 			
 			try {
 				epAide.setPage(u);
