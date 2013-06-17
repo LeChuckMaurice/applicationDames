@@ -106,8 +106,6 @@ public class ReactionAction implements Globale, ActionListener{
 			myCtrl.charger();
 			(Globale.theView).creerInterfaceJeu((Globale.thePart).getPlateau().getTaille());
 			myCtrl.attacherReactionsPlateau();
-
-			(Globale.thePart).getPlateau().remplirPlateau();
 			myCtrl.updateView();
 			}
 			catch(Exception e){

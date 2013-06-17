@@ -124,6 +124,7 @@ public class DamesControl implements Globale{
 
     	}
     	*/
+		(Globale.thePart).getPlateau().updateStatus();
 		this.updateView();
 	}
 
