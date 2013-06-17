@@ -59,7 +59,7 @@ public class ViewDames{
 
 		pGlobal = new JPanel();
 		pGlobal.setPreferredSize(new Dimension(320,325));
-		pGlobal.setSize(322,346);
+		pGlobal.setSize(320,325);
 		//pGlobal.updateUI();
 
 		dialogFin = new DialogFin();
