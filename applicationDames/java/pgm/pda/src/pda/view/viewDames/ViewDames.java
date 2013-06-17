@@ -58,7 +58,7 @@ public class ViewDames{
 	public ViewDames(){
 
 		pGlobal = new JPanel();
-		pGlobal.setPreferredSize(new Dimension(322,346));
+		pGlobal.setPreferredSize(new Dimension(350,370));
 		pGlobal.setSize(322,346);
 		//pGlobal.updateUI();
 
@@ -131,7 +131,7 @@ public class ViewDames{
 		pGlobal.removeAll();
 		pGlobal.updateUI();
 
-		bpPrincipal = new JBackgroundPanel("datas/Fond_net.jpg");
+		bpPrincipal = new JBackgroundPanel();
 		pGlobal.add(bpPrincipal);
 		bpPrincipal.setLayout(new GridLayout(4,1));
 
@@ -139,7 +139,7 @@ public class ViewDames{
 		pLogo.setOpaque (false);
 		bpPrincipal.add(pLogo);
 		lLogo = new JLabel();
-		ImageIcon logoDame=new ImageIcon("datas/logo.png");
+		ImageIcon logoDame=new ImageIcon("data/img/logo.png");
 		lLogo.setIcon(logoDame);
 		pLogo.add(lLogo);
 
@@ -170,7 +170,7 @@ public class ViewDames{
 		pGlobal.removeAll();
 		pGlobal.updateUI();
 		
-		bpPrincipal = new JBackgroundPanel("datas/Fond_net.jpg");
+		bpPrincipal = new JBackgroundPanel();
 		bpPrincipal.setLayout(new BorderLayout());
 
 		pGlobal.add(bpPrincipal);

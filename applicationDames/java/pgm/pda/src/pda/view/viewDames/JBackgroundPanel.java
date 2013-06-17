@@ -11,7 +11,7 @@ public class JBackgroundPanel extends JPanel {
  
   public JBackgroundPanel() {
     try {
-      img = ImageIO.read(new File("data/img/Fond_net.jpg");
+      img = ImageIO.read(new File("data/img/Fond_net.jpg"));
     } catch(IOException e) {
       e.printStackTrace();
     }
