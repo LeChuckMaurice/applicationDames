@@ -58,10 +58,9 @@ public class ViewDames{
 	public ViewDames(){
 
 		pGlobal = new JPanel();
-		pGlobal.setPreferredSize(new Dimension(322,346))
+		pGlobal.setPreferredSize(new Dimension(322,346));
 		pGlobal.setSize(322,346);
-		pGlobal.updateUI();
-		this.add(pGlobal);
+		//pGlobal.updateUI();
 
 		dialogFin = new DialogFin();
 		dialogSave = new DialogSaveCharge(false);
@@ -69,9 +68,6 @@ public class ViewDames{
 		dialogQuit = new DialogQuitter();
 		dialogTaille = new DialogTaille();
 		dialogErreur = new DialogErreur("");
-		
-		this.setVisible(true);
-		this.setDefaultCloseOperation ( EXIT_ON_CLOSE );
 
 		this.creerInterfaceMenu();
 		
@@ -85,7 +81,7 @@ public class ViewDames{
 		pGlobal.updateUI();
 		this.taillePlateau=laTaille;
 
-		bpPrincipal = new JBackgroundPanel("datas/Fond_net.jpg");
+		bpPrincipal = new JBackgroundPanel("datas/img/Fond_net.jpg");
 		pGlobal.add(bpPrincipal);
 		bpPrincipal.setLayout(new BorderLayout());
 

@@ -9,6 +9,7 @@
 package pda.datas;
 
 import pda.control.*;
+import pda.control.controlDames.*;
 import java.util.Hashtable;
 
 /**
@@ -28,7 +29,7 @@ public class LaunchDatas {
 	 * The CONSTANT array of application names.
 	 * ADD HERE THE UNIQUE NAME OF A RUNNABLE APPLICATION (!! application name must be unique : it's a key !!).
 	 */
-	private static final String[] appArray = { "hello" };
+	private static final String[] appArray = { "hello","Dames" };
 
 
 	/** The list of applications classes that can be launched */
@@ -60,6 +61,12 @@ public class LaunchDatas {
 		// pour les 2 Hashtable "applications" et "icons"
 		applications.put ( appArray[0], HelloCtrl.class ); // !! la classe compilée HelloCtrl.class DOIT EXISTER
 		icons.put ( appArray[0], "hello.png" );
+
+		//Ajout du jeu de dames
+
+		applications.put(appArray[1], DamesControl.class);
+		icons.put(appArray[1],"logoDames.png");
+
 
 	} // ------------------------------------------------------- LaunchDatas()
 

@@ -3,17 +3,21 @@ package pda.control.controlDames;
 import pda.view.viewDames.*;
 import java.awt.event.*;
 import java.io.*;
-import datas.Piece;
-import datas.Plateau;
+import javax.swing.JPanel;
+import pda.control.PdaCtrl;
+import pda.datas.datasDames.Piece;
+import pda.datas.datasDames.Plateau;
 
-public class DamesControl implements Globale{
+public class DamesControl implements Globale, pda.control.IApplication{
 	
 	private Piece pieceSelect = null;
 	private boolean inDoubleCoup=false;
+	private String name;
 	
 	public DamesControl(){
 
 	attacherReactionsMenu();
+	setAppliName("Dames");
 
 	}
 
@@ -168,8 +172,33 @@ public class DamesControl implements Globale{
 		return this.inDoubleCoup;
 	}
 
-public static void main(String[] args) {
-	DamesControl ctrl = new DamesControl();
-}
+
+	//Methodes de l'interface IApplication
+
+	public void start(PdaCtrl pda){
+		System.out.println("Lancement du jeu de Dames");
+	}
+
+	public String getAppliName(){
+		return name;
+
+	}
+
+	public JPanel getAppliPanel(){
+		JPanel panel=(Globale.theView).getPanel();
+
+		return panel;
+	}
+
+	public boolean close(){
+		return true;
+	}
+
+	public void setAppliName ( String theName ){
+		this.name=theName;
+	}
+
+
+
 
 }
