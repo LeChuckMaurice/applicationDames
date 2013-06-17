@@ -17,13 +17,12 @@ public class Case extends JButton {
 		super();
 		this.x = theX;
 		this.y  = theY;
-		//this.setTaille(theTaillePlateau);
 		this.taillePlateau=theTaillePlateau;
 	}
 	
 	public void setCaseNoire(){
 		if (taillePlateau==8 || taillePlateau==10 || taillePlateau==12) {
-			String chemin =  taillePlateau +"/caseNoir.png";
+			String chemin = "data/img/" +taillePlateau +"/caseNoir.png";
 			image = new ImageIcon(chemin);
 			this.setIcon(image);
 		}
@@ -35,7 +34,7 @@ public class Case extends JButton {
 
 	public void setCaseBlanche(){
 		if (taillePlateau==8 || taillePlateau==10 || taillePlateau==12) {
-			String chemin =   taillePlateau+"/caseBlanc.png";
+			String chemin =  "data/img/" +taillePlateau+"/caseBlanc.png";
 			image = new ImageIcon(chemin);
 			this.setIcon(image);
 		}
@@ -47,7 +46,7 @@ public class Case extends JButton {
 
 	public void setPionBlanc(){
 		if (taillePlateau==8 || taillePlateau==10 || taillePlateau==12) {
-			String chemin =  taillePlateau +"/pionBlanc.png";
+			String chemin = "data/img/" +taillePlateau +"/pionBlanc.png";
 			image = new ImageIcon(chemin);
 			this.setIcon(image);
 		}
@@ -59,7 +58,7 @@ public class Case extends JButton {
 
 	public void setDameBlanc(){
 		if (taillePlateau==8 || taillePlateau==10 || taillePlateau==12) {
-			String chemin =   taillePlateau+"/dameBlanc.png";
+			String chemin =  "data/img/" +taillePlateau+"/dameBlanc.png";
 			image = new ImageIcon(chemin);
 			this.setIcon(image);
 		}
@@ -71,7 +70,7 @@ public class Case extends JButton {
 
 	public void setPionNoir(){
 		if (taillePlateau==8 || taillePlateau==10 || taillePlateau==12) {
-			String chemin =  taillePlateau +"/pionNoir.png";
+			String chemin = "data/img/" +taillePlateau +"/pionNoir.png";
 			image = new ImageIcon(chemin);
 			this.setIcon(image);
 		}
@@ -83,7 +82,7 @@ public class Case extends JButton {
 
 	public void setDameNoir(){
 		if (taillePlateau==8 || taillePlateau==10 || taillePlateau==12) {
-			String chemin =  taillePlateau +"/dameNoir.png";
+			String chemin = "data/img/" +taillePlateau +"/dameNoir.png";
 			image = new ImageIcon(chemin);
 			this.setIcon(image);
 		}
@@ -96,7 +95,7 @@ public class Case extends JButton {
 	public void setCaseJouable(){
 		if (taillePlateau==8 || taillePlateau==10 || taillePlateau==12) {
 
-			String chemin =  taillePlateau+"/caseJouable.png";
+			String chemin = "data/img/" +taillePlateau+"/caseJouable.png";
 			image = new ImageIcon(chemin);
 			this.setIcon(image);
 		}
@@ -108,7 +107,7 @@ public class Case extends JButton {
 
 	public void setPionBlancSurl(){
 		if (taillePlateau==8 || taillePlateau==10 || taillePlateau==12) {
-			String chemin =  taillePlateau +"/pionBlancSurl.png";
+			String chemin = "data/img/" +taillePlateau +"/pionBlancSurl.png";
 			image = new ImageIcon(chemin);
 			this.setIcon(image);
 		}
@@ -120,7 +119,7 @@ public class Case extends JButton {
 
 	public void setDameBlancSurl(){
 		if (taillePlateau==8 || taillePlateau==10 || taillePlateau==12) {
-			String chemin =   taillePlateau+"/dameBlancSurl.png";
+			String chemin =  "data/img/" +taillePlateau+"/dameBlancSurl.png";
 			image = new ImageIcon(chemin);
 			this.setIcon(image);
 		}
@@ -132,7 +131,7 @@ public class Case extends JButton {
 
 	public void setPionBlancOver(){
 		if (taillePlateau==8 || taillePlateau==10 || taillePlateau==12) {
-			String chemin =  taillePlateau +"/pionBlancOver.png";
+			String chemin = "data/img/" +taillePlateau +"/pionBlancOver.png";
 			image = new ImageIcon(chemin);
 			this.setIcon(image);
 		}
@@ -144,7 +143,7 @@ public class Case extends JButton {
 
 	public void setDameBlancOver(){
 		if (taillePlateau==8 || taillePlateau==10 || taillePlateau==12) {
-			String chemin =   taillePlateau+"/dameBlancOver.png";
+			String chemin =  "data/img/" +taillePlateau+"/dameBlancOver.png";
 			image = new ImageIcon(chemin);
 			this.setIcon(image);
 		}
