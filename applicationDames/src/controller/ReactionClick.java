@@ -79,6 +79,7 @@ public class ReactionClick implements Globale, MouseListener{
 	}
 
 	private void reactionCase(Case theCase){
+		
 		if (!(Globale.thePart).getTourIA()) {
 			
 		
@@ -89,8 +90,7 @@ public class ReactionClick implements Globale, MouseListener{
 			Piece laPiece=plateau.getPiece(laCase.getCoordonnee());
 
 			if (laPiece!=null) {
-				//normalement !(laPiece.isIA()), true pour permettre le deplacement manuel des pions noir
-				if (true) {
+				if (!(laPiece.isIA())) {
 					if (laPiece.canMove()) {
 
 						//Si on a aucune piece selectionne et que on clic sur une piece joueur pouvant bouger on selectionne cette dernière
@@ -150,9 +150,6 @@ public class ReactionClick implements Globale, MouseListener{
 							int j=0;
 							Coup theCoup=null;
 
-							
-
-
 							while (!(caseCoup) && j<listeCoups.size()) {
 								Coup coupActuel = listeCoups.get(j);
 								Coordonnee coordArrive = coupActuel.getArrivee();
@@ -170,6 +167,8 @@ public class ReactionClick implements Globale, MouseListener{
 								myCtrl.setPieceSelect(null);
 								plateau.updateStatus();
 								myCtrl.updateView();
+								myCtrl.isFin();
+								myCtrl.coupIA();
 							}
 									
 						}
@@ -178,11 +177,6 @@ public class ReactionClick implements Globale, MouseListener{
 				}
 			}
 		}
-
-		myCtrl.isFin();
-
-		myCtrl.coupIA();
-
 	}
 
 }

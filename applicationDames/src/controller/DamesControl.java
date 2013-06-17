@@ -114,7 +114,17 @@ public class DamesControl implements Globale{
 	}
 
 	public void coupIA(){
+		(Globale.thePart).getPlateau().getOrdinateur().play();
 
+		/*
+		try{
+  		Thread.sleep(1000);
+    	}
+    	catch(InterruptedException e){
+
+    	}
+    	*/
+		this.updateView();
 	}
 
 	public void isFin(){
