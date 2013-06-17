@@ -62,7 +62,7 @@
 	    <classpath refid="myCLASSPATH"/>
 	  </java>
 	</target>
-
+	
 	<!-- Fabrication d'une archive exécutable -->
 	<target name="jar" depends="compileAll" description="creates PDA jar" >
 	  <jar destfile="${dist}/pda.jar">
