@@ -9,6 +9,7 @@ import datas.Plateau;
 public class DamesControl implements Globale{
 	
 	private Piece pieceSelect = null;
+	private boolean inDoubleCoup=false;
 	
 	public DamesControl(){
 
@@ -157,6 +158,14 @@ public class DamesControl implements Globale{
 
 	public Piece getPieceSelect(){
 		return this.pieceSelect;
+	}
+
+	public void setDoubleCoup(boolean status){
+		this.inDoubleCoup=status;
+	}
+
+	public boolean getInDoubleCoup(){
+		return this.inDoubleCoup;
 	}
 
 public static void main(String[] args) {

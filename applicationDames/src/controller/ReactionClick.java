@@ -83,28 +83,60 @@ public class ReactionClick implements Globale, MouseListener{
 		if (!(Globale.thePart).getTourIA()) {
 			
 		
-			myCtrl.updateView();
+			
 			
 			Case laCase=theCase;
 			Plateau plateau=(Globale.thePart).getPlateau();
 			Piece laPiece=plateau.getPiece(laCase.getCoordonnee());
 
 			if (laPiece!=null) {
-				if (!(laPiece.isIA())) {
-					if (laPiece.canMove()) {
-
-						//Si on a aucune piece selectionne et que on clic sur une piece joueur pouvant bouger on selectionne cette dernière
-						this.selectionPiece(laPiece,laCase);
+				if (!myCtrl.getInDoubleCoup()) {
+				myCtrl.updateView();
+					if (!(laPiece.isIA())) {
+						if (laPiece.canMove()) {
 						
+							this.selectionPiece(laPiece,laCase);
+						
+						}
 					}
 				}
 			}
 			else{
 				if (myCtrl.getPieceSelect()!=null) {
+					jouerCoup(laPiece,laCase,plateau);
+				}
+			}
+		}
+	}
 
-					Coordonnee coord=laCase.getCoordonnee();
-					int x=coord.getX();
-					int y=coord.getY();
+	private void selectionPiece(Piece laPiece,Case laCase){
+
+		myCtrl.setPieceSelect(laPiece);
+
+		ArrayList<Coordonnee> listCases = laPiece.getDeplacements();
+						
+		if (laPiece.isDame()) {
+			laCase.setDameBlancOver();
+		}
+		else{
+			laCase.setPionBlancOver();
+		}
+
+		//puis on applique le surlignage rouge a toute les cases sur lesquelles la piece peut ce deplacer
+		for (int i=0;i<listCases.size() ;i++ ) {
+			Coordonnee coordJouable=listCases.get(i);
+			int x = coordJouable.getX();
+			int y = coordJouable.getY();
+			Case caseJouable=(Globale.theView).getCase(x,y);
+			caseJouable.setCaseJouable();
+		}
+
+	}
+
+	public void jouerCoup(Piece laPiece,Case laCase,Plateau plateau){
+		Coordonnee coord=laCase.getCoordonnee();
+		int x=coord.getX();
+		int y=coord.getY();
 
 					//Si on a une piece de selectionne et que on clic sur une case jouable (noire)
 					if (((x+y)%2)==1) {
@@ -146,22 +178,26 @@ public class ReactionClick implements Globale, MouseListener{
 
 							if (caseCoup) {
 								plateau.playAction(theCoup);
+								myCtrl.updateView();
 								Coordonnee coordArrive = theCoup.getArrivee();
 								Piece laPieceFin = plateau.getPiece(coordArrive);
 
-								if (!(laPieceFin.canTake())) {
+								if (theCoup.getPiecePrise()!=null && laPieceFin.canTake()) {
+										int newX = coordArrive.getX();
+										int newY = coordArrive.getY();
+										Case newCase = (Globale.theView).getCase(newX,newY);
+										myCtrl.setDoubleCoup(true);
+										this.selectionPiece(laPieceFin,newCase);
+										this.jouerCoup(laPieceFin,newCase,plateau);
+								}
+								else {
 									myCtrl.setPieceSelect(null);
 									(Globale.thePart).setTourIA(true);
+									myCtrl.setDoubleCoup(false);
 								}
-								else{
-									int newX = coordArrive.getX();
-									int newY = coordArrive.getY();
-									Case newCase = (Globale.theView).getCase(newX,newY);
-									this.selectionPiece(laPieceFin,newCase);
 
 								}
 								plateau.updateStatus();
-								myCtrl.updateView();
 								myCtrl.isFin();
 
 								if ((Globale.thePart).getTourIA()==true) {
@@ -170,36 +206,9 @@ public class ReactionClick implements Globale, MouseListener{
 							}
 									
 						}
-					}
-
-				}
-			}
-		}
 	}
-
-	private void selectionPiece(Piece laPiece,Case laCase){
-
-		myCtrl.setPieceSelect(laPiece);
-
-		ArrayList<Coordonnee> listCases = laPiece.getDeplacements();
-						
-		if (laPiece.isDame()) {
-			laCase.setDameBlancOver();
-		}
-		else{
-			laCase.setPionBlancOver();
-		}
-
-		//puis on applique le surlignage rouge a toute les cases sur lesquelles la piece peut ce deplacer
-		for (int i=0;i<listCases.size() ;i++ ) {
-			Coordonnee coordJouable=listCases.get(i);
-			int x = coordJouable.getX();
-			int y = coordJouable.getY();
-			Case caseJouable=(Globale.theView).getCase(x,y);
-			caseJouable.setCaseJouable();
-		}
-	}
-
 }
+
+
 
 
