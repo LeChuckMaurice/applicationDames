@@ -76,14 +76,13 @@ public class Plateau implements Serializable{
 
 	
 	public void playAction(Coup coup){
-		System.out.println(coup.toString());
 		try{
 			this.movePiece(coup.getPiece(), coup.getArrivee());
 			if(coup.getPiecePrise()!=null){
 				this.deletePiece(coup.getPiecePrise());
 			}
 		}
-			catch(IllegalArgumentException e){
+		catch(IllegalArgumentException e){
 			System.out.println(e.getMessage());
 		}
 	}
@@ -250,16 +249,18 @@ public class Plateau implements Serializable{
 	public String toString(){
 		String chainePlateau = "  ";
 		Piece piece;
+		int k;
 
-		for(int k=0; k<this.taille; k++){
+		// affichage des coordonnees en x
+		for(k=0; k<this.taille; k++){
 			chainePlateau = chainePlateau + k + "   ";
 		}
-		chainePlateau = chainePlateau + "\n";
+		chainePlateau = chainePlateau + "\n╔";
 
 		for(k=0; k<this.taille-1; k++){
 			chainePlateau = chainePlateau+ "───┬";
 		}
-		chainePlateau = chainePlateau+ "╗\n";
+		chainePlateau = chainePlateau+ "───╗\n";
 
 		for(int i=0; i<this.taille; i++){ // y
 			chainePlateau = chainePlateau + "│";
@@ -285,17 +286,29 @@ public class Plateau implements Serializable{
 					}
 				}
 			}
+			// affichage de la coordonnees en y
 			chainePlateau = chainePlateau+" "+i+"\n";
 
 			// Si ce n'est pas la derniere ligne
 			if(i!=this.taille-1){
-				chainePlateau = chainePlateau + "├───┼───┼───┼───┼───┼───┼───┼───┤\n";
+				// separation entre les lignes
+				chainePlateau = chainePlateau + "├";
+
+				for(k=0; k<this.taille-1; k++){
+					chainePlateau = chainePlateau+ "───┼";
+				}
+				chainePlateau = chainePlateau+ "───┤\n";	
 			}
 
 		}
+		// derniere ligne
+		chainePlateau = chainePlateau + "╚";
 
-		chainePlateau = chainePlateau + "╚───┴───┴───┴───┴───┴───┴───┴───╝";
-		
+		for(k=0; k<this.taille-1; k++){
+			chainePlateau = chainePlateau+ "───┴";
+		}
+		chainePlateau = chainePlateau+ "───╝\n";	
+
 		return chainePlateau;
 	}
 
