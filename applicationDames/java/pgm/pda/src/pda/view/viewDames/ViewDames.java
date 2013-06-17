@@ -81,7 +81,7 @@ public class ViewDames{
 		pGlobal.updateUI();
 		this.taillePlateau=laTaille;
 
-		bpPrincipal = new JBackgroundPanel("datas/img/Fond_net.jpg");
+		bpPrincipal = new JBackgroundPanel();
 		pGlobal.add(bpPrincipal);
 		bpPrincipal.setLayout(new BorderLayout());
 
@@ -102,19 +102,19 @@ public class ViewDames{
 
 		pMenuRight.setLayout(new GridLayout(1,3));
 
-		ImageIcon iSave=new ImageIcon("datas/save.png");
+		ImageIcon iSave=new ImageIcon("data/img/save.png");
 		bSave = new JLabel();
 		bSave.setIcon(iSave);
 		bSave.setBackground(new Color(0,0,0,0));
 		pMenuRight.add(bSave);
 		
-		ImageIcon iHelp=new ImageIcon("datas/help.png");
+		ImageIcon iHelp=new ImageIcon("data/img/help.png");
 		bHelp = new JLabel();
 		bHelp.setIcon(iHelp);
 		bHelp.setBackground(new Color(0,0,0,0));
 		pMenuRight.add(bHelp);
 
-		ImageIcon iExit=new ImageIcon("datas/exit.png");
+		ImageIcon iExit=new ImageIcon("data/img/exit.png");
 		bExit = new JLabel();
 		bExit.setIcon(iExit);
 		bExit.setBackground(new Color(0,0,0,0));
