@@ -29,19 +29,54 @@ public class Coup {
 		if(piecePrise!=null){
 			points = points + 10;
 		}
+		// 
+		if(transformDame()){
+			points = points + 20;
+		}
+		if(makeVulnerable()){
+			points = points - 11;
+		}
+		else if(isVulnerable()){
+			points = points + 11;
+		}
+
 		
 		return points;
 	}
 
-	private boolean makeVulnerable(){
-		return true;
+	public boolean transformDame(){
+		boolean transformDame = false;
+		// Si la piece n'est pas deja une dame
+		if(!piece.isDame()){
+			if(piece.isIA()){
+				if(this.arrivee.getY()==this.piece.getPlateau().getTaille()-1){
+					transformDame = true;
+				}
+			}
+			else{
+				if(this.arrivee.getY()==0){
+					transformDame = true;
+				}
+			}
+		}
+
+		return transformDame;
 	}
 
-	public boolean isAuthorized(){
-		boolean authorized=false;
-		
+	private boolean makeVulnerable(){
+		boolean makeVulnerable = false;
+		if(this.piece.isVulnerable(this.arrivee)){
+			makeVulnerable = true;
+		}
+		return makeVulnerable;
+	}
 
-		return authorized;
+	private boolean isVulnerable(){
+		boolean isVulnerable = false;
+		if(this.piece.isVulnerable()){
+			isVulnerable = true;
+		}
+		return isVulnerable;
 	}
 
 	public int getNbPoints(){

@@ -2,6 +2,7 @@ package datas;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
  
 public class IA implements Serializable {
 
@@ -49,6 +50,7 @@ public class IA implements Serializable {
 				allCoups = piece.generateCoups();
 			}
 		}
+		Collections.shuffle(allCoups);
 		return allCoups;
 	}
 
@@ -104,6 +106,7 @@ public class IA implements Serializable {
 			}
 		}
 
+		Collections.shuffle(allCoups);
 		return allCoups;
 
 	}
@@ -134,13 +137,14 @@ public class IA implements Serializable {
 			}
 			else {
 				piece = coup.getPiece();
-				plateau.playAction(coup);
-				nbDeplacements++;
-
 				// Si le deplacement implique une prise
 				if(coup.getPiecePrise()!=null){
 					nbPrises++;
 				}
+				plateau.playAction(coup);
+				System.out.println(coup);
+				nbDeplacements++;
+
 
 				// Si le pion peut rejouer pour faire une prise
 				if(nbDeplacements==nbPrises && piece.canTake()){

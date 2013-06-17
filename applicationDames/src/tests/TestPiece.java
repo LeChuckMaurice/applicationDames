@@ -43,7 +43,7 @@ public class TestPiece {
 		this.tabPieceVide10[6][7] = this.pionJoueur;
 
 		this.dameJoueur = new Dame(2,9,this.plateauVide10,false);
-		this.tabPieceVide10[7][0] = this.dameJoueur;
+		this.tabPieceVide10[2][9] = this.dameJoueur;
 
 	}
 
@@ -59,11 +59,20 @@ public class TestPiece {
 		assertTrue(this.pionIA.isVulnerable());
 
 		// dameIA ne peut pas prendre car bloquée par pionIA
+		this.plateauVide10.movePiece(dameJoueur,0,7);
 		this.plateauVide10.movePiece(dameJoueur,3,4);
 
 		System.out.println(this.plateauVide10.toString());
 		assertFalse(this.pionIA.isVulnerable());
+		
+		this.plateauVide10.movePiece(dameJoueur,0,7);
+		this.plateauVide10.movePiece(pionJoueur,6,5);
+		
+		assertFalse(this.pionIA.isVulnerable());
 
+		this.plateauVide10.movePiece(dameJoueur,1,8);
+		
+		assertTrue(this.pionIA.isVulnerable());
 
 	}
 

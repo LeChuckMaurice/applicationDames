@@ -72,12 +72,25 @@ public class launcher {
 
 		Piece pieceTmp;
 
+		// Tant qu'il n'y a pas de gagnant
 		while(gagnant==0){
 			pieceTmp = choixPiece(plateau, scanner);
-			System.out.println("choixpiece ok");
 			jouerCoup(pieceTmp, plateau, scanner);
-			partie.getPlateau().getOrdinateur().play();
-			
+			plateau.updateStatus();
+
+			gagnant=partie.getGagnant();
+			// S'il n'y a pas encore de gagnant
+			if(gagnant==0){
+				partie.getPlateau().getOrdinateur().play();
+				plateau.updateStatus();
+			}
+		}
+
+		if(gagnant==1){
+			System.out.println("Vous avez perdu.");
+		}
+		else{
+			System.out.println("Vous avez gagné.");
 		}
 
 

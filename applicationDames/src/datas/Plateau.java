@@ -207,7 +207,7 @@ public class Plateau implements Serializable{
 	/**
 	*Affiche le plateau sous forme d'une chaine de caractere
 	*/
-	public String toString(){
+	public String toString2(){
 		String chainePlateau = "";
 		Piece piece;
 
@@ -243,6 +243,58 @@ public class Plateau implements Serializable{
 			chainePlateau = chainePlateau+"  |"+i+"|";
 			chainePlateau = chainePlateau + "\n";
 		}
+		
+		return chainePlateau;
+	}
+
+	public String toString(){
+		String chainePlateau = "  ";
+		Piece piece;
+
+		for(int k=0; k<this.taille; k++){
+			chainePlateau = chainePlateau + k + "   ";
+		}
+		chainePlateau = chainePlateau + "\n";
+
+		for(k=0; k<this.taille-1; k++){
+			chainePlateau = chainePlateau+ "───┬";
+		}
+		chainePlateau = chainePlateau+ "╗\n";
+
+		for(int i=0; i<this.taille; i++){ // y
+			chainePlateau = chainePlateau + "│";
+			for (int j=0; j<this.taille; j++){ // x
+				piece = this.tabPiece[j][i];
+				if(piece==null){
+					chainePlateau = chainePlateau + "   │";
+				}
+				else if(piece.isIA()){ // Sinon,si c'est une piece de l'IA
+					if(piece.isDame()){ // Si c'est une dame
+						chainePlateau = chainePlateau + " d │";
+					}
+					else if(!piece.isDame()){ // Si c'est un pion
+						chainePlateau = chainePlateau + " o │";
+					}
+				}
+				else if(!piece.isIA()){ // Sinon, si c'est une piece du joueur
+					if(piece.isDame()){ // Si c'est une dame
+						chainePlateau = chainePlateau + " D │";
+					}
+					else if(!piece.isDame()){ // Si c'est un pion
+						chainePlateau = chainePlateau + " O │";
+					}
+				}
+			}
+			chainePlateau = chainePlateau+" "+i+"\n";
+
+			// Si ce n'est pas la derniere ligne
+			if(i!=this.taille-1){
+				chainePlateau = chainePlateau + "├───┼───┼───┼───┼───┼───┼───┼───┤\n";
+			}
+
+		}
+
+		chainePlateau = chainePlateau + "╚───┴───┴───┴───┴───┴───┴───┴───╝";
 		
 		return chainePlateau;
 	}

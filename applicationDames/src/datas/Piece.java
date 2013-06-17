@@ -43,37 +43,49 @@ public abstract class Piece implements Serializable {
 	}
 
 	public boolean isVulnerable(){
-		return this.isVulnerable(this.place,this.pieceIA);
+		return this.isVulnerable(this.place);
 	}
 
-	public boolean isVulnerable (Coordonnee thePlace, boolean pieceIA){
+	public boolean isVulnerable (Coordonnee thePlace){
 		boolean vulnerable = false;
 
-		int x = place.getX();  
-		int y = place.getY();
-		int deplacementX=0; // deplacement en x
-		int deplacementY=0; // deplacement en y
+		int x = thePlace.getX();  
+		int y = thePlace.getY();
 		Coordonnee coord = new Coordonnee(x,y);
-
+		Coordonnee arriere;
 		Piece piece1=null; 
 
-		// recuperation des 4 diagonales
-		ArrayList<Coordonnee> diagonaleHG = this.getDiagonale(-1,-1);
-		ArrayList<Coordonnee> diagonaleHD = this.getDiagonale(1, -1);
-		ArrayList<Coordonnee> diagonaleBD = this.getDiagonale(1,1);
-		ArrayList<Coordonnee> diagonaleBG = this.getDiagonale(-1, 1);
+		ArrayList<Coordonnee> diagonale;
 		
-		int i=0;
-		do{
-			// piece1 = diagonaleHG.get(i);
-			i++;
-		}
-		// jusqu'a ce que la case soit occupée
-		while(piece1!=null && i<diagonaleHG.size());
+		int[][] param = {{-1,-1},{-1,1},{1,-1},{1,1}};
+		int j;
+		for(int i=0; i<4; i++){
 
-		// si c'est un pion adverse et qu'il est a 1 de distance
-		if(piece1!=null && piece1.isIA()){
-				//
+			arriere = new Coordonnee(x-param[i][0],y-param[i][1]);
+
+			//Si la case derriere la piece est libre 
+			if(this.plateau.isValide(arriere) && this.plateau.isLibre(arriere)){
+				diagonale = this.getDiagonale(coord,param[i][0],param[i][1]);
+				j=-1;
+				do{
+					j++;
+					piece1 = this.plateau.getPiece(diagonale.get(j));
+					System.out.println(j+" : "+diagonale.get(j));
+				}
+				// jusqu'a ce que la case soit occupée
+				while(piece1==null && j<diagonale.size()-1);
+
+				// si c'est une piece adverse
+				if(piece1!=null && piece1.isIA()!=this.isIA()){
+					// Si c'est un pion a un de distance
+					if(piece1.isDame()==false && j==0){
+						vulnerable=true;
+					}
+					else if(piece1.isDame()==true){
+						vulnerable=true;
+					}
+				}
+			}
 		}
 
 		return vulnerable;
