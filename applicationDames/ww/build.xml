@@ -43,14 +43,11 @@
 
 	
 	<target name="doc" depends="compilation" description="compilation des classes" >
-		<javadoc destdir="${doc}" private="true"/>
+		<javadoc sourcepath="${src}" destdir="${doc}" private="true"/>
 	</target>
 	
 	<target name="jar" depends="compilation" description="creation de l'archive .jar">
-		<jar destfile="${distrib}/pda.jar" />
-		<fileset dir="${class}" >
-			<include name="pda/**/*.class" />
-		</fileset>
+		<jar destfile="${distrib}/DamesPDA.jar" basedir="${class}" />
 	</target>
 	
 
