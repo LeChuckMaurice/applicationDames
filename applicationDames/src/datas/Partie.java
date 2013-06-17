@@ -98,4 +98,8 @@ public class Partie {
 	public boolean getTourIA(){
 		return this.tourIA;
 	}
+
+	public void setTourIA(boolean tourIA){
+		this.tourIA = tourIA;
+	}
 }
