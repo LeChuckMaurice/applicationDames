@@ -80,7 +80,7 @@ public class ReactionClick implements Globale, MouseListener{
 
 	private void reactionCase(Case theCase){
 		
-		while (!(Globale.thePart).getTourIA()) {
+		if (!(Globale.thePart).getTourIA()) {
 			
 		
 			myCtrl.updateView();
@@ -94,26 +94,8 @@ public class ReactionClick implements Globale, MouseListener{
 					if (laPiece.canMove()) {
 
 						//Si on a aucune piece selectionne et que on clic sur une piece joueur pouvant bouger on selectionne cette dernière
+						this.selectionPiece(laPiece,laCase);
 						
-						myCtrl.setPieceSelect(laPiece);
-
-						ArrayList<Coordonnee> listCases = laPiece.getDeplacements();
-						
-						if (laPiece.isDame()) {
-							laCase.setDameBlancOver();
-						}
-						else{
-							laCase.setPionBlancOver();
-						}
-
-						//puis on applique le surlignage rouge a toute les cases sur lesquelles la piece peut ce deplacer
-						for (int i=0;i<listCases.size() ;i++ ) {
-							Coordonnee coordJouable=listCases.get(i);
-							int x = coordJouable.getX();
-							int y = coordJouable.getY();
-							Case caseJouable=(Globale.theView).getCase(x,y);
-							caseJouable.setCaseJouable();
-						}
 					}
 				}
 			}
@@ -170,7 +152,14 @@ public class ReactionClick implements Globale, MouseListener{
 								if (!(laPieceFin.canTake())) {
 									myCtrl.setPieceSelect(null);
 									(Globale.thePart).setTourIA(true);
-								}	
+								}
+								else{
+									int newX = coordArrive.getX();
+									int newY = coordArrive.getY();
+									Case newCase = (Globale.theView).getCase(newX,newY);
+									this.selectionPiece(laPieceFin,newCase);
+
+								}
 								plateau.updateStatus();
 								myCtrl.updateView();
 								myCtrl.isFin();
@@ -185,6 +174,29 @@ public class ReactionClick implements Globale, MouseListener{
 
 				}
 			}
+		}
+	}
+
+	private void selectionPiece(Piece laPiece,Case laCase){
+
+		myCtrl.setPieceSelect(laPiece);
+
+		ArrayList<Coordonnee> listCases = laPiece.getDeplacements();
+						
+		if (laPiece.isDame()) {
+			laCase.setDameBlancOver();
+		}
+		else{
+			laCase.setPionBlancOver();
+		}
+
+		//puis on applique le surlignage rouge a toute les cases sur lesquelles la piece peut ce deplacer
+		for (int i=0;i<listCases.size() ;i++ ) {
+			Coordonnee coordJouable=listCases.get(i);
+			int x = coordJouable.getX();
+			int y = coordJouable.getY();
+			Case caseJouable=(Globale.theView).getCase(x,y);
+			caseJouable.setCaseJouable();
 		}
 	}
 

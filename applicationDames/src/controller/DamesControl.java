@@ -115,16 +115,9 @@ public class DamesControl implements Globale{
 
 	public void coupIA(){
 		
+		
 		(Globale.thePart).getPlateau().getOrdinateur().play();
-
-		/*
-		try{
-  		Thread.sleep(1000);
-    	}
-    	catch(InterruptedException e){
-
-    	}
-    	*/
+    	
     	
 		(Globale.thePart).getPlateau().updateStatus();
 		this.updateView();
