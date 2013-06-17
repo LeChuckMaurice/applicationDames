@@ -58,6 +58,8 @@ public class ViewDames{
 	public ViewDames(){
 
 		pGlobal = new JPanel();
+		pGlobal.setLayout(new GridLayout(1,1));
+		pGlobal.setBackground(Color.black);
 		pGlobal.setPreferredSize(new Dimension(320,325));
 		pGlobal.setSize(320,325);
 		//pGlobal.updateUI();
