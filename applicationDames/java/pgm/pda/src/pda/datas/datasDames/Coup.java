@@ -1,7 +1,7 @@
 package pda.datas.datasDames;
  
 import java.util.ArrayList;
-
+/** La classe Coup décrit un Coup*/
 public class Coup {
 
 	private Coordonnee arrivee;
