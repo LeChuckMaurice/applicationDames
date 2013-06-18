@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="PDA" default="compileAll" basedir=".." >
-
+ 
 	<!-- Définition des variables -->
 	<property name="src" location="src"/>
 	<property name="lib" location="lib"/>
@@ -62,7 +62,7 @@
 	    <classpath refid="myCLASSPATH"/>
 	  </java>
 	</target>
-
+	
 	<!-- Fabrication d'une archive exécutable -->
 	<target name="jar" depends="compileAll" description="creates PDA jar" >
 	  <jar destfile="${dist}/pda.jar">
