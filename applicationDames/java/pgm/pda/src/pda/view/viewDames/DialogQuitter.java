@@ -3,6 +3,10 @@ package pda.view.viewDames;
 import java.awt.*;
 import javax.swing.*;
 
+/**
+*Cete boite de dialogue permet de quitter une partie, elle est sous classe de JDialog
+*On propose 3 choix dans cette boite : Quitter et sauvegarder, quitter sans sauvegarder ou annuler
+*/
 public class DialogQuitter extends JDialog{
 
 	private JPanel pPrincipal;
@@ -23,6 +27,9 @@ public class DialogQuitter extends JDialog{
 		this.setUndecorated(true);
 	}
 
+	/**
+	*Crée le décors de la boite 
+	*/
 	public void creerInterface(){
 		
 		pPrincipal = new JPanel();
@@ -59,6 +66,10 @@ public class DialogQuitter extends JDialog{
 
 	}
 
+	/**
+	*Definit un style au bouton passé en parametre
+	*Utilisé pour unifié le look des différent boutons de la boite
+	*/
 	public void setStyleButton(JButton button){
 		button.setPreferredSize( new Dimension(200,35));
 		button.setBackground(Color.black);
@@ -67,14 +78,23 @@ public class DialogQuitter extends JDialog{
 		button.setBorderPainted(false);
 	}
 
+	/**
+	*Renvoit le bouton permettant de sauvegarder et quitter
+	*/
 	public JButton getSave(){
 		return bSave;
 	}	
 
+	/**
+	*Renvoit le bouton permettant de ne pas sauvegarder et de quitter
+	*/
 	public JButton getNoSave(){
 		return bNoSave;
 	}	
 
+	/**
+	*Renvoit le bouton permettant de ne pas quitter
+	*/
 	public JButton getAnnuler(){
 		return bAnnuler;
 	}

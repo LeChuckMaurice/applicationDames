@@ -75,11 +75,17 @@ public class ViewDames{
 		pGlobal.setSize(320,325);
 
 		dialogFin = new DialogFin();
+		init(dialogFin);
 		dialogSave = new DialogSaveCharge(false);
+		init(dialogSave);
 		dialogCharge = new DialogSaveCharge(true);
+		init(dialogCharge);
 		dialogQuit = new DialogQuitter();
+		init(dialogQuit);
 		dialogTaille = new DialogTaille();
+		init(dialogTaille);
 		dialogErreur = new DialogErreur("");
+		init(dialogErreur);
 
 		this.creerInterfaceMenu();
 		
@@ -354,6 +360,16 @@ public class ViewDames{
 			}
 		}
 	}
+
+	/**
+	*Initialise l'emplacement de la boite au centre de la fenetre appelante
+	*/
+	public void init (JDialog fenetre) {
+	    Dimension d = pGlobal.getSize () ;
+	    Point p = pGlobal.getLocation () ;
+	    fenetre.setLocation (p.x+(d.width-getSize().width)/2, p.y+(d.height-getSize().height)/2);
+	}
+
 
 	//Accesseur
 

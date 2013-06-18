@@ -3,6 +3,10 @@ package pda.view.viewDames;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+*Cette boite de dialogue sert de squelettes à celles permettant de sauvegarder et de quitter, elle est sous classe de JDialog
+*Elle ce compose dd'un JLabel indiquant l'action que on va effectuer et de 2 boutons pour confirmer ou annuler cette action
+*/
 public class DialogSaveCharge extends JDialog{
 
 	private JPanel pPrincipal;
@@ -14,7 +18,7 @@ public class DialogSaveCharge extends JDialog{
 	private JButton bSave;
 	private JButton bCharge;
 
-	//
+	
 	public DialogSaveCharge(boolean isCharge){
 		super ();
 		creerInterface(isCharge);
@@ -23,8 +27,13 @@ public class DialogSaveCharge extends JDialog{
 		this.setVisible(false);
 		this.setDefaultCloseOperation ( HIDE_ON_CLOSE );
 		this.setUndecorated(true);
+		//this.init();
 	}
 
+	/**
+	*Crée le décors de la boite de dialogue 
+	*@param isCharge true pour une boite de chargement, false pour une sauvegarde. On crée le décor en conséquence
+	*/
 	public void creerInterface(boolean isCharge){
 		
 		pPrincipal = new JPanel();
@@ -70,6 +79,10 @@ public class DialogSaveCharge extends JDialog{
 		}
 	}
 
+	/**
+	*Definit un style au bouton passé en parametre
+	*Utilisé pour unifié le look des différent boutons de la boite
+	*/
 	public void setStyleButton(JButton button){
 		button.setPreferredSize( new Dimension(105,35));
 		button.setBackground(Color.black);
@@ -78,21 +91,27 @@ public class DialogSaveCharge extends JDialog{
 		button.setBorderPainted(false);
 	}
 
+	/**
+	*@return bCharge le bouton permettant le chargement d'une partie
+	*/
 	public JButton getCharge(){
 		return bCharge;
 	}
 	
+	/**
+	*@return bSave le bouton permettant la sauvegarde d'une partie
+	*/
 	public JButton getSave(){
 		return bSave;
 	}
 
+	/**
+	*@return bAnnuleur le bouton fermant la boite de dialogue
+	*/
 	public JButton getAnnuler(){
 		return bAnnuler;
 	}
 
-	public static void main(String[] args) {
-		DialogSaveCharge charg = new DialogSaveCharge(true);
-		DialogSaveCharge save = new DialogSaveCharge(false);
-	}
+	
 
 }

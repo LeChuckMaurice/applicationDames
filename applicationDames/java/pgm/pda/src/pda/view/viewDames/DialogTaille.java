@@ -3,6 +3,11 @@ package pda.view.viewDames;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+*Cette boite de dialogue permet la selection de la taille du plateau, elle est sous classe de JDialog
+*Elle ce compose d'un JLabel indiquant l'action, d'une Combo box permettant le choix parmis les differentes tailles proposer et de 
+*boutons pour annuler ou comfirmer
+*/
 public class DialogTaille extends JDialog{
 	
 	private JPanel pPrincipal;
@@ -26,6 +31,9 @@ public class DialogTaille extends JDialog{
 		this.setUndecorated(true);
 	}
 
+	/**
+	*Cree le décor de la boite de dialogue
+	*/
 	public void creerInterface(){
 
 		pPrincipal= new JPanel();
@@ -46,6 +54,7 @@ public class DialogTaille extends JDialog{
 
 		cbTaille = new JComboBox<Integer>();
 		cbTaille.setPreferredSize(new Dimension(200,25));
+		// On ajoute les différentes tailles de tableau possible a la JComboBox
 		cbTaille.addItem(8);
 		cbTaille.addItem(10);
 		cbTaille.addItem(12);
@@ -77,6 +86,10 @@ public class DialogTaille extends JDialog{
 
 	}
 
+	/**
+	*Definit un style au bouton passé en parametre
+	*Utilisé pour unifié le look des différent boutons de la boite
+	*/
 	public void setStyleButton(JButton button){
 		button.setSize(100,35);
 		button.setBackground(Color.black);
@@ -85,23 +98,33 @@ public class DialogTaille extends JDialog{
 		button.setBorderPainted(false);
 	}
 
-	/*
-	public void init () {
-   	JFrame parent = ;
-    Dimension d = parent.getSize () ;
-    Point p = parent.getLocation () ;
-    setLocation (p.x+(d.width-getSize().width)/2, p.y+(d.height-getSize().height)/2);
-	}
+	/**
+	*Initialise l'emplacement de la boite au centre de la fenetre appelante
 	*/
+	public void init () {
+	   	JFrame parent = (JFrame) this.getOwner();
+	    Dimension d = parent.getSize () ;
+	    Point p = parent.getLocation () ;
+	    setLocation (p.x+(d.width-getSize().width)/2, p.y+(d.height-getSize().height)/2);
+	}
 
+	/**
+	*Renvoit le bouton servant à quitter la boite
+	*/
 	public JButton getAnnuler(){
 		return bAnnuler;
 	}
 
+	/**
+	*Renvoit le bouton servant à valider le choix
+	*/
 	public JButton getConfirmer(){
 		return bConfirmer;
 	}
 
+	/**
+	*Renvoit l'élément de la JComboBox actuellement selectionné
+	*/
 	public int getContenu(){
 		return (int) cbTaille.getSelectedItem();
 	}
