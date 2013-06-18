@@ -8,7 +8,7 @@ public class Coup {
 	private Piece piece;
 	private Piece piecePrise; 
 	private int nbPoints;
-
+ 
 
 	public Coup(Piece piece, Coordonnee arrivee){
 		this.arrivee = arrivee;
