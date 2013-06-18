@@ -5,6 +5,12 @@ import java.awt.*;
 import java.io.*;
 import java.net.*;
 
+/**
+*Cette classe regroupe tout les éléments de la vue de l'application Dames
+*Elle est construite autour d'un JPanel principal (pGlobal) dont le contenu change selon la vue affichée (Menu,jeu ou aide)
+*Cette classe construit aussi toute les fenetres de dialogue de l'application
+*
+*/
 
 public class ViewDames{
 	
@@ -55,6 +61,11 @@ public class ViewDames{
 	private DialogTaille dialogTaille;
 	private DialogErreur dialogErreur;
 
+	/**
+	*Le constructeur cree et initialise la taille du JPanel principal pGlobal
+	*Il cree aussi des instance de toute les boites de dialogue
+	*Puis lance la création de l'interface du menu
+	*/
 	public ViewDames(){
 
 		pGlobal = new JPanel();
@@ -62,7 +73,6 @@ public class ViewDames{
 		pGlobal.setBackground(Color.black);
 		pGlobal.setPreferredSize(new Dimension(320,325));
 		pGlobal.setSize(320,325);
-		//pGlobal.updateUI();
 
 		dialogFin = new DialogFin();
 		dialogSave = new DialogSaveCharge(false);
@@ -77,6 +87,14 @@ public class ViewDames{
 
 	}
 
+	/**
+	*Cree l'interface de jeu
+	*Jeu:
+	*L'interface de jeu ce compose de 3 JLabel en haut à droite pour la sauvegarde, l'aide et l'arret de la partie
+	*Mais aussi d'un plateau carre de x Cases de cotés, ou x est la taille du plateau prealablement choisit
+	*@see Case
+	*@param laTaille La taille du tableau 2D de Cases et donc du plateau
+	*/
 	public void creerInterfaceJeu(int laTaille){
 
 		pGlobal.removeAll();
@@ -128,6 +146,11 @@ public class ViewDames{
 
 	}
 
+	/**
+	*Cree l'interface du menu principal/Acceuil 
+	*Menu :
+	*Le menu principal ce compose d'un logo et 3 boutons
+	*/
 	public void creerInterfaceMenu(){
 		
 		pGlobal.removeAll();
@@ -167,6 +190,12 @@ public class ViewDames{
 		pQuitter.add(bQuitter);
 	}
 
+	/**
+	*Cree l'interface d'aide
+	*Aide:
+	*L'interface d'aide ce compose d'un bouton dans le coin superieur droit pour revenir à la partie précédente
+	*Et d'un JScrollPane contenant le texte recuperer du fichier "aide.html" placé dans le dossier data
+	*/
 	public void creerInterfaceAide(){
 		
 		pGlobal.removeAll();
@@ -242,6 +271,10 @@ public class ViewDames{
 
 	}
 
+	/**
+	*Cet methode change le look du bouton passé en paramètre
+	*Elle est utilisé pour unifier les boutons du menu principal
+	*/
 	public void setStyleButton(JButton button){
 		button.setPreferredSize( new Dimension(240,58));
 		button.setBackground(Color.black);
@@ -250,6 +283,11 @@ public class ViewDames{
 		button.setBorderPainted(false);
 	}
 
+	/**
+	*Cette methode crée le plateau servant de support au jeu
+	*Le plateau est un JPanel divise par un GridLayout de nb lignes et nb colonnes = taille du tableau
+	*On place dans chaque "case" du GridLayout un objet de type case avec un fond noir ou blanc
+	*/
 	public void initPlateau(){
 
 		// Plateau
@@ -266,6 +304,7 @@ public class ViewDames{
 
 		pPlateau.setLayout(new GridLayout(taillePlateau,taillePlateau));
 		
+		//Boucle d'ajout des cases
 		for (int y=0;y<taillePlateau ;y++ ) {
 			
 			for (int x=0;x<taillePlateau ;x++ ) {
@@ -316,79 +355,132 @@ public class ViewDames{
 		}
 	}
 
+	//Accesseur
+
+	/**
+	*@return case La case dont l'abscisse et l'ordonnée sont placé en parametre 
+	*/
 	public Case getCase(int x, int y){
 		return tabCase[x][y];
 	}
 	
+	/**
+	*@return pGlobal Le JPanel contenant l'ensemble de l'interface
+	*/	
 	public JPanel getPanel(){
 		return pGlobal;
 	}
 
-		
+	/**
+	*@return bNew Le bouton de création d'une nouvelle partie dans le menu
+	*/		
 	public JButton getNew(){
 		return bNew;
 	}
 
+	/**
+	*@return bCharger Le bouton de chargement d'une partie dans le menu
+	*/
 	public JButton getCharger(){
 		return bCharger;
 	}
 
+	/**
+	*@return bQuitter Le bouton quittant l'application
+	*/
 	public JButton getQuitter(){
 		return bQuitter;
 	}
 
+	/**
+	*@return bExit Le bouton quittant la phase de jeu pour un retour au menu en lancant DialogExit
+	*/
 	public JLabel getExit(){
 		return bExit;
 	}
 
+	/**
+	*@return bHelp Le bouton de lancement de l'aide
+	*/
 	public JLabel getHelp(){
 		return bHelp;
 	}
 
+	/**
+	*@return bSave Le bouton permettant de sauvegarder sa partie en lancant DialogSaveCharge
+	*/
 	public JLabel getSave(){
 		return bSave;
 	}
 
+	/**
+	*@return bExitAide Le bouton permettant de quitter l'aide pour revenir à la partie
+	*/
 	public JLabel getExitAide(){
 		return bExitAide;
 	}
 
+	/**
+	*@return tabCase La tableau de case utilisé pour placer les cases dans le plateau
+	*/
 	public Case[][] getTabCase(){
 		return tabCase;
 	}
 
+	/**
+	*@return taillePlateau La taille du plateau ( d'un coté)
+	*/
 	public int getTaillePlateau(){
 		return taillePlateau;
 	}
 	
+	/**
+	*@return sizeGlobal La taille du panel de fond pGlobal
+	*/
 	public Dimension getSize(){
 		return pGlobal.getSize();
 	}
 
+	/**
+	*@return pointGlobal L'origine du panel de fond pGlobal
+	*/
 	public Point getLocation(){
 		return pGlobal.getLocation();
 	}
 
+	/**
+	*@return dialogFin La boite de dialogue DialogFin
+	*/
 	public DialogFin getDialogFin(){
 		return this.dialogFin;
 	}
-
+	/**
+	*@return dialogSave La boite de dialogue DialogSave
+	*/
 	public DialogSaveCharge getDialogSave(){
 		return this.dialogSave;
 	}
-
+	/**
+	*@return dialogCharge La boite de dialogue DialogCharge
+	*/
 	public DialogSaveCharge getDialogCharge(){
 		return this.dialogCharge;
 	}
-
+	/**
+	*@return dialogQuit La boite de dialogue DialogQuit
+	*/
 	public DialogQuitter getDialogQuit(){
 		return this.dialogQuit;
 	}
-	
+		/**
+		*@return dialogTaille La boite de dialogue DialogTaille
+		*/
 	public DialogTaille getDialogTaille(){
 		return this.dialogTaille;
 	}
-	
+		/**
+		*@return dialogErreur La boite de dialogue DialogErreur
+		*/
 	public DialogErreur getDialogErreur(){
 		return this.dialogErreur;
 	}
