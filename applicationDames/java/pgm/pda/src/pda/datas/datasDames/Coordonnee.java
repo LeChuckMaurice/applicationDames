@@ -1,7 +1,7 @@
 package pda.datas.datasDames;
 
 import java.io.Serializable;
- 
+
 /**
  * La classe Coordonnee décrit une coordonnée en abscisse et en ordonnée.
  */
