@@ -8,6 +8,11 @@ import pda.control.PdaCtrl;
 import pda.datas.datasDames.Piece;
 import pda.datas.datasDames.Plateau;
 
+
+/**
+*Cette classe centralise les réactions de l'application Dames et effectue les modification en conséquence sur les parties view et datas.
+*
+*/
 public class DamesControl implements Globale, pda.control.IApplication{
 	
 	private Piece pieceSelect = null;
@@ -21,6 +26,9 @@ public class DamesControl implements Globale, pda.control.IApplication{
 
 	}
 
+	/**
+	*Attache les réactions au éléments du menu
+	*/
 	public void attacherReactionsMenu(){
 
 		(Globale.theView).getNew().addActionListener(new ReactionAction(this));
@@ -45,6 +53,9 @@ public class DamesControl implements Globale, pda.control.IApplication{
 		
 	}
 
+	/**
+	*Attache les réactions au éléments de l'interace de jeu
+	*/
 	public void attacherReactionsPlateau(){
 
 		(Globale.theView).getExit().addMouseListener(new ReactionClick(this));
@@ -62,10 +73,17 @@ public class DamesControl implements Globale, pda.control.IApplication{
 		}
 	}	
 	
+	/**
+	*Attache l'es réactions au éléments de l'aide
+	*/
 	public void attacherReactionsAide(){
 		(Globale.theView).getExitAide().addMouseListener(new ReactionClick(this));
 	}
 
+	/**
+	*Mets à jour le plateau graphique en fonction de l'état du plateau datas
+	*On parcours toute les cases noire que on modifie en fonctions de la pièce (ou l'absence ) présente au même coordonnées dans le plateau
+	*/
 	public void updateView(){
 		Plateau thePlat=(Globale.thePart).getPlateau();
 		int taillePlateau=thePlat.getTaille();
@@ -118,6 +136,10 @@ public class DamesControl implements Globale, pda.control.IApplication{
 
 	}
 
+	/**
+	*Effectue un tour de jeu pour l'IA
+	*@see Plateau
+	*/
 	public void coupIA(){
 		
 		
@@ -130,6 +152,9 @@ public class DamesControl implements Globale, pda.control.IApplication{
 		isFin();
 	}
 
+	/**
+	*Verifie si la partie et fini et le cas échéant affiche la boite dialogFin correspondante
+	*/
 	public void isFin(){
 		int isGagnant = (Globale.thePart).getGagnant();
 
@@ -143,31 +168,55 @@ public class DamesControl implements Globale, pda.control.IApplication{
 		}
 	}
 
+	/**
+	*Charge le plateau de datas
+	*/
 	public void charger() throws Exception{
 		(Globale.thePart).setPlateau(thePart.chargerPlateau());
 		
 	}
 	
+	/**
+	*Sauvegarde le plateau
+	*/
 	public void sauver(){
 		thePart.savePlateau();
 	}
 	
+	/**
+	*Initialise le plateau de la partie avec un nouveau plateau
+	*@param taille La taille du nouveau plateau ( d'un coté )
+	*/
 	public void createThePlat(int taille){
 		(Globale.thePart).setPlateau(new Plateau(taille));
 	}
 
+	/**
+	*Attribut à pieceSelect la pièce passé en paramêtre, cette methode est utilisé pour sauvegarder une piece lorsque on joue un coup graphiquement
+	*@param laPiece piece a selectionné
+	*/
 	public void setPieceSelect(Piece laPiece){
 		this.pieceSelect=laPiece;
 	}
 
+	/**
+	*@return pieceSelect Renvoie la piece selectionnée
+	*/
 	public Piece getPieceSelect(){
 		return this.pieceSelect;
 	}
 
+	/**
+	*Passe le booleen à vrai pour indique que le coup actuellement jouer est un double coup, false pour signaler que on sort du double coup
+	*Double coup designe un coup à 2 (ou plus) prises
+	*/
 	public void setDoubleCoup(boolean status){
 		this.inDoubleCoup=status;
 	}
 
+	/**
+	*@return inDoubleCoup true si le coup actuel à plus d'une prise, false sinon
+	*/
 	public boolean getInDoubleCoup(){
 		return this.inDoubleCoup;
 	}
@@ -175,15 +224,24 @@ public class DamesControl implements Globale, pda.control.IApplication{
 
 	//Methodes de l'interface IApplication
 
+	/**
+	*Affiche un message signalant le lancement de l'application
+	*/
 	public void start(PdaCtrl pda){
 		System.out.println("Lancement du jeu de Dames");
 	}
 
+	/**
+	*@return name Le nom de l'application
+	*/
 	public String getAppliName(){
 		return name;
 
 	}
 
+	/**
+	*@return panel Le panel global de la vue
+	*/
 	public JPanel getAppliPanel(){
 		JPanel panel=(Globale.theView).getPanel();
 
@@ -194,6 +252,10 @@ public class DamesControl implements Globale, pda.control.IApplication{
 		return true;
 	}
 
+	/**
+	*Change le nom de l'application pour celui passé en parametre
+	*@param theName Le nouveau nom de l'application
+	*/
 	public void setAppliName ( String theName ){
 		this.name=theName;
 	}

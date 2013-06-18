@@ -24,7 +24,7 @@ import java.awt.*;
 		this.setVisible(false);
 		this.setDefaultCloseOperation ( HIDE_ON_CLOSE );
 		this.setUndecorated(true);
-		init();
+		//init();
 	}
 
 	/**

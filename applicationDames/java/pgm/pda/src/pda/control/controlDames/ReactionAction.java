@@ -6,6 +6,10 @@ import java.awt.event.*;
 import pda.datas.datasDames.Plateau;
 import pda.view.viewDames.*;
 
+/**
+*Cette methode definit les réactions au bouton du menu principal et des boites de dialogues
+*Elle implémente Globale pour les références et ActionListener pour les réactions
+*/
 public class ReactionAction implements Globale, ActionListener{
 	
 	private DamesControl myCtrl;
@@ -70,11 +74,17 @@ public class ReactionAction implements Globale, ActionListener{
 	
 		
 	}
+
+	/**
+	*Affiche la fentre de selection de taille du plateau
+	*/
 	private void reactionNewGame(){
-		//(Globale.theView).getDialogTaille().init();
 		(Globale.theView).getDialogTaille().setVisible(true);
 	}
 
+	/**
+	*Crée une nouvelle partie en récupérant la taille choisie dans dialogTaille
+	*/
 	private void creationNewGame(){
 		DialogTaille dialogTaille=(Globale.theView).getDialogTaille();
 		int taillePlat=dialogTaille.getContenu();
@@ -89,18 +99,26 @@ public class ReactionAction implements Globale, ActionListener{
 		
 	}
 
-
+	/**
+	*Retour au menu principal
+	*/
 	private void retourMenu(){
 		(Globale.theView).creerInterfaceMenu();
 		myCtrl.attacherReactionsMenu();
 	}
 	
+	/**
+	*Lance la methode de sauvegarde de DameControl
+	*/
 	private void save(){
 		myCtrl.sauver();
 
 	}
 
-
+	/**
+	*Lance la methode de chargement de DameControl
+	*Affiche un DialoErreur si aucune partie n'est sauvegardée
+	*/
 	private void charger(){
 			try{
 			myCtrl.charger();

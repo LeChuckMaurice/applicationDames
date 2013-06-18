@@ -27,7 +27,7 @@ public class DialogSaveCharge extends JDialog{
 		this.setVisible(false);
 		this.setDefaultCloseOperation ( HIDE_ON_CLOSE );
 		this.setUndecorated(true);
-		this.init();
+		//this.init();
 	}
 
 	/**
@@ -112,14 +112,6 @@ public class DialogSaveCharge extends JDialog{
 		return bAnnuler;
 	}
 
-	/**
-	*Initialise l'emplacement de la boite au centre de la fenetre appelante
-	*/
-	public void init () {
-	   	JFrame parent = (JFrame) this.getOwner();
-	    Dimension d = parent.getSize () ;
-	    Point p = parent.getLocation () ;
-	    setLocation (p.x+(d.width-getSize().width)/2, p.y+(d.height-getSize().height)/2);
-	}
+	
 
 }
