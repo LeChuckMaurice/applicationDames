@@ -1,16 +1,11 @@
 package pda.datas.datasDames;
 
 import java.io.Serializable;
- 
+
 /**
  * La classe Coordonnee décrit une coordonnée en abscisse et en ordonnée.
  */
 public class Coordonnee implements Serializable{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Abscisse
