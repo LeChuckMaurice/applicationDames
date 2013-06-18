@@ -29,7 +29,7 @@
 	<property name="compilation"
 		value="../build/class" />
 	<target name="compilation" description="Compile toutes les classes">
-		<javac destdir="${class}" >
+		<javac destdir="${class}" encoding="UTF-8" includeantruntime="false">
     	<classpath>
 			<path refid="MyClassPATH" />
 			<fileset dir="${lib}">

@@ -29,7 +29,7 @@
 	<property name="compilation"
 		value="../build/class" />
 	<target name="compilation" description="Compile toutes les classes">
-		<javac destdir="${class}" >
+		<javac destdir="${class}" encoding="UTF-8" includeantruntime="false">
     	<classpath>
 			<path refid="MyClassPATH" />
 			<fileset dir="${lib}">
@@ -43,14 +43,11 @@
 
 	
 	<target name="doc" depends="compilation" description="compilation des classes" >
-		<javadoc destdir="${doc}" private="true"/>
+		<javadoc sourcepath="${src}" destdir="${doc}" private="true"/>
 	</target>
 	
 	<target name="jar" depends="compilation" description="creation de l'archive .jar">
-		<jar destfile="${distrib}/pda.jar" />
-		<fileset dir="${class}" >
-			<include name="pda/**/*.class" />
-		</fileset>
+		<jar destfile="${distrib}/DamesPDA.jar" basedir="${class}" />
 	</target>
 	
 
