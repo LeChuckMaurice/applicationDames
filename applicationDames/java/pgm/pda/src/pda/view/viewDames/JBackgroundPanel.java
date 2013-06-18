@@ -6,6 +6,9 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.io.*;
 
+/**
+*Cette classe est une sous classe de JPanel permettant de mettre une image en fond de ce panel
+*/
 public class JBackgroundPanel extends JPanel {
   private BufferedImage img;
  

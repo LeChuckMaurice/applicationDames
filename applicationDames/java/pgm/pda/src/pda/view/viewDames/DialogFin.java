@@ -4,6 +4,10 @@ import javax.swing.*;
 
 import java.awt.*;
 
+/**
+*Crée la boite de dialogue qui symbolise la fin de la partie, cette classe est une sous classe de JDialog
+*Elle ce compose d'un JLabel indiquant la victoire ou la défaite et d'un bouton pour revenir au menu principal
+*/
 public class DialogFin extends JDialog{
 
 private JPanel pPrincipal;
@@ -18,8 +22,12 @@ public DialogFin(){
 	this.setVisible(false);
 	this.setDefaultCloseOperation ( HIDE_ON_CLOSE );
 	this.setUndecorated(true);
+	init();
 }
 
+/**
+*Crée le décors de la boite de dialogue
+*/
 public void creerInterface(){
 		
 	pPrincipal = new JPanel();
@@ -47,6 +55,10 @@ public void creerInterface(){
 
 }
 
+/**
+*Definit le style du JLabel selon la victoire/défaite
+*@param victoire true si le joueur gagne, false si c'est l'IA
+*/
 public void styleLabel(boolean victoire){
 	if (victoire) {
 		lText.setForeground(new Color(170,248,7));
@@ -59,10 +71,17 @@ public void styleLabel(boolean victoire){
 
 }
 
+
+/**
+*Renvoit le bouton servant au retour menu
+*/
 public JButton getMenu(){
 	return bMenu;
 }
 
+/**
+*Initialise l'emplacement de la boite au centre de la fenetre appelante
+*/
 public void init () {
    	JFrame parent = (JFrame) this.getOwner();
     Dimension d = parent.getSize () ;
