@@ -1,23 +1,29 @@
 package pda.datas.datasDames;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable; 
 import java.util.ArrayList;
- 
+import java.io.Serializable;
+
 public class Plateau implements Serializable{
 
 	/**
-	 * 
+	 * Taille du plateau
 	 */
-	private static final long serialVersionUID = 1L;
 	public int taille;
+
+	/**
+	 * Ordinateur
+	 */
 	public IA ordinateur;
+
+	/**
+	 * Tableau de pièces à deux dimensions
+	 */
 	public Piece[][] tabPiece;
 
+
+	/**
+	 * Constructeur de la classe Plateau
+	 */
 	public Plateau(int taillePlat){
 		this.taille = taillePlat;
 		this.ordinateur = new IA(this); 
@@ -26,6 +32,9 @@ public class Plateau implements Serializable{
 
 	// Methodes generales
 
+	/**
+	 * Remplit le plateau dans la configuration de départ d'une partie de Dames
+	 */
 	public void remplirPlateau(){
 
 		int x = 0;
@@ -44,7 +53,11 @@ public class Plateau implements Serializable{
 			}
 		}
 	}
-	
+
+	/**
+	 * Indique si la coordonnée passée en paramètre est valide (dans le plateau et sur une case)
+	 * @return Vrai si la coordonnée passée en paramètre est valide, Faux sinon.
+	 */
 	public boolean isValide(Coordonnee coord){
 		boolean valide=true;
 		int x=coord.getX();
@@ -62,6 +75,10 @@ public class Plateau implements Serializable{
 		return valide;
 	}
 
+	/**
+	 * Indique si la case de coordonnée passée en paramètre est libre (non occupée par une autre pièce)
+	 * @return Vrai si la case est libre, Faux si elle est occupée.
+	 */
 	public boolean isLibre(Coordonnee coord) {
 		boolean libre = false;
 		int x = coord.getX();
@@ -74,7 +91,11 @@ public class Plateau implements Serializable{
 		return libre;
 	}
 
-	
+	/**
+	 * Joue le coup passé en paramètre : effectue les modifications sur le plateau
+	 *<BR> (suppressions de pièces, déplacements de pièces)
+	 * @param coup Le coup à jouer
+	 */
 	public void playAction(Coup coup){
 		try{
 			this.movePiece(coup.getPiece(), coup.getArrivee());
@@ -89,7 +110,7 @@ public class Plateau implements Serializable{
 
 
 	/**
-	*Deplace une piece vers la coordonnee place en parametre
+	*Deplace une piece vers la coordonnee passée en parametre
 	*@param piece La piece que l'on deplace
 	*@param newPlace Le nouvel emplacement de la piece
 	*@throws IllegalArgumentException si la nouvelle position n'est pas sur le plateau
@@ -104,7 +125,7 @@ public class Plateau implements Serializable{
 	}
 
 	/**
-	*Deplace une piece vers la coordonnee place en parametre
+	*Deplace une piece vers les coordonnées
 	*@param piece La piece que l'on deplace
 	*@param newX La nouvelle position en abcisse de la piece
 	*@param newY La nouvelle position en ordonnee de la piece
@@ -164,6 +185,9 @@ public class Plateau implements Serializable{
 		}
 	}
 
+	/**
+	 *Vérifie si des pions doivent être transformés en Dame, effectue les transformations s'il y en a.
+	 */
 	public void updateStatus(){
 		int y=0;
 
@@ -186,7 +210,7 @@ public class Plateau implements Serializable{
 	}
 
 	/**
-	*Change un pion en Dames
+	*Transforme un pion en Dames
 	*@param piece Le pion a changer en dames
 	*/
 	private void changeStatus(Piece piece){
@@ -204,49 +228,8 @@ public class Plateau implements Serializable{
 	}
 
 	/**
-	*Affiche le plateau sous forme d'une chaine de caractere
+	*Crée une chaine de caractères représentant le plateau
 	*/
-	public String toString2(){
-		String chainePlateau = "";
-		Piece piece;
-
-		for(int k=0; k<this.taille; k++){
-			chainePlateau = chainePlateau + k + "|";
-		}
-		chainePlateau = chainePlateau + "\n\n";
-
-		for(int i=0; i<this.taille; i++){ // y
-
-			for (int j=0; j<this.taille; j++){ // x
-				piece = this.tabPiece[j][i];
-				if(piece==null){
-					chainePlateau = chainePlateau + " |";
-				}
-				else if(piece.isIA()){ // Sinon,si c'est une piece de l'IA
-					if(piece.isDame()){ // Si c'est une dame
-						chainePlateau = chainePlateau + "d|";
-					}
-					else if(!piece.isDame()){ // Si c'est un pion
-						chainePlateau = chainePlateau + "o|";
-					}
-				}
-				else if(!piece.isIA()){ // Sinon, si c'est une piece du joueur
-					if(piece.isDame()){ // Si c'est une dame
-						chainePlateau = chainePlateau + "D|";
-					}
-					else if(!piece.isDame()){ // Si c'est un pion
-						chainePlateau = chainePlateau + "O|";
-					}
-				}
-			}
-			chainePlateau = chainePlateau+"  |"+i+"|";
-			chainePlateau = chainePlateau + "\n";
-		}
-		
-		return chainePlateau;
-	}
-	
-
 	public String toString(){
 		String chainePlateau = "  ";
 		Piece piece;
@@ -313,6 +296,48 @@ public class Plateau implements Serializable{
 		return chainePlateau;
 	}
 
+	/**
+	*Crée une chaine de caractères représentant le plateau
+	*/
+	public String toString2(){
+		String chainePlateau = "";
+		Piece piece;
+
+		for(int k=0; k<this.taille; k++){
+			chainePlateau = chainePlateau + k + "|";
+		}
+		chainePlateau = chainePlateau + "\n\n";
+
+		for(int i=0; i<this.taille; i++){ // y
+
+			for (int j=0; j<this.taille; j++){ // x
+				piece = this.tabPiece[j][i];
+				if(piece==null){
+					chainePlateau = chainePlateau + " |";
+				}
+				else if(piece.isIA()){ // Sinon,si c'est une piece de l'IA
+					if(piece.isDame()){ // Si c'est une dame
+						chainePlateau = chainePlateau + "d|";
+					}
+					else if(!piece.isDame()){ // Si c'est un pion
+						chainePlateau = chainePlateau + "o|";
+					}
+				}
+				else if(!piece.isIA()){ // Sinon, si c'est une piece du joueur
+					if(piece.isDame()){ // Si c'est une dame
+						chainePlateau = chainePlateau + "D|";
+					}
+					else if(!piece.isDame()){ // Si c'est un pion
+						chainePlateau = chainePlateau + "O|";
+					}
+				}
+			}
+			chainePlateau = chainePlateau+"  |"+i+"|";
+			chainePlateau = chainePlateau + "\n";
+		}
+		
+		return chainePlateau;
+	}
 
 
 	// Accesseurs
@@ -339,7 +364,8 @@ public class Plateau implements Serializable{
 
 	/**
 	*Accesseur d'une piece contenue dans le plateau
-	*@param coord Les coordonnee de la piece que on souhaite obtenir
+	*@param coord Les coordonnee de la piece que l'on souhaite obtenir
+	*@return piece La pièce ayant pour coordonnée celle passée en paramètre, s'il n'y a pas de piece renvoie null.
 	*/
 	public Piece getPiece(Coordonnee coord){
 		Piece piece;
@@ -355,13 +381,15 @@ public class Plateau implements Serializable{
 		return piece;
 	}
 
+	/**
+	*Accesseur d'une piece contenue dans le plateau
+	*@param x Abscisse de la piece que l'on souhaite obtenir
+	*@param y Abscisse de la piece que l'on souhaite obtenir
+	*@return piece La pièce ayant pour coordonnée celle passée en paramètre, s'il n'y a pas de piece renvoie null.
+	*/
 	public Piece getPiece(int x, int y){
 		Coordonnee coord = new Coordonnee(x,y);
 		return this.getPiece(coord);
 	}
-
-
-
-
 	
 }

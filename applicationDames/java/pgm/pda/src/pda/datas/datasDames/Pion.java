@@ -9,14 +9,28 @@ public class Pion extends Piece {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Constructeur de la classe Pion
+	 */
 	public Pion(int positionX, int positionY, Plateau thePlateau, boolean pieceIA) {
 		super(positionX,positionY,pieceIA,thePlateau,false);
 	}
 	
+	/**
+	 * Génère tous les déplacements possibles à partir de la position actuelle du Pion
+	 * @return tous les déplacements possibles
+	 */
+	@Override
 	public ArrayList<Coordonnee> getDeplacements(){
 		return this.getDeplacements(this.place);
 	}
 
+	/**
+	 * Génère tous les déplacements possibles à partir de la position passée en paramètre
+	 * @param place position simulée de la pièce
+	 * @return tous les déplacements possibles
+	 */
+	@Override
 	public ArrayList<Coordonnee> getDeplacements(Coordonnee place){
 
 		ArrayList<Coordonnee> tabCoord = new ArrayList<Coordonnee>();
@@ -27,7 +41,7 @@ public class Pion extends Piece {
 		Coordonnee caseAvantGauche;
 		Coordonnee caseAvantDroit;
 
-		if(this.pieceIA){
+		if(this.isIA()){
 			caseAvantGauche = new Coordonnee(x-1,y+1);
 			caseAvantDroit = new Coordonnee(x+1,y+1);
 		}
@@ -57,59 +71,22 @@ public class Pion extends Piece {
 		return tabCoord;
 	}
 
-	public boolean canMove() {
-		return this.canMove(this.place, this.pieceIA);
-	}
-
-	public boolean canMove(Coordonnee thePlace, boolean pieceIA) {
-		boolean move=false;
-		int x=thePlace.getX();
-		int y=thePlace.getY();
-		// Si la piece appartient à l'IA
-		if (pieceIA==true) {
-			Coordonnee gche= new Coordonnee(x-1,y+1);
-			Coordonnee drte= new Coordonnee(x+1,y+1);
-			// Si case droite valide et libre
-			if(this.plateau.isValide(drte) && this.plateau.isLibre(drte)){
-				move=true;
-			}
-			// Sinon, si case gauche valide et libre
-			else if(this.plateau.isValide(gche) && this.plateau.isLibre(gche)){
-				move=true;
-			}
-			// Sinon, si le pion peut prendre (il peut donc bouger)
-			else if(this.canTake(thePlace,pieceIA)){
-				move=true;
-			}
-			
-		}
-		// Sinon si la piece appartient au joueur
-		else if (pieceIA==false) {
-			Coordonnee gche= new Coordonnee(x-1,y-1);
-			Coordonnee drte= new Coordonnee(x+1,y-1);
-
-			// Si case droite valide et libre
-			if(this.plateau.isValide(drte) && this.plateau.isLibre(drte)){
-				move=true;
-			}
-			// Sinon, si case gauche valide et libre
-			if(this.plateau.isValide(gche) && this.plateau.isLibre(gche)){
-				move=true;
-			}
-			// Sinon, si le pion peut prendre (il peut donc bouger)
-			else if(this.canTake(thePlace,pieceIA)){
-				move=true;
-			}
-			
-		}
-		return move;
-	}
-
+	/**
+	 * Recherche tous les pièces adverses que le Pion peut prendre à partir de sa position actuelle
+	 * @return La liste des pièces prenables
+	 */
+	@Override
 	public ArrayList<Piece> prisesPossibles() {
-		return this.prisesPossibles(this.place, this.pieceIA);
+		return this.prisesPossibles(this.place);
 	}
-	
-	public ArrayList<Piece> prisesPossibles(Coordonnee thePlace, boolean pieceIA) {
+
+	/**
+	 * Recherche tous les pièces adverses que le Pion peut prendre à partir de la position passée en paramètre
+	 * @param thePlace position simulée de la pièce
+	 * @return La liste des pièces prenables
+	 */
+	@Override
+	public ArrayList<Piece> prisesPossibles(Coordonnee thePlace) {
 		ArrayList<Piece> prisesPossibles = new ArrayList<Piece>();
 
 		int x=thePlace.getX();
@@ -140,7 +117,7 @@ public class Pion extends Piece {
 			// Si la case contient une piece et que la case d'apres est valide et libre
 			if(pieces1[j]!=null && this.plateau.isValide(cases2[j]) && this.plateau.isLibre(cases2[j])){
 				// Si la piece a abattre est du camp adverse
-				if(pieces1[j].isIA()!=pieceIA){
+				if(pieces1[j].isIA()!=this.isIA()){
 					prisesPossibles.add(pieces1[j]);
 				}
 			}
@@ -149,12 +126,81 @@ public class Pion extends Piece {
 		return prisesPossibles;
 	}
 
-
-	public boolean canTake() {
-		return this.canTake(this.place,this.pieceIA);
+	/**
+	 * Indique si la Pièce peut bouger
+	 * @return vrai si la pièce peut bouger, faux sinon
+	 */
+	@Override
+	public boolean canMove() {
+		return this.canMove(this.place);
 	}
 
-	public boolean canTake(Coordonnee thePlace, boolean pieceIA) {
+	/**
+	 * Indique si la Pièce peut bouger
+	 * @param place position simulée de la pièce
+	 * @return vrai si la pièce peut bouger, faux sinon
+	 */
+	@Override
+	public boolean canMove(Coordonnee thePlace) {
+		boolean move=false;
+		int x=thePlace.getX();
+		int y=thePlace.getY();
+		// Si la piece appartient à l'IA
+		if (this.isIA()==true) {
+			Coordonnee gche= new Coordonnee(x-1,y+1);
+			Coordonnee drte= new Coordonnee(x+1,y+1);
+			// Si case droite valide et libre
+			if(this.plateau.isValide(drte) && this.plateau.isLibre(drte)){
+				move=true;
+			}
+			// Sinon, si case gauche valide et libre
+			else if(this.plateau.isValide(gche) && this.plateau.isLibre(gche)){
+				move=true;
+			}
+			// Sinon, si le pion peut prendre (il peut donc bouger)
+			else if(this.canTake(thePlace)){
+				move=true;
+			}
+			
+		}
+		// Sinon si la piece appartient au joueur
+		else if (this.isIA()==false) {
+			Coordonnee gche= new Coordonnee(x-1,y-1);
+			Coordonnee drte= new Coordonnee(x+1,y-1);
+
+			// Si case droite valide et libre
+			if(this.plateau.isValide(drte) && this.plateau.isLibre(drte)){
+				move=true;
+			}
+			// Sinon, si case gauche valide et libre
+			if(this.plateau.isValide(gche) && this.plateau.isLibre(gche)){
+				move=true;
+			}
+			// Sinon, si le pion peut prendre (il peut donc bouger)
+			else if(this.canTake(thePlace)){
+				move=true;
+			}
+			
+		}
+		return move;
+	}
+
+	/**
+	 * Indique si la Pièce peut prendre
+	 * @return vrai si la pièce peut prendre, faux sinon
+	 */
+	@Override
+	public boolean canTake() {
+		return this.canTake(this.place);
+	}
+
+	/**
+	 * Indique si la Pièce peut prendre
+	 * @param place position simulée de la pièce
+	 * @return vrai si la pièce peut prendre, faux sinon
+	 */
+	@Override
+	public boolean canTake(Coordonnee thePlace) {
 		boolean take=false;
 		int x=thePlace.getX();
 		int y=thePlace.getY();
@@ -184,7 +230,7 @@ public class Pion extends Piece {
 			// Si la case contient une piece et que la case d'apres est valide et libre
 			if(pieces1[j]!=null && this.plateau.isValide(cases2[j]) && this.plateau.isLibre(cases2[j])){
 				// Si la piece a abattre est du camp adverse
-				if(pieces1[j].isIA()!=pieceIA){
+				if(pieces1[j].isIA()!=this.isIA()){
 					take=true;
 				}
 			}

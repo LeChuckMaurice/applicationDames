@@ -3,24 +3,34 @@ package pda.datas.datasDames;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * La classe Dame
+ */
 public class Dame extends Piece implements Serializable {
 
 
-
 	/**
-	 * 
+	 * Constructeur de la classe Dame
 	 */
-	private static final long serialVersionUID = 1L;
-
 	public Dame(int positionX, int positionY, Plateau thePlateau, boolean pieceIA) {
 		super(positionX,positionY,pieceIA,thePlateau,true);
 	}
 
-
+	/**
+	 * Génère tous les déplacements possibles à partir de la position actuelle de la Dame
+	 * @return tous les déplacements possibles
+	 */
+	@Override
 	public ArrayList<Coordonnee> getDeplacements() {
 		return this.getDeplacements(this.place);
 	}
 
+	/**
+	 * Génère tous les déplacements possibles à partir de la position passée en paramètre
+	 * @param place position simulée de la pièce
+	 * @return tous les déplacements possibles
+	 */
+	@Override
 	public ArrayList<Coordonnee> getDeplacements(Coordonnee place) {
 
 		ArrayList<Coordonnee> tabCoord = new ArrayList<Coordonnee>();
@@ -96,45 +106,23 @@ public class Dame extends Piece implements Serializable {
 
 	}
 
-	public boolean canMove() {
-		return this.canMove(this.place, this.pieceIA);
-	}
 
-	public boolean canMove(Coordonnee place, boolean pieceIA ) {
-		boolean move = false;
-
-		int x = place.getX();
-		int y = place.getY();
-
-		// tableau des coordonnees des cases de distance 1
-		Coordonnee[] cases1 = new Coordonnee[4];
-		cases1[0] = new Coordonnee(x+1,y+1);
-		cases1[1] = new Coordonnee(x+1,y-1);
-		cases1[2] = new Coordonnee(x-1,y+1);
-		cases1[3] = new Coordonnee(x-1,y-1);
-
-		for(int i=0; i<=3; i++){
-			// Si la case est valide et libre
-			if(this.plateau.isValide(cases1[i]) && this.plateau.isLibre(cases1[i])){
-				move=true;
-			}
-		}
-		// S'il ne peut pas bouger sans prendre
-		if(!move){
-			// Si il peut prendre (il peut donc bouger)
-			if(this.canTake()){
-				move=true;
-			}
-		}
-
-		return move;
-	}
-
+	/**
+	 * Recherche tous les pièces adverses que la Dame peut prendre à partir de sa position actuelle
+	 * @return La liste des pièces prenables
+	 */
+	@Override
 	public ArrayList<Piece> prisesPossibles() {
-		return this.prisesPossibles(this.place, this.pieceIA);
+		return this.prisesPossibles(this.place);
 	}
 
-	public ArrayList<Piece> prisesPossibles(Coordonnee place, boolean pieceIA ) {
+	/**
+	 * Recherche tous les pièces adverses que la Dame peut prendre à partir de la position passée en paramètre
+	 * @param place position simulée de la pièce
+	 * @return La liste des pièces prenables
+	 */
+	@Override
+	public ArrayList<Piece> prisesPossibles(Coordonnee place) {
 		ArrayList<Piece> prisesPossibles = new ArrayList<Piece>();
 
 		int x = place.getX();  
@@ -186,7 +174,7 @@ public class Dame extends Piece implements Serializable {
 				coord.setY(y);
 
 				// La piece n'est pas null, qu'elle est adverse et que la case d'apres est libre et valide
-				if(piece!=null && piece.isIA()!=pieceIA 
+				if(piece!=null && piece.isIA()!=this.isIA() 
 					&& this.plateau.isValide(coord) && this.plateau.isLibre(coord)){
 					prisesPossibles.add(piece);
 				}
@@ -194,12 +182,68 @@ public class Dame extends Piece implements Serializable {
 		}
 		return prisesPossibles;
 	}
-
-	public boolean canTake() {
-		return this.canTake(this.place, this.pieceIA);
+	
+	/**
+	 * Indique si la Pièce peut bouger
+	 * @return vrai si la pièce peut bouger, faux sinon
+	 */
+	@Override
+	public boolean canMove() {
+		return this.canMove(this.place);
 	}
 
-	public boolean canTake(Coordonnee place, boolean pieceIA ) {
+	/**
+	 * Indique si la Pièce peut bouger
+	 * @param thePlace position simulée de la pièce
+	 * @return vrai si la pièce peut bouger, faux sinon
+	 */
+	@Override
+	public boolean canMove(Coordonnee place) {
+		boolean move = false;
+
+		int x = place.getX();
+		int y = place.getY();
+
+		// tableau des coordonnees des cases de distance 1
+		Coordonnee[] cases1 = new Coordonnee[4];
+		cases1[0] = new Coordonnee(x+1,y+1);
+		cases1[1] = new Coordonnee(x+1,y-1);
+		cases1[2] = new Coordonnee(x-1,y+1);
+		cases1[3] = new Coordonnee(x-1,y-1);
+
+		for(int i=0; i<=3; i++){
+			// Si la case est valide et libre
+			if(this.plateau.isValide(cases1[i]) && this.plateau.isLibre(cases1[i])){
+				move=true;
+			}
+		}
+		// S'il ne peut pas bouger sans prendre
+		if(!move){
+			// Si il peut prendre (il peut donc bouger)
+			if(this.canTake()){
+				move=true;
+			}
+		}
+
+		return move;
+	}
+
+	/**
+	 * Indique si la Pièce peut prendre
+	 * @return vrai si la pièce peut prendre, faux sinon
+	 */
+	@Override
+	public boolean canTake() {
+		return this.canTake(this.place);
+	}
+
+	/**
+	 * Indique si la Pièce peut prendre
+	 * @param place position simulée de la pièce
+	 * @return vrai si la pièce peut prendre, faux sinon
+	 */
+	@Override
+	public boolean canTake(Coordonnee place) {
 		boolean take = false;
 
 		int x = place.getX();  
@@ -250,7 +294,7 @@ public class Dame extends Piece implements Serializable {
 				coord.setX(x);
 				coord.setY(y);
 				// La piece n'est pas null, qu'elle est adverse et que la case d'apres est libre et valide
-				if(piece!=null && piece.isIA()!=pieceIA 
+				if(piece!=null && piece.isIA()!=this.isIA()
 					&& this.plateau.isValide(coord) && this.plateau.isLibre(coord)){
 					take = true;
 				}

@@ -3,21 +3,37 @@ package pda.datas.datasDames;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-
+/**
+ * La classe Piece décrit une pièce : c'est une super-classe abstraite des classes Dame et Pion.
+ * Une pièce est caractérisée par son camp (Ordinateur ou joueur), son statut (Dame ou Pion),
+ *<BR> sa coordonnée sur le Plateau. Elle possède une référence sur le Plateau.
+ */
 public abstract class Piece implements Serializable {
 
 	/**
-	 * 
+	 * Camp : vrai si la pièce appartient à l'Ordinateur, faux si elle appartient au Joueur.
 	 */
-	private static final long serialVersionUID = 1L;
-	// PieceIA : true=IA / false=joueur
 	protected boolean pieceIA;
-	// dame : true=Dame / false=Pion
+
+	/**
+	 * statut : vrai si la pièce appartient est une Dame, faux c'est un Pion.
+	 */	
 	protected boolean dame;
+	
+	/**
+	 * Coordonnées de la Pièce sur le Plateau de jeu.
+	 */
 	protected Coordonnee place;
+
+	/**
+	 * Plateau de jeu
+	 */
 	protected Plateau plateau;
 
  
+ 	/**
+ 	 * Constructeur de la classe Piece
+ 	 */
 	public Piece(int positionX, int positionY, boolean camp,Plateau thePlateau, boolean isDame){
 		this.place = new Coordonnee(positionX,positionY);
 		this.pieceIA=camp;
@@ -27,6 +43,9 @@ public abstract class Piece implements Serializable {
 
 	// Methodes
 
+	/**
+	 * Génère tous les coups jouables par cette Piece
+	 */
 	public ArrayList<Coup> generateCoups(){
 
 		ArrayList<Coup> coups = new ArrayList<Coup>();
@@ -42,10 +61,19 @@ public abstract class Piece implements Serializable {
 		return coups;
 	}
 
+	/**
+	 * Indique si la Piece vulnérable dans sa position actuelle
+	 * @return Vrai si la pièce est vulnérable, faux sinon
+	 */
 	public boolean isVulnerable(){
 		return this.isVulnerable(this.place);
 	}
 
+	/**
+	 * Indique si la Piece vulnérable serait vulnérable si elle était placée 
+	 * <BR>sur la case de coordonnée passée en paramètre.
+	 * @return Vrai si la pièce la pièce serait vulnérable, faux sinon.
+	 */
 	public boolean isVulnerable (Coordonnee thePlace){
 		boolean vulnerable = false;
 
@@ -90,18 +118,56 @@ public abstract class Piece implements Serializable {
 		return vulnerable;
 	}
 
-
+	/**
+	 * Génère tous les déplacements possibles à partir de la position actuelle de la Pièce
+	 * @return tous les déplacements possibles
+	 */
 	public abstract ArrayList<Coordonnee> getDeplacements();
+
+	/**
+	 * Génère tous les déplacements possibles à partir de la position passée en paramètre
+	 * @param place position simulée de la pièce
+	 * @return tous les déplacements possibles
+	 */
 	public abstract ArrayList<Coordonnee> getDeplacements(Coordonnee place);
 
+
+	/**
+	 * Recherche tous les pièces adverses que la pièce peut prendre à partir de sa position actuelle
+	 * @return La liste des pièces prenables
+	 */
 	public abstract ArrayList<Piece> prisesPossibles();
-	public abstract ArrayList<Piece> prisesPossibles(Coordonnee thePlace, boolean pieceIA);
 
+	/**
+	 * Recherche tous les pièces adverses que la pièce peut prendre à partir de la position passée en paramètre
+	 * @param thePlace position simulée de la pièce
+	 * @return La liste des pièces prenables
+	 */
+	public abstract ArrayList<Piece> prisesPossibles(Coordonnee thePlace);
+
+	/**
+	 * Indique si la Pièce peut bouger
+	 * @return vrai si la pièce peut bouger, faux sinon
+	 */
 	public abstract boolean canMove();
-	public abstract boolean canMove( Coordonnee place, boolean pieceIA );
+	/**
+	 * Indique si la Pièce peut bouger
+	 * @param thePlace position simulée de la pièce
+	 * @return vrai si la pièce peut bouger, faux sinon
+	 */
+	public abstract boolean canMove(Coordonnee place);
 
+	/**
+	 * Indique si la Pièce peut prendre
+	 * @return vrai si la pièce peut prendre, faux sinon
+	 */
 	public abstract boolean canTake();
-	public abstract boolean canTake( Coordonnee place, boolean pieceIA );
+	/**
+	 * Indique si la Pièce peut prendre
+	 * @param place position simulée de la pièce
+	 * @return vrai si la pièce peut prendre, faux sinon
+	 */
+	public abstract boolean canTake(Coordonnee place);
 
 	//Accesseurs
 	
@@ -129,22 +195,39 @@ public abstract class Piece implements Serializable {
 		return this.dame;
 	}
 	
-
+	/**
+	 * Accesseur de l'attribut Plateau
+	 * @return plateau attribut Plateau
+	 */
 	public Plateau getPlateau(){
 		return this.plateau;
 	}
 
-
+	/**
+	 * Modificateur de l'attribut place
+	 * @param newPlace nouvelle place de la pièce
+	 */
 	public void setCoordonnee(Coordonnee newPlace){
 		this.place = newPlace;
 	}
 
-
+	/**
+	 * Liste les coordonnées des cases situées dans une diagonale à partir de la position actuelle de la pièce
+	 * @param dirX direction de la diagonale en x. Si dirX=-1, direction haut. Si dirX=1, direction bas.
+	 * @param dirY direction de la diagonale en y. Si dirY=-1, direction gauche. Si dirY=1, direction droite.
+	 * @return La liste des coordonnées des cases de la diagonale
+	 */
 	protected ArrayList<Coordonnee> getDiagonale(int dirX, int dirY){
 		return this.getDiagonale(this.place, dirX, dirY);
 	}
 
-
+	/**
+	 * Liste les coordonnées des cases situées dans une diagonale à partir de la position passée en paramètre
+	 * @param dirX direction de la diagonale en x. Si dirX=-1, direction haut. Si dirX=1, direction bas.
+	 * @param dirY direction de la diagonale en y. Si dirY=-1, direction gauche. Si dirY=1, direction droite.
+	 * @param place position à partir de laquelle part la diagonale.
+	 * @return tabCoord liste des coordonnées des cases de la diagonale
+	 */
 	protected ArrayList<Coordonnee> getDiagonale(Coordonnee place, int dirX, int dirY){
 		ArrayList<Coordonnee> tabCoord = new ArrayList<Coordonnee>();
 
