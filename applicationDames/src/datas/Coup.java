@@ -2,8 +2,12 @@ package datas;
  
 import java.util.ArrayList;
 
+/** La classe Coup décrit */
 public class Coup {
 
+	/**
+	 * Coordonnees de l'arrivee
+	 */
 	private Coordonnee arrivee;
 	private Piece piece;
 	private Piece piecePrise; 
