@@ -172,7 +172,7 @@ public class Plateau implements Serializable{
 	*@param piece La piece a supprimer
 	*@throw IllegalArgumentException si la piece passee en parametre n'existe pas
 	*/
-	private void deletePiece(Piece piece) throws IllegalArgumentException{
+	public void deletePiece(Piece piece) throws IllegalArgumentException{
 
 		if(piece==null){
 			throw new IllegalArgumentException("La piece a supprimer n'existe pas.");
