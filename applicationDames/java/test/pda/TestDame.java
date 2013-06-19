@@ -1,15 +1,15 @@
-package tests;
+package test.pda;
+
+import pda.datas.datasDames.*;
 
 import java.util.ArrayList;
 
-import datas.*;
 import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import datas.Plateau;
 
 
 public class TestDame {
@@ -168,7 +168,7 @@ public class TestDame {
 		Pion pionGenantJoueur = new Pion(5,6,this.plateauVide10,false);
 		this.tabPieceVide10[5][6] = pionGenantJoueur;
 
-		ArrayList<Piece> pieces = dame1Joueur.prisesPossibles(dame1Joueur.getCoordonnee(), dame1Joueur.isIA());
+		ArrayList<Piece> pieces = dame1Joueur.prisesPossibles(dame1Joueur.getCoordonnee());
 		
 		System.out.println("\ntestPrisesPossibles() : resultats attendus (3,4) (3,6) et (7,2)");
 		for(int i = 0; i<pieces.size(); i++){

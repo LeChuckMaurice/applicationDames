@@ -1,8 +1,9 @@
-package tests;
+package test.pda;
 
-import datas.Coordonnee;
+import pda.datas.datasDames.*;
+
 import static org.junit.Assert.*;
-
+import org.junit.runner.*; 
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +12,7 @@ public class TestCoordonnee {
 	private Coordonnee coordonnee;
 	
 	@Before 
-	public void instancier () { 
+	public void test() { 
 		this.coordonnee = new Coordonnee(1,1);
 	} 
 
@@ -50,4 +51,6 @@ public class TestCoordonnee {
 		assertFalse(this.coordonnee.equals(coordNull));
 	}
 
+	public static void main(String[] args) {}
+	
 }

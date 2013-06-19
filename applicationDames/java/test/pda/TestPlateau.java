@@ -1,15 +1,14 @@
-package tests;
+package test.pda;
 
+import pda.datas.datasDames.*;
 import java.util.ArrayList;
 
-import datas.*;
 import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import datas.Plateau;
 
 public class TestPlateau {
 
