@@ -64,12 +64,6 @@ public class TestPion {
 	}
 
 
-
-	@Test
-	public void testGenerateCoups() {
-		fail("Not yet implemented");
-	}
-
 	@Test
 	public void testGetDeplacements() {
 		viderPlateau(plateauVide10);
@@ -116,9 +110,9 @@ public class TestPion {
 
 		// test avec pion qui peut prendre (mais ne peut pas bouger sans prendre)
 		Piece piecePrise = this.plateau10.getPiece(1,6);
+		this.plateau10.movePiece(piecePrise,2,5);
 		this.plateau10.movePiece(piecePrise,1,4);
 		assertTrue(pieceTrue.canMove());
-
 	}
 
 
@@ -179,13 +173,11 @@ public class TestPion {
 		assertFalse(pionJoueur2.canTake());
 		assertFalse(pionIA1.canTake());
 		assertFalse(pionIA2.canTake());
-		/*
-		this.plateauVide10.deletePiece(pionJoueur2);
-		this.plateauVide10.movePiece(pionIA2,5,4);
+
+		this.tabPieceVide10[5][4] = pionIA2;
 
 		// test prise en arriere
 		assertTrue(pion1.canTake());
-		*/
 
 	}
 

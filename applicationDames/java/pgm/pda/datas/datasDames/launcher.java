@@ -1,6 +1,5 @@
 package pda.datas.datasDames;
 
-import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -92,15 +91,13 @@ public class launcher {
 		else{
 			System.out.println("Vous avez gagné.");
 		}
-
-
+		
+		scanner.close();
 		
 	}
 
 	public static Piece choixPiece(Plateau plateau, Scanner scanner){
 		Piece piece = null;
-		int x;
-		int y;
 		boolean saisieOk = false;
 		Coordonnee coordonnee = new Coordonnee(20,20);
 
@@ -144,9 +141,6 @@ public class launcher {
 		Coordonnee coordonnee = new Coordonnee(20,20);
 		boolean canContinue = true;
 		boolean saisieOk = false;
-		boolean fini;
-		int x=1;
-		int y;
 		Coup coup;
 		int nbDeplacements = 0;
 		int nbPrises = 0;

@@ -238,4 +238,5 @@ public class Pion extends Piece {
 		
 		return take;
 	}
+
 }

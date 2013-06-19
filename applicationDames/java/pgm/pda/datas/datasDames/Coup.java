@@ -1,6 +1,5 @@
 package pda.datas.datasDames;
  
-import java.util.ArrayList;
 /**La classe Coup décrit le mouvement d'une piece : coordonnées d'arrivée, piecePrise. 
  *Un pion peut effectuer plusieurs coup pendant un tour s'il peut effectuer plusieurs prises.
  *<BR>Elle permet aussi d'évaluer la qualité du coup d'un point de vue stratégique avec un système de points.
@@ -223,6 +222,26 @@ public class Coup {
 	 */
 	public Piece getPiecePrise(){
 		return this.piecePrise;
+	}
+
+
+
+
+	public String toString(){
+		String chaine = "______________ "+this.piece.isIA()+" ______________\n";
+		chaine = chaine + "Départ : "+this.piece.getCoordonnee().toString()+"\n";
+		chaine = chaine + "Arrivée : "+this.arrivee.toString()+"\n";
+		if(piecePrise==null){
+			chaine = chaine + "Pas de prise.\n";
+		}
+		else{
+			chaine = chaine + "Piece prise : "+this.piecePrise.getCoordonnee().toString()+"\n";
+		}
+
+		chaine = chaine + this.nbPoints+" points\n";
+		chaine = chaine + "______________________________________\n";
+
+		return chaine;
 	}
 	
 }

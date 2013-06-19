@@ -20,7 +20,7 @@ import java.awt.*;
 	public DialogErreur(String msg){
 		super();
 		creerInterface(msg);
-		this.setSize(240,130);
+		this.setSize(280,100);
 		this.setVisible(false);
 		this.setDefaultCloseOperation ( HIDE_ON_CLOSE );
 		this.setUndecorated(true);

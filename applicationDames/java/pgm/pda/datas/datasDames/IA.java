@@ -10,6 +10,11 @@ import java.util.Collections;
 public class IA implements Serializable {
 
 	/**
+	 * Numéro de version
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
 	 * Plateau de jeu
 	 */
 	private Plateau plateau;

@@ -8,6 +8,11 @@ import java.io.Serializable;
 public class Coordonnee implements Serializable{
 
 	/**
+	 * Numéro de version
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Abscisse
 	 */
 	public int x; 

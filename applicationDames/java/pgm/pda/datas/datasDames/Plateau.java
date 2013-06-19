@@ -6,6 +6,11 @@ import java.io.Serializable;
 public class Plateau implements Serializable{
 
 	/**
+	 * Numéro de version
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Taille du plateau
 	 */
 	public int taille;

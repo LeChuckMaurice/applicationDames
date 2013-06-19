@@ -2,11 +2,11 @@
 <project name="PDA" default="compileAll" basedir=".." >
  
 	<!-- Définition des variables -->
-	<property name="src" location="java"/>
+	<property name="src" location="java/pgm"/>
 	<property name="lib" location="jar"/>
 	<property name="class" location="build/class"/>
 	<property name="data" location="data"/>
-	<property name="dist" location="build/distrib"/>
+	<property name="dist" location="jar"/>
 	<property name="doc" location="build/api"/>
 	<property name="work" location="ww"/>  
   
@@ -48,8 +48,7 @@
 
 	<!-- Compilation de l'entièreté du projet -->
 	<target name="compileAll" description="compiles all the sources" >
-	  <javac destdir="${class}" debug="true" verbose="false" encoding="UTF-8">
-	    <compilerarg value="-Xlint"/>
+	  <javac destdir="${class}" debug="true" verbose="false" encoding="UTF-8" includeantruntime="false">
 	    <classpath refid="myCLASSPATH"/>
 	    <src path="${src}"/>
 	  </javac>
@@ -62,18 +61,10 @@
 	    <classpath refid="myCLASSPATH"/>
 	  </java>
 	</target>
-	
-	<!-- Exécution de l'application -->
-	<target name="runTerminal" depends="compileAll" description="executes the Checkers" >
-	  <java classname="pda.datas.datasDames.launcher" fork="true" dir="${work}">
-	    <jvmarg value="-Djava.net.preferIPv4Stack=true"/>
-	    <classpath refid="myCLASSPATH"/>
-	  </java>
-	</target>
 
 	<!-- Fabrication d'une archive exécutable -->
 	<target name="jar" depends="compileAll" description="creates PDA jar" >
-	  <jar destfile="${dist}/pda.jar">
+	  <jar destfile="${dist}/DamesPDA.jar">
 	    <manifest>
               <attribute name="Built-By" value="IUT Vannes | M.Cornic, D.Deveaux, C.Guerin, F.Merciol"/>
 	      <attribute name="Created-By" value="IUT Vannes | M.Cornic, D.Deveaux, C.Guerin, F.Merciol"/>
@@ -81,9 +72,10 @@
 	    </manifest>
 	    <fileset dir="${class}">
               <include name="pda/**/*.class"/>
+              <include name="pda/**/**/*.class"/>
 	    </fileset>
 	    <fileset dir="${data}">
-              <include name="**/*.gif"/>
+              <include name="**/**/*.gif"/>
               <include name="**/*.png"/>
 	    </fileset>
 	  </jar>
@@ -98,6 +90,7 @@
               <exclude name="**/*.gif"/>
               <exclude name="**/*.wav"/>
               <exclude name="**/TODO"/>
+              <include name="**/TODO"/>
 	    </fileset>
 	    <doctitle><![CDATA[<h1>Test</h1>]]></doctitle>
 	    <bottom><![CDATA[<i>Copyright &#169; 2007 UBS/IUT/Fran&ccedil;ois Merciol. All Rights Reserved.</i>]]></bottom>

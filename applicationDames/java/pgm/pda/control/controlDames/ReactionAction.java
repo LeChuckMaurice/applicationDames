@@ -1,9 +1,6 @@
 package pda.control.controlDames;
 
-import java.awt.*;
 import java.awt.event.*;
-
-import pda.datas.datasDames.Plateau;
 import pda.view.viewDames.*;
 
 /**
@@ -130,6 +127,7 @@ public class ReactionAction implements Globale, ActionListener{
 			}
 			catch(Exception e){
 				(Globale.theView).getDialogErreur().changeText("Aucun plateau n'est sauvegarder");
+				(Globale.theView).init((Globale.theView).getDialogErreur());
 				(Globale.theView).getDialogErreur().setVisible(true);
 			}
 			myCtrl.isFin();		

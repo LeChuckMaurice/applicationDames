@@ -1,8 +1,6 @@
 package pda.control.controlDames;
 
 import pda.view.viewDames.*;
-import java.awt.event.*;
-import java.io.*;
 import javax.swing.JPanel;
 import pda.control.PdaCtrl;
 import pda.datas.datasDames.Piece;

@@ -11,6 +11,11 @@ import java.util.ArrayList;
 public abstract class Piece implements Serializable {
 
 	/**
+	 * Numéro de version
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Camp : vrai si la pièce appartient à l'Ordinateur, faux si elle appartient au Joueur.
 	 */
 	protected boolean pieceIA;

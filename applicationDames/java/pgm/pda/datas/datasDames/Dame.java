@@ -10,6 +10,11 @@ public class Dame extends Piece implements Serializable {
 
 
 	/**
+	 * Numéro de version
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Constructeur de la classe Dame
 	 */
 	public Dame(int positionX, int positionY, Plateau thePlateau, boolean pieceIA) {

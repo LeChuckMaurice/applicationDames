@@ -2,11 +2,7 @@ package test.pda;
 
 import pda.datas.datasDames.*;
 import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 
@@ -61,6 +57,18 @@ public class TestCoup {
 		Coup coup3 = new Coup(dame1IA,new Coordonnee(2,3));
 		assertEquals(null, coup3.findPiecePrise());
 
+		Coup coup4 = new Coup(dame1IA,new Coordonnee(5,4));
+		assertEquals(null, coup4.findPiecePrise());
+		
+		Pion pion1IA = new Pion(5,6,this.plateau10Vide,false);
+		this.tabPieceVide10[5][6] = pion1IA;
+		
+		Coup coup5 = new Coup(pion1IA,new Coordonnee(3,4));
+		assertEquals(dame1IA, coup5.findPiecePrise());
+
+		Coup coup6 = new Coup(pion1IA,new Coordonnee(4,7));
+		assertEquals(null, coup6.findPiecePrise());
+		
 	}
 
 	@Test

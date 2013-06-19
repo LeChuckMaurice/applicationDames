@@ -1,7 +1,6 @@
 package test.pda;
 
 import pda.datas.datasDames.*;
-import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -62,12 +61,6 @@ public class TestPlateau {
 		viderPlateau(plateauVide10);
 	}
 
-
-	@Test
-	public void testPlateau() {
-		fail("Not yet implemented");
-	}
-
 	@Test
 	public void testRemplirPlateau() {
 
@@ -98,29 +91,6 @@ public class TestPlateau {
 		assertFalse(this.plateau10.isValide(coord2));
 		assertFalse(this.plateau10.isValide(coord3));
 		assertTrue(this.plateau10.isValide(coord4));
-	}
-
-	@Test
-	public void testPlayAction() {
-		// test avec deux prises par un pion de l'IA
-		// sur le plateau 10 
-
-		this.plateauVide10.movePiece(this.dameJoueur,3,8);
-
-		ArrayList<Coordonnee> parcours = new ArrayList<Coordonnee>();
-		parcours.add(new Coordonnee(0,7));
-		parcours.add(new Coordonnee(2,9));
-		parcours.add(new Coordonnee(4,7));
-		/*
-		Coup coup = new Coup(2,parcours,pionIA);
-
-		System.out.println("___________avant play action________________\n");
-		System.out.println(this.plateauVide10.toString());
-		this.plateauVide10.playAction(coup);
-
-		System.out.println("___________apres play action________________\n");
-		System.out.println(this.plateauVide10.toString());
-		*/
 	}
 
 	@Test
@@ -173,40 +143,36 @@ public class TestPlateau {
 	@Test
 	public void testUpdateStatus() {
 		// placement du pion joueur sur la derniere ligne adverse
-		this.plateauVide10.movePiece(pionJoueur,5,0);
+		Pion pionJoueur = new Pion(5,0,this.plateauVide10,false);
+		this.tabPieceVide10[5][0]=pionJoueur;
 		assertEquals(pionJoueur.isDame(), false);
+
 		// placement du pion IA sur la derniere ligne adverse
-		this.plateauVide10.movePiece(pionIA,6,9);
-		assertEquals(pionJoueur.isDame(), false);
+		Pion pionIA = new Pion(6,9,this.plateauVide10,true);
+		this.tabPieceVide10[6][9]=pionIA;
+
+		assertEquals(pionIA.isDame(), false);
 
 		// mise a jour des statuts des pieces
 		this.plateauVide10.updateStatus();
-
+		System.out.println(plateauVide10.toString());
 		// verification si les deux pions places sur la derniere ligne adverse
 		// ont bien ete transformes en Dame
-		Piece pieceJoueur = this.plateauVide10.getPiece(new Coordonnee(5,0));
-		Piece pieceIA = this.plateauVide10.getPiece(new Coordonnee(6,9));
-		assertEquals(pieceJoueur.isDame(), true);
-		assertEquals(pieceIA.isDame(), true);
+		Piece pieceJoueur2 = this.plateauVide10.getPiece(5,0);
+		Piece pieceIA2 = this.plateauVide10.getPiece(6,9);
+		assertEquals(true, pieceJoueur2.isDame());
+		assertEquals(true, pieceIA2.isDame());
 
 	}
 
 
 	@Test
 	public void testToString() {
-		fail("Not yet implemented");
+		System.out.println("Test méthode toString() :\n");
+		System.out.println("Plateau 8\n"+this.plateau8.toString());
+		System.out.println("Plateau 10\n"+this.plateau10.toString());
+		System.out.println("Plateau 12\n"+this.plateau12.toString());
 	}
-
-	@Test
-	public void testSavePlateau() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testChargerPlateau() {
-		fail("Not yet implemented");
-	}
-
 
 	@Test
 	public void testGetPiece() {
@@ -217,7 +183,6 @@ public class TestPlateau {
 		assertEquals(this.plateau10.getPiece(new Coordonnee(0,1)),piece);
 		// cas d'une case vide (doit renvoyer null)
 		assertEquals(this.plateau10.getPiece(new Coordonnee(0,0)),null);
-
 	}
 
 
