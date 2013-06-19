@@ -62,10 +62,10 @@ public class Coup {
 			points = points + 20;
 		}
 		if(makeVulnerable()){
-			points = points - 11; 
+			points = points - 9; 
 		}
-		else if(isVulnerable()){
-			points = points + 11;
+		if(isVulnerable()){
+			points = points + 9;
 		}
 
 		
@@ -100,9 +100,25 @@ public class Coup {
 	 */
 	private boolean makeVulnerable(){
 		boolean makeVulnerable = false;
+
+		Plateau plateau = this.piece.getPlateau();
+		Piece[][] tabPiece = plateau.getTabPiece();
+
+		boolean existsPiecePrise = false;
+
+		// S'ily a une piece prise, on la supprime (temporairement pour la simulation)
+		if(piecePrise!=null){
+			plateau.deletePiece(this.piecePrise);
+			existsPiecePrise = true;
+		}
 		if(this.piece.isVulnerable(this.arrivee)){
 			makeVulnerable = true;
 		}
+
+		if(existsPiecePrise){
+			tabPiece[piecePrise.getCoordonnee().getX()][piecePrise.getCoordonnee().getY()] = piecePrise;
+		}
+
 		return makeVulnerable;
 	}
 
