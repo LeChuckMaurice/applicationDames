@@ -43,7 +43,7 @@ public class Coup {
 		this.piecePrise = findPiecePrise();
 		this.nbPoints = calculerPoints();
 	}
-	
+
 
 	// Méthodes
 
