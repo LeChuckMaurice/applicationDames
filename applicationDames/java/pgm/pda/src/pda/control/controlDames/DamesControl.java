@@ -157,6 +157,7 @@ public class DamesControl implements Globale, pda.control.IApplication{
 	*/
 	public void isFin(){
 		int isGagnant = (Globale.thePart).getGagnant();
+		(Globale.theView).init((Globale.theView).getDialogFin());
 
 		if (isGagnant==1) {
 			(Globale.theView).getDialogFin().styleLabel(false);

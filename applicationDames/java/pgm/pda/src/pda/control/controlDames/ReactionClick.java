@@ -29,6 +29,7 @@ public class ReactionClick implements Globale, MouseListener{
 			lancementAide();
 		}
 		else if (src==(Globale.theView).getSave()) {
+			(Globale.theView).init((Globale.theView).getDialogSave());
 			(Globale.theView).getDialogSave().setVisible(true);
 		}
 		else if (src==(Globale.theView).getExitAide()) {
@@ -84,6 +85,7 @@ public class ReactionClick implements Globale, MouseListener{
 	*Permet de lancer la boite de dialog dialogQuit pour quitter la partie
 	*/
 	private void quitterPlateau(){
+		(Globale.theView).init((Globale.theView).getDialogQuit());
 		(Globale.theView).getDialogQuit().setVisible(true);
 	
 	}

@@ -26,6 +26,7 @@ public class ReactionAction implements Globale, ActionListener{
 			reactionNewGame();
 		}
 		else if (src==(Globale.theView).getCharger()) {
+			(Globale.theView).init((Globale.theView).getDialogCharge());
 			(Globale.theView).getDialogCharge().setVisible(true);
 		}
 		else if (src==(Globale.theView).getQuitter()) {
@@ -79,6 +80,7 @@ public class ReactionAction implements Globale, ActionListener{
 	*Affiche la fentre de selection de taille du plateau
 	*/
 	private void reactionNewGame(){
+		(Globale.theView).init((Globale.theView).getDialogTaille());
 		(Globale.theView).getDialogTaille().setVisible(true);
 	}
 
