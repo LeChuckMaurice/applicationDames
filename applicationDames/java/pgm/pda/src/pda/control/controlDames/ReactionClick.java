@@ -129,7 +129,7 @@ public class ReactionClick implements Globale, MouseListener{
 		}
 	}
 
-	private void selectionPiece(Piece laPiece,Case laCase){
+	private void selectionPiece(Piece laPiece,Case laCask){
 
 		//On selectionne la piece
 		myCtrl.setPieceSelect(laPiece);
@@ -150,7 +150,31 @@ public class ReactionClick implements Globale, MouseListener{
 			int x = coordJouable.getX();
 			int y = coordJouable.getY();
 			Case caseJouable=(Globale.theView).getCase(x,y);
-			caseJouable.setCaseJouable();
+			if (myCtrl.getInDoubleCoup()) {
+				
+				Coup theCoup=null;
+				boolean caseCoup=false;
+				int k=0;
+				ArrayList<Coup> listeCoups = myCtrl.getPieceSelect().generateCoups();
+				//On récupère le coup correspondant au deplacement choisit
+				while (!(caseCoup) && k<listeCoups.size()) {
+					Coup coupActuel = listeCoups.get(k);
+					Coordonnee coordArrive = coupActuel.getArrivee();
+								
+					if (coordArrive.equals(coordJouable)) {
+						caseCoup=true;
+						theCoup = coupActuel;
+					}
+								
+					k++;
+				}
+				if (theCoup.getPiecePrise()!=null) {
+					caseJouable.setCaseJouable();
+				}
+			}
+			else{
+				caseJouable.setCaseJouable();
+			}
 		}
 
 	}
@@ -191,11 +215,19 @@ public class ReactionClick implements Globale, MouseListener{
 				//On récupère le coup correspondant au deplacement choisit
 				while (!(caseCoup) && j<listeCoups.size()) {
 					Coup coupActuel = listeCoups.get(j);
-					Coordonnee coordArrive = coupActuel.getArrivee();
-								
-					if (coordArrive.equals(coord)) {
-						caseCoup=true;
-						theCoup = coupActuel;
+					if (myCtrl.getInDoubleCoup()) {
+						if (coupActuel.getPiecePrise()!=null) {
+							caseCoup=true;
+							theCoup = coupActuel;
+						}
+					}
+					else{
+						Coordonnee coordArrive = coupActuel.getArrivee();
+						
+						if (coordArrive.equals(coord)) {
+							caseCoup=true;
+							theCoup = coupActuel;
+						}
 					}
 								
 					j++;
