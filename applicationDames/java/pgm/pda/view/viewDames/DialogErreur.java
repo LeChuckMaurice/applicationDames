@@ -58,17 +58,6 @@ import java.awt.*;
 
 	}
 
-	/**
-    *Initialise l'emplacement de la fenetre
-    */
-	public void init () {
-	
-    	JFrame parent = (JFrame) this.getOwner();
-    	Dimension d = parent.getSize () ;
-    	Point p = parent.getLocation () ;
-    	setLocation (p.x+(d.width-getSize().width)/2, p.y+(d.height-getSize().height)/2);
-    }
-
     /**
     *Change le texte du JLabel par celui passé en parametre
     */

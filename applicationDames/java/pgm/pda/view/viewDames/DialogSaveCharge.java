@@ -27,7 +27,6 @@ public class DialogSaveCharge extends JDialog{
 		this.setVisible(false);
 		this.setDefaultCloseOperation ( HIDE_ON_CLOSE );
 		this.setUndecorated(true);
-		//this.init();
 	}
 
 	/**
